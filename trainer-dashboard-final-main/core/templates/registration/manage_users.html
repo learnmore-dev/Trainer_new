@@ -1,0 +1,829 @@
+<!-- templates/manage_users.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 1px solid rgba(106, 40, 255, 0.3);
+        }
+
+        .header-left h1 {
+            font-size: 24px;
+            background: linear-gradient(45deg, #6a28ff, #ff416c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .header-left p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #6a28ff, #8e4dff);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #e83e8c);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            color: #6a28ff;
+        }
+
+        /* FILTER SECTION */
+        .filter-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: #6a28ff;
+            box-shadow: 0 0 10px rgba(106, 40, 255, 0.3);
+        }
+
+        /* USERS TABLE */
+        .users-table-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(45deg, #6a28ff, #ff416c);
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        td {
+            padding: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #6a28ff, #ff416c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .active {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .inactive {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+
+        .role-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .superuser {
+            background: rgba(255, 65, 108, 0.2);
+            color: #ff416c;
+        }
+
+        .staff {
+            background: rgba(106, 40, 255, 0.2);
+            color: #6a28ff;
+        }
+
+        .regular {
+            background: rgba(23, 162, 184, 0.2);
+            color: #17a2b8;
+        }
+
+        .action-form {
+            display: inline;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .edit-btn {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .edit-btn:hover {
+            background: #28a745;
+            color: white;
+        }
+
+        .delete-btn {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .toggle-btn:hover {
+            background: #ffc107;
+            color: #333;
+        }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            background: #6a28ff;
+        }
+
+        .page-btn.active {
+            background: #6a28ff;
+            color: white;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid #6a28ff;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: white;
+            font-size: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-form input,
+        .modal-form select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="admin-container">
+    <!-- BACK BUTTON -->
+    <a href="{% url 'admin_dashboard' %}" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <!-- HEADER -->
+    <div class="admin-header">
+        <div class="header-left">
+            <h1>User Management</h1>
+            <p>Manage all users in the system</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-primary" onclick="openAddUserModal()">
+                <i class="fas fa-user-plus"></i> Add New User
+            </button>
+            <button class="btn btn-secondary" onclick="exportUsers()">
+                <i class="fas fa-download"></i> Export
+            </button>
+            <button class="btn btn-danger" onclick="bulkDelete()">
+                <i class="fas fa-trash"></i> Bulk Delete
+            </button>
+        </div>
+    </div>
+
+    <!-- FILTER SECTION -->
+    <div class="filter-section">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label><i class="fas fa-search"></i> Search Users</label>
+                <input type="text" placeholder="Search by name, email, or username" id="searchInput">
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-filter"></i> Status</label>
+                <select id="statusFilter">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-user-tag"></i> Role</label>
+                <select id="roleFilter">
+                    <option value="">All Roles</option>
+                    <option value="superuser">Super Admin</option>
+                    <option value="staff">Staff</option>
+                    <option value="regular">Regular User</option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-group">
+                <label><i class="fas fa-calendar"></i> Date From</label>
+                <input type="date" id="dateFrom">
+            </div>
+            <div class="filter-group">
+                <label><i class="fas fa-calendar"></i> Date To</label>
+                <input type="date" id="dateTo">
+            </div>
+            <div class="filter-group" style="align-self: flex-end;">
+                <button class="btn btn-primary" onclick="applyFilters()">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+                <button class="btn btn-secondary" onclick="resetFilters()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- USERS TABLE -->
+    <div class="users-table-container">
+        <div class="table-header">
+            <h2>All Users ({{ users.count }})</h2>
+            <div class="table-actions">
+                <select id="bulkAction" style="background: rgba(255,255,255,0.1); color: white; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                    <option value="">Bulk Actions</option>
+                    <option value="activate">Activate Selected</option>
+                    <option value="deactivate">Deactivate Selected</option>
+                    <option value="delete">Delete Selected</option>
+                </select>
+                <button class="btn btn-primary" onclick="applyBulkAction()">
+                    <i class="fas fa-play"></i> Apply
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Role</th>
+                        <th>Joined</th>
+                        <th>Last Login</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="user-checkbox" value="{{ user.id }}">
+                        </td>
+                        <td>
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    {{ user.username|first|upper }}
+                                </div>
+                                <div>
+                                    <strong>{{ user.username }}</strong><br>
+                                    <small>{{ user.get_full_name }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <span class="status-badge {% if user.is_active %}active{% else %}inactive{% endif %}">
+                                {% if user.is_active %}
+                                <i class="fas fa-check-circle"></i> Active
+                                {% else %}
+                                <i class="fas fa-times-circle"></i> Inactive
+                                {% endif %}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="role-badge 
+                                {% if user.is_superuser %}superuser
+                                {% elif user.is_staff %}staff
+                                {% else %}regular{% endif %}">
+                                {% if user.is_superuser %}
+                                Super Admin
+                                {% elif user.is_staff %}
+                                Staff
+                                {% else %}
+                                User
+                                {% endif %}
+                            </span>
+                        </td>
+                        <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                        <td>
+                            {% if user.last_login %}
+                            {{ user.last_login|date:"M d, Y H:i" }}
+                            {% else %}
+                            Never
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="action-btn edit-btn" onclick="editUser('{{ user.id }}')" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                
+                                <form method="post" class="action-form" onsubmit="return confirm('Are you sure?')">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                                    <input type="hidden" name="action" value="toggle_active">
+                                    <button type="submit" class="action-btn toggle-btn" title="Toggle Status">
+                                        <i class="fas fa-power-off"></i>
+                                    </button>
+                                </form>
+                                
+                                <form method="post" class="action-form" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                                    <input type="hidden" name="action" value="delete">
+                                    <button type="submit" class="action-btn delete-btn" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px;">
+                            <i class="fas fa-users-slash" style="font-size: 48px; color: rgba(255,255,255,0.3); margin-bottom: 15px;"></i>
+                            <h3 style="color: rgba(255,255,255,0.7);">No users found</h3>
+                            <p style="color: rgba(255,255,255,0.5);">Try adjusting your filters or add new users</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+            <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ADD USER MODAL -->
+<div id="addUserModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New User</h3>
+            <button class="close-modal" onclick="closeAddUserModal()">&times;</button>
+        </div>
+        <form id="addUserForm" class="modal-form">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="first_name">
+            </div>
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="last_name">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select name="role">
+                    <option value="regular">Regular User</option>
+                    <option value="staff">Staff</option>
+                    <option value="superuser">Super Admin</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeAddUserModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create User</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Select All Checkbox
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('.user-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+    // Open/Close Modal
+    function openAddUserModal() {
+        document.getElementById('addUserModal').style.display = 'flex';
+    }
+
+    function closeAddUserModal() {
+        document.getElementById('addUserModal').style.display = 'none';
+    }
+
+    // Filter Functions
+    function applyFilters() {
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        const status = document.getElementById('statusFilter').value;
+        const role = document.getElementById('roleFilter').value;
+        const dateFrom = document.getElementById('dateFrom').value;
+        const dateTo = document.getElementById('dateTo').value;
+
+        const rows = document.querySelectorAll('#usersTable tbody tr');
+        
+        rows.forEach(row => {
+            let show = true;
+            const username = row.cells[1].textContent.toLowerCase();
+            const statusText = row.cells[3].textContent.toLowerCase();
+            const roleText = row.cells[4].textContent.toLowerCase();
+            const joinedDate = row.cells[5].textContent;
+
+            if (search && !username.includes(search)) {
+                show = false;
+            }
+            
+            if (status && !statusText.includes(status)) {
+                show = false;
+            }
+            
+            if (role) {
+                if (role === 'superuser' && !roleText.includes('super')) show = false;
+                if (role === 'staff' && !roleText.includes('staff')) show = false;
+                if (role === 'regular' && !roleText.includes('user')) show = false;
+            }
+            
+            row.style.display = show ? '' : 'none';
+        });
+    }
+
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('roleFilter').value = '';
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+        
+        const rows = document.querySelectorAll('#usersTable tbody tr');
+        rows.forEach(row => row.style.display = '');
+    }
+
+    // Bulk Actions
+    function applyBulkAction() {
+        const action = document.getElementById('bulkAction').value;
+        const selectedUsers = Array.from(document.querySelectorAll('.user-checkbox:checked')).map(cb => cb.value);
+        
+        if (selectedUsers.length === 0) {
+            alert('Please select at least one user.');
+            return;
+        }
+        
+        if (!action) {
+            alert('Please select an action.');
+            return;
+        }
+        
+        if (confirm(`Are you sure you want to ${action} ${selectedUsers.length} user(s)?`)) {
+            // Implement bulk action logic here
+            console.log(`Applying ${action} to:`, selectedUsers);
+            alert(`Action "${action}" applied to ${selectedUsers.length} user(s).`);
+        }
+    }
+
+    // Export Users
+    function exportUsers() {
+        alert('Exporting users data...');
+        // Implement export logic here
+    }
+
+    // Bulk Delete
+    function bulkDelete() {
+        const selectedUsers = Array.from(document.querySelectorAll('.user-checkbox:checked')).map(cb => cb.value);
+        
+        if (selectedUsers.length === 0) {
+            alert('Please select users to delete.');
+            return;
+        }
+        
+        if (confirm(`Are you sure you want to delete ${selectedUsers.length} user(s)? This action cannot be undone.`)) {
+            // Implement bulk delete logic here
+            console.log('Deleting users:', selectedUsers);
+            alert(`${selectedUsers.length} user(s) deleted.`);
+        }
+    }
+
+    // Edit User
+    function editUser(userId) {
+        alert(`Editing user ID: ${userId}`);
+        // Implement edit logic here
+    }
+
+    // Form Submission
+    document.getElementById('addUserForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Implement form submission logic here
+        alert('User added successfully!');
+        closeAddUserModal();
+        this.reset();
+    });
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#usersTable tbody tr');
+        
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+        const modal = document.getElementById('addUserModal');
+        if (e.target === modal) {
+            closeAddUserModal();
+        }
+    });
+</script>
+
+</body>
+</html>

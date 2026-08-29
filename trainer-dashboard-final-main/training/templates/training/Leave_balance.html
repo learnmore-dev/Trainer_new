@@ -1,0 +1,632 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+:root {
+  --p1: #4f46e5;
+  --p2: #7c3aed;
+  --green: #10b981;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --gray: #64748b;
+  --border: #e2e8f0;
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --radius: 1rem;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.lb-wrap {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* Header glass */
+.lb-page-header {
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  color: white;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(4px);
+}
+
+.lb-page-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.lb-page-header p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+.lb-badge {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  padding: 0.35rem 1rem;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* User Card */
+.user-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.user-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.user-card-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fefce8;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.user-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--p1), var(--p2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.user-info h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.user-info p {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-top: 0.2rem;
+}
+
+/* Balance Grid */
+.balance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bal-card {
+  border-radius: 1rem;
+  padding: 1rem 1.2rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.bal-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+}
+
+.bal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.bc-optional::before   { background: linear-gradient(90deg, #10b981, #059669); }
+.bc-mandatory::before  { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+.bc-casual::before     { background: linear-gradient(90deg, #f59e0b, #d97706); }
+.bc-sick::before       { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.bc-emergency::before  { background: linear-gradient(90deg, #f97316, #ea580c); }
+.bc-weekoff::before    { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+
+.bal-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.bal-emoji {
+  font-size: 1.3rem;
+}
+
+.bal-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray);
+}
+
+.bal-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.bal-used {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.bal-sep {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.bal-limit {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray);
+}
+
+.bal-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.prog-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.pf-ok   { background: linear-gradient(90deg, #10b981, #059669); }
+.pf-warn { background: linear-gradient(90deg, #f59e0b, #d97706); }
+.pf-full { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.pf-blue { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+.pf-purple { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+
+/* Festival chips */
+.festival-taken-section {
+  margin-bottom: 1.2rem;
+}
+
+.fts-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #475569;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.festival-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.festival-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.8rem;
+  border-radius: 40px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+}
+
+.fc-optional  { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+.fc-mandatory { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+
+/* Summary row */
+.summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: #f8fafc;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.sum-pill {
+  padding: 0.2rem 0.8rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.sum-opt  { background: #dcfce7; color: #166534; }
+.sum-man  { background: #dbeafe; color: #1e40af; }
+.sum-cas  { background: #fef9c3; color: #854d0e; }
+.sum-sick { background: #fee2e2; color: #991b1b; }
+.sum-wo   { background: #ede9fe; color: #5b21b6; }
+.sum-em   { background: #ffedd5; color: #9a3412; }
+
+/* Collapsible history */
+.history-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--p1);
+  border-top: 1px solid var(--border);
+  margin-top: 0.5rem;
+}
+
+.toggle-icon {
+  transition: transform 0.2s;
+}
+
+.toggle-icon.open {
+  transform: rotate(180deg);
+}
+
+.history-body {
+  display: none;
+  margin-top: 0.75rem;
+}
+
+.history-body.show {
+  display: block;
+}
+
+.mini-table-wrap {
+  overflow-x: auto;
+}
+
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.mini-table th {
+  background: #f1f5f9;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+}
+
+.mini-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.type-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.status-pill {
+  padding: 0.2rem 0.7rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.sp-pending  { background: #fef9c3; color: #854d0e; }
+.sp-approved { background: #dcfce7; color: #166534; }
+.sp-rejected { background: #fee2e2; color: #991b1b; }
+
+/* Pagination */
+.pagination-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline-block;
+}
+
+.pagination a, .pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  height: 2.2rem;
+  padding: 0 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: white;
+  color: #1e293b;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.pagination a:hover {
+  background: var(--p1);
+  color: white;
+  border-color: var(--p1);
+}
+
+.pagination .active span {
+  background: var(--p1);
+  color: white;
+  border-color: var(--p1);
+}
+
+.pagination .disabled span {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .lb-wrap {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+  .balance-grid {
+    grid-template-columns: 1fr;
+  }
+  .lb-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+
+<div class="lb-wrap">
+
+  <!-- Page Header -->
+  <div class="lb-page-header">
+    <div>
+      <h1>📊 Leave Balance — {{ year }}</h1>
+      <p>Track leave usage and remaining balance for all leave types</p>
+    </div>
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+      <span class="lb-badge">🎉 Optional: 5/year</span>
+      <span class="lb-badge">🏖️ Casual: 1/month</span>
+      <a href="{% url 'training:leave_create' %}" class="lb-badge" style="background: white; color: var(--p1); text-decoration: none; font-weight: 700;">+ Apply Leave</a>
+    </div>
+  </div>
+
+  {% for d in balance_data %}
+  <div class="user-card">
+
+    <!-- User Header -->
+    <div class="user-card-header">
+      <div class="user-avatar">{{ d.user.first_name|first|upper }}{{ d.user.last_name|first|upper }}</div>
+      <div class="user-info">
+        <h3>{{ d.user.get_full_name|default:d.user.username }}</h3>
+        <p>@{{ d.user.username }}{% if d.user.email %} · {{ d.user.email }}{% endif %}</p>
+      </div>
+    </div>
+
+    <!-- Balance Cards -->
+    <div class="user-card-body" style="padding: 1.2rem 1.5rem;">
+      <div class="balance-grid">
+
+        <!-- Optional Holiday -->
+        <div class="bal-card bc-optional">
+          <div class="bal-top"><span class="bal-emoji">🎉</span><span class="bal-title">Optional Holiday</span></div>
+          <div class="bal-numbers"><span class="bal-used">{{ d.opt_used }}</span><span class="bal-sep">/</span><span class="bal-limit">{{ d.opt_limit }}</span></div>
+          <div class="bal-label">{% if d.opt_remaining == 0 %}<span style="color:#ef4444;">All used</span>{% else %}<span style="color:#166534;">{{ d.opt_remaining }} remaining</span>{% endif %}</div>
+          <div class="prog-bar"><div class="prog-fill {% if d.opt_remaining == 0 %}pf-full{% elif d.opt_remaining <= 2 %}pf-warn{% else %}pf-ok{% endif %}" style="width:{% widthratio d.opt_used d.opt_limit 100 %}%;"></div></div>
+        </div>
+
+        <!-- Mandatory Holiday -->
+        <div class="bal-card bc-mandatory">
+          <div class="bal-top"><span class="bal-emoji">🏛️</span><span class="bal-title">Mandatory Holiday</span></div>
+          <div class="bal-numbers"><span class="bal-used">{{ d.man_taken_leaves|length }}</span><span class="bal-sep">/</span><span class="bal-limit">{{ d.man_total }}</span></div>
+          <div class="bal-label">{{ d.man_total|add:"-"|add:d.man_taken_leaves|length }} available</div>
+          <div class="prog-bar"><div class="prog-fill pf-blue" style="width:{% if d.man_total %}{% widthratio d.man_taken_leaves|length d.man_total 100 %}{% else %}0{% endif %}%;"></div></div>
+        </div>
+
+        <!-- Casual Leave -->
+        <div class="bal-card bc-casual">
+          <div class="bal-top"><span class="bal-emoji">🏖️</span><span class="bal-title">Casual Leave</span></div>
+          <div class="bal-numbers"><span class="bal-used">{{ d.casual_used_month }}</span><span class="bal-sep">/</span><span class="bal-limit">{{ d.casual_limit }}</span></div>
+          <div class="bal-label">{% if d.casual_remaining_month == 0 %}<span style="color:#ef4444;">Used this month</span>{% else %}<span style="font-weight:700;">{{ d.casual_remaining_month }} left</span>{% endif %}</div>
+          <div class="prog-bar"><div class="prog-fill {% if d.casual_remaining_month == 0 %}pf-full{% else %}pf-ok{% endif %}" style="width:{% widthratio d.casual_used_month d.casual_limit 100 %}%;"></div></div>
+        </div>
+
+        <!-- Sick Leave -->
+        <div class="bal-card bc-sick">
+          <div class="bal-top"><span class="bal-emoji">🤒</span><span class="bal-title">Sick Leave</span></div>
+          <div class="bal-numbers"><span class="bal-used">{{ d.sick_used }}</span></div>
+          <div class="bal-label">Used this year (no fixed limit)</div>
+          <div class="prog-bar"><div class="prog-fill pf-full" style="width:{% if d.sick_used %}{% widthratio d.sick_used 10 100 %}{% else %}0{% endif %}%;"></div></div>
+        </div>
+
+        <!-- Emergency Leave -->
+        <div class="bal-card bc-emergency">
+          <div class="bal-top"><span class="bal-emoji">🚨</span><span class="bal-title">Emergency Leave</span></div>
+          <div class="bal-numbers"><span class="bal-used">{{ d.emergency_used }}</span></div>
+          <div class="bal-label">Used this year (no fixed limit)</div>
+          <div class="prog-bar"><div class="prog-fill pf-warn" style="width:{% if d.emergency_used %}{% widthratio d.emergency_used 10 100 %}{% else %}0{% endif %}%;"></div></div>
+        </div>
+
+        <!-- Week Off -->
+        <div class="bal-card bc-weekoff">
+          <div class="bal-top"><span class="bal-emoji">📅</span><span class="bal-title">Week Off</span></div>
+          <div class="bal-numbers"><span class="bal-used">{{ d.weekoff_used }}</span></div>
+          <div class="bal-label">Applied this year</div>
+          <div class="prog-bar"><div class="prog-fill pf-purple" style="width:{% if d.weekoff_used %}{% widthratio d.weekoff_used 10 100 %}{% else %}0{% endif %}%;"></div></div>
+        </div>
+
+      </div>
+
+      <!-- Festivals taken -->
+      {% if d.opt_taken_leaves or d.man_taken_leaves %}
+      <div class="festival-taken-section">
+        <div class="fts-title">Holidays Applied</div>
+        <div class="festival-chips">
+          {% for leave in d.opt_taken_leaves %}
+            <span class="festival-chip fc-optional">🎉 {{ leave.holiday_name|default:"Optional Holiday" }} <span style="opacity:.7;">({{ leave.leave_date|date:"d M" }})</span> {% if leave.status == 'approved' %}✅{% elif leave.status == 'rejected' %}❌{% else %}⏳{% endif %}</span>
+          {% endfor %}
+          {% for leave in d.man_taken_leaves %}
+            <span class="festival-chip fc-mandatory">🏛️ {{ leave.holiday_name|default:"Mandatory Holiday" }} <span style="opacity:.7;">({{ leave.leave_date|date:"d M" }})</span> {% if leave.status == 'approved' %}✅{% elif leave.status == 'rejected' %}❌{% else %}⏳{% endif %}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+    <!-- Summary row -->
+    <div class="summary-row">
+      {% if d.opt_used %}<span class="sum-pill sum-opt">🎉 {{ d.opt_used }} Optional</span>{% endif %}
+      {% if d.man_taken_leaves %}<span class="sum-pill sum-man">🏛️ {{ d.man_taken_leaves|length }} Mandatory</span>{% endif %}
+      {% if d.casual_used_month %}<span class="sum-pill sum-cas">🏖️ {{ d.casual_used_month }} Casual</span>{% endif %}
+      {% if d.sick_used %}<span class="sum-pill sum-sick">🤒 {{ d.sick_used }} Sick</span>{% endif %}
+      {% if d.weekoff_used %}<span class="sum-pill sum-wo">📅 {{ d.weekoff_used }} WO</span>{% endif %}
+      {% if d.emergency_used %}<span class="sum-pill sum-em">🚨 {{ d.emergency_used }} Emergency</span>{% endif %}
+      {% if not d.opt_used and not d.man_taken_leaves and not d.casual_used_month and not d.sick_used and not d.weekoff_used and not d.emergency_used %}
+        <span style="color:#94a3b8; font-size:0.75rem;">No leaves taken this year</span>
+      {% endif %}
+    </div>
+
+    <!-- Collapsible history -->
+    {% if d.all_leaves %}
+    <div style="padding: 0 1.5rem 1.2rem;">
+      <div class="history-toggle" onclick="toggleHistory(this)">
+        <span>📋 Full Leave History ({{ d.all_leaves|length }} records)</span>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="history-body">
+        <div class="mini-table-wrap">
+          <table class="mini-table">
+            <thead><tr><th>Date</th><th>Type</th><th>Festival/Note</th><th>Status</th></tr></thead>
+            <tbody>
+              {% for leave in d.all_leaves %}
+              <tr>
+                <td>{{ leave.leave_date|date:"d M Y" }}</td>
+                <td><span class="type-chip">{% if leave.leave_type == 'sick' %}🤒{% elif leave.leave_type == 'casual' %}🏖️{% elif leave.leave_type == 'emergency' %}🚨{% elif leave.leave_type == 'weekoff' %}📅{% elif leave.leave_type == 'optional_holiday' %}🎉{% elif leave.leave_type == 'mandatory_holiday' %}🏛️{% else %}📝{% endif %} {{ leave.get_leave_type_display }}</span></td>
+                <td>{{ leave.holiday_name|default:leave.reason|truncatechars:40 }}</td>
+                <td><span class="status-pill sp-{{ leave.status }}">{% if leave.status == 'pending' %}⏳{% elif leave.status == 'approved' %}✅{% else %}❌{% endif %} {{ leave.get_status_display }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% empty %}
+    <div style="text-align: center; padding: 3rem; background: white; border-radius: var(--radius); box-shadow: var(--shadow-sm); color: #64748b;">No users found.</div>
+  {% endfor %}
+
+  <!-- ========== PAGINATION ========== -->
+  {% if is_paginated %}
+  <div class="pagination-container">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li><a href="?page=1">&laquo; First</a></li>
+        <li><a href="?page={{ page_obj.previous_page_number }}">‹ Previous</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo; First</span></li>
+        <li class="disabled"><span>‹ Previous</span></li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="active"><span>{{ num }}</span></li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <li><a href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">Next ›</a></li>
+        <li><a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>Next ›</span></li>
+        <li class="disabled"><span>Last &raquo;</span></li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+function toggleHistory(el) {
+  const body = el.nextElementSibling;
+  const icon = el.querySelector('.toggle-icon');
+  body.classList.toggle('show');
+  icon.classList.toggle('open');
+}
+</script>
+{% endblock %}

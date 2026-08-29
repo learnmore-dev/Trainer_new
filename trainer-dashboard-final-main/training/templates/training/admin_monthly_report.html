@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  .page-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.5rem; }
+  .page-title  { font-size:1.2rem; font-weight:700; color:#333; }
+
+  .export-btn {
+    background: linear-gradient(135deg,#28a745,#20c997);
+    color: white; padding: 9px 20px; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.2s;
+  }
+  .export-btn:hover { opacity:.9; color:white; }
+
+  .filter-section { background:white; padding:1rem 1.4rem; border-radius:10px; margin-bottom:1.4rem; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+  .filter-form { display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end; }
+  .filter-group { display:flex; flex-direction:column; gap:4px; }
+  .filter-group label { font-weight:600; font-size:.82rem; color:#555; text-transform:uppercase; }
+  .filter-group select { padding:8px 12px; border:1.5px solid #dee2e6; border-radius:7px; font-size:.88rem; }
+  .filter-btn { padding:8px 18px; background:#4361ee; color:white; border:none; border-radius:7px; font-weight:600; cursor:pointer; }
+
+  .user-section { background:white; border-radius:12px; padding:1.4rem; margin-bottom:1.6rem; box-shadow:0 2px 12px rgba(0,0,0,.07); border-left:5px solid #4361ee; }
+  .user-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.8rem; margin-bottom:1rem; padding-bottom:.8rem; border-bottom:2px solid #f0f0f0; }
+  .user-name { font-size:1.1rem; font-weight:700; color:#333; display:flex; align-items:center; gap:8px; }
+  .user-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#4361ee,#7209b7); color:white; display:inline-flex; align-items:center; justify-content:center; font-weight:700; }
+
+  /* Summary cards */
+  .summary-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:.7rem; margin-bottom:1.2rem; }
+  .s-card { border-radius:10px; padding:.9rem; text-align:center; border:2px solid transparent; }
+  .s-card .s-num { font-size:1.8rem; font-weight:800; line-height:1; }
+  .s-card .s-lbl { font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-top:3px; }
+  .s-card.present  { background:#f0fff4; border-color:#68d391; color:#276749; }
+  .s-card.half_day { background:#fffff0; border-color:#f6e05e; color:#744210; }
+  .s-card.leave    { background:#fff5f5; border-color:#fc8181; color:#822727; }
+  .s-card.hours    { background:#ebf8ff; border-color:#63b3ed; color:#2a4365; }
+  .s-card.percent  { background:#f3e8ff; border-color:#b794f4; color:#553c9a; }
+  .s-card.incentive{ background:#f0fff4; border-color:#68d391; color:#276749; }
+
+  /* Content row */
+  .content-row { display:grid; grid-template-columns:260px 1fr; gap:1.2rem; align-items:start; }
+  @media(max-width:900px){ .content-row { grid-template-columns:1fr; } }
+
+  .chart-box { background:#f8f9fa; border-radius:10px; padding:1rem; text-align:center; margin-bottom:.8rem; }
+  .chart-box h5 { font-size:.82rem; font-weight:700; color:#555; margin-bottom:.5rem; text-transform:uppercase; }
+
+  /* Table */
+  .att-table { width:100%; border-collapse:collapse; font-size:.83rem; }
+  .att-table th { background:#343a40; color:white; padding:8px 10px; text-align:center; font-weight:500; font-size:.78rem; }
+  .att-table td { padding:7px 10px; text-align:center; border-bottom:1px solid #f0f0f0; }
+  .att-table tr.present-row { background:#f0fff4; }
+  .att-table tr.half-row    { background:#fffff0; }
+  .att-table tr.leave-row   { background:#fff5f5; }
+
+  .badge { padding:3px 9px; border-radius:20px; font-size:.72rem; font-weight:700; color:white; display:inline-block; }
+  .badge-present   { background:#38a169; }
+  .badge-half_day  { background:#d69e2e; color:#212529; }
+  .badge-leave     { background:#e53e3e; }
+  .badge-leave-app { background:#dd6b20; }
+  .badge-pending   { background:#718096; }
+  .duration-badge  { background:#6f42c1; color:white; padding:2px 8px; border-radius:10px; font-size:.72rem; font-weight:700; }
+
+  .table-wrapper { overflow-x:auto; border-radius:8px; }
+
+  /* Incentive bar */
+  .incentive-bar { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; padding:.7rem 1rem; background:#f8f9fa; border-radius:8px; font-size:.84rem; margin-top:1rem; }
+  .i-total { font-weight:800; color:#28a745; font-size:1rem; }
+  .eligible-yes { background:#d4edda; color:#155724; padding:3px 10px; border-radius:20px; font-size:.75rem; font-weight:700; }
+  .eligible-no  { background:#f8d7da; color:#721c24; padding:3px 10px; border-radius:20px; font-size:.75rem; font-weight:700; }
+
+  .period-bar { background:#e9ecef; padding:8px 14px; border-radius:6px; font-size:.85rem; margin-bottom:1rem; }
+  .no-data { text-align:center; padding:3rem; color:#aaa; font-style:italic; background:white; border-radius:10px; }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<div class="page-header">
+  <div class="page-title">📊 Monthly Attendance Report</div>
+  <a href="{% url 'training:export_attendance_excel' %}?month={{ month }}&year={{ year }}{% if selected_trainer %}&trainer={{ selected_trainer }}{% endif %}" class="export-btn">
+    📥 Export Excel
+  </a>
+</div>
+
+<!-- Filter -->
+<div class="filter-section">
+  <form method="GET" class="filter-form">
+    <div class="filter-group">
+      <label>👤 Trainer</label>
+      <select name="trainer">
+        <option value="">All Trainers</option>
+        {% for user in trainers %}
+          <option value="{{ user.id }}" {% if selected_trainer|stringformat:"i" == user.id|stringformat:"i" %}selected{% endif %}>
+            {{ user.get_full_name|default:user.username }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>📅 Month</label>
+      <select name="month">
+        <option value="1"  {% if month == 1  %}selected{% endif %}>January</option>
+        <option value="2"  {% if month == 2  %}selected{% endif %}>February</option>
+        <option value="3"  {% if month == 3  %}selected{% endif %}>March</option>
+        <option value="4"  {% if month == 4  %}selected{% endif %}>April</option>
+        <option value="5"  {% if month == 5  %}selected{% endif %}>May</option>
+        <option value="6"  {% if month == 6  %}selected{% endif %}>June</option>
+        <option value="7"  {% if month == 7  %}selected{% endif %}>July</option>
+        <option value="8"  {% if month == 8  %}selected{% endif %}>August</option>
+        <option value="9"  {% if month == 9  %}selected{% endif %}>September</option>
+        <option value="10" {% if month == 10 %}selected{% endif %}>October</option>
+        <option value="11" {% if month == 11 %}selected{% endif %}>November</option>
+        <option value="12" {% if month == 12 %}selected{% endif %}>December</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>📅 Year</label>
+      <select name="year">
+        {% for y in years %}
+          <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="filter-btn">🔍 Generate</button>
+  </form>
+</div>
+
+{% if report %}
+  <div class="period-bar">
+    <strong>Report:</strong> {{ month_name }} {{ year }}
+    {% if selected_trainer %} | <strong>Trainer:</strong>
+      {% for user in trainers %}{% if user.id|stringformat:"i" == selected_trainer %}{{ user.get_full_name|default:user.username }}{% endif %}{% endfor %}
+    {% endif %}
+  </div>
+
+  {% for user_data in report %}
+  <div class="user-section">
+
+    <div class="user-header">
+      <div class="user-name">
+        <span class="user-avatar">{{ user_data.name|first|upper }}</span>
+        {{ user_data.name }}
+      </div>
+      <div style="font-size:.82rem;color:#888;">{{ user_data.total_days }} records</div>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="summary-cards">
+      <div class="s-card present">
+        <div class="s-num">{{ user_data.present_count }}</div>
+        <div class="s-lbl">🟢 Present</div>
+      </div>
+      <div class="s-card half_day">
+        <div class="s-num">{{ user_data.half_day_count }}</div>
+        <div class="s-lbl">🟡 Half Day</div>
+      </div>
+      <div class="s-card leave">
+        <div class="s-num">{{ user_data.leave_count }}</div>
+        <div class="s-lbl">🔴 Leave</div>
+      </div>
+      <div class="s-card hours">
+        <div class="s-num" style="font-size:1.3rem;">{{ user_data.total_hours }}h</div>
+        <div class="s-lbl">⏱ Total Hrs</div>
+      </div>
+      <div class="s-card percent">
+        <div class="s-num" style="font-size:1.3rem;">{{ user_data.attendance_percentage }}%</div>
+        <div class="s-lbl">📈 Attendance</div>
+      </div>
+      <div class="s-card incentive">
+        <div class="s-num" style="font-size:1.2rem;">₹{{ user_data.incentive }}</div>
+        <div class="s-lbl">💰 Incentive</div>
+      </div>
+    </div>
+
+    <!-- Pie charts + Table -->
+    <div class="content-row">
+
+      <!-- Charts -->
+      <div>
+        <div class="chart-box">
+          <h5>Attendance Breakdown</h5>
+          <canvas id="attChart_{{ forloop.counter }}" height="200"></canvas>
+        </div>
+        <div class="chart-box">
+          <h5>Hours Breakdown</h5>
+          <canvas id="hrChart_{{ forloop.counter }}" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper">
+        <table class="att-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Day</th>
+              <th>Status</th>
+              <th>Mark In</th>
+              <th>Mark Out</th>
+              <th>Duration</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in user_data.records %}
+            <tr class="{% if record.day_status == 'present' %}present-row{% elif record.day_status == 'half_day' %}half-row{% elif record.day_status == 'leave' or record.status == 'LEAVE' %}leave-row{% endif %}">
+              <td><strong>{{ record.date|date:"d M" }}</strong></td>
+              <td style="color:#888;font-size:.76rem;">{{ record.date|date:"D" }}</td>
+              <td>
+                {% if record.day_status == 'present' %}<span class="badge badge-present">🟢 Present</span>
+                {% elif record.day_status == 'half_day' %}<span class="badge badge-half_day">🟡 Half Day</span>
+                {% elif record.day_status == 'leave' %}<span class="badge badge-leave">🔴 Leave</span>
+                {% elif record.status == 'LEAVE' %}<span class="badge badge-leave-app">🗓️ Applied</span>
+                {% else %}<span class="badge badge-pending">⏳</span>{% endif %}
+              </td>
+              <td>{{ record.mark_in_time }}</td>
+              <td>{{ record.mark_out_time }}</td>
+              <td>{% if record.duration != "--" %}<span class="duration-badge">{{ record.duration }}</span>{% else %}--{% endif %}</td>
+              <td style="font-size:.75rem;color:#666;">
+                {% if record.location_name and record.location_name != "--" %}📍 {{ record.location_name|truncatechars:25 }}{% else %}--{% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Incentive bar -->
+    <div class="incentive-bar">
+      <span>📊 Attendance: <strong>{{ user_data.attendance_percentage }}%</strong></span>
+      <span>📦 Batches: <strong>{{ user_data.new_batches }}</strong></span>
+      <span>➕ Extra: <strong>{{ user_data.extra_batches }}</strong></span>
+      <span>🎓 Class Hrs: <strong>{{ user_data.class_hours }}h</strong></span>
+      <span>🔧 Other Hrs: <strong>{{ user_data.other_hours }}h</strong></span>
+      <span class="i-total">💰 ₹{{ user_data.incentive }}</span>
+      {% if user_data.eligible %}<span class="eligible-yes">Eligible ✅</span>
+      {% else %}<span class="eligible-no">Not Eligible ❌</span>{% endif %}
+    </div>
+
+  </div>
+
+  <script>
+  (function(){
+    // Attendance pie
+    new Chart(document.getElementById('attChart_{{ forloop.counter }}'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Present','Half Day','Leave','Pending'],
+        datasets: [{
+          data: [{{ user_data.present_count }},{{ user_data.half_day_count }},{{ user_data.leave_count }},{{ user_data.pending_count }}],
+          backgroundColor: ['#38a169','#d69e2e','#e53e3e','#718096'],
+          borderWidth: 2, borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true, cutout: '58%',
+        plugins: { legend: { position:'bottom', labels:{ font:{size:10}, padding:6 } } }
+      }
+    });
+
+    // Hours pie
+    new Chart(document.getElementById('hrChart_{{ forloop.counter }}'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Class Hours','Other Hours'],
+        datasets: [{
+          data: [{{ user_data.class_hours|default:0 }},{{ user_data.other_hours|default:0 }}],
+          backgroundColor: ['#4361ee','#7209b7'],
+          borderWidth: 2, borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true, cutout: '58%',
+        plugins: { legend: { position:'bottom', labels:{ font:{size:10}, padding:6 } } }
+      }
+    });
+  })();
+  </script>
+
+  {% endfor %}
+
+{% else %}
+  <div class="no-data">📭 No records found for {{ month_name }} {{ year }}</div>
+{% endif %}
+
+{% endblock %}

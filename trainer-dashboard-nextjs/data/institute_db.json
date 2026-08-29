@@ -1,0 +1,4019 @@
+{
+  "users": [
+    {
+      "id": "usr_admin",
+      "username": "admin",
+      "name": "Institute Director (Admin)",
+      "email": "admin@institute.edu",
+      "role": "admin",
+      "password": "admin",
+      "phone": "+91 98765 43210",
+      "designation": "Director / Management",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "created_at": "2024-12-31T18:30:00.000Z"
+    },
+    {
+      "id": "usr_trainer_1",
+      "username": "rahul.sharma",
+      "name": "Rahul Sharma",
+      "email": "rahul.sharma@institute.edu",
+      "role": "trainer",
+      "password": "trainer",
+      "phone": "+91 8340729468",
+      "designation": "Senior Full-Stack Trainer",
+      "hourly_rate": 600,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+      "created_at": "2025-01-14T18:30:00.000Z"
+    },
+    {
+      "id": "usr_trainer_2",
+      "username": "priya.patel",
+      "name": "Priya Patel",
+      "email": "priya.patel@institute.edu",
+      "role": "trainer",
+      "password": "trainer",
+      "phone": "+91 98980 33445",
+      "designation": "Python & Data Science Trainer",
+      "hourly_rate": 550,
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+      "created_at": "2025-01-31T18:30:00.000Z"
+    },
+    {
+      "id": "usr_trainer_3",
+      "username": "amit.verma",
+      "name": "Amit Verma",
+      "email": "amit.verma@institute.edu",
+      "role": "trainer",
+      "password": "trainer",
+      "phone": "+91 97123 55667",
+      "designation": "UI/UX & Frontend Trainer",
+      "hourly_rate": 500,
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
+      "created_at": "2025-03-09T18:30:00.000Z"
+    }
+  ],
+  "batches": [
+    {
+      "id": "btc_1",
+      "name": "MERN Stack - Morning Batch A",
+      "course_id": "course_mern",
+      "course_name": "MERN Stack Developer Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-01",
+      "total_hours": 60,
+      "total_students": 18,
+      "is_completed": false,
+      "batch_type": "training",
+      "is_active": true,
+      "created_at": "2026-08-01T08:00:00Z"
+    },
+    {
+      "id": "btc_sql",
+      "name": "SQL & Database Engineering - Morning Batch",
+      "course_id": "course_sql",
+      "course_name": "SQL Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-15",
+      "total_hours": 40,
+      "total_students": 15,
+      "is_completed": false,
+      "batch_type": "training",
+      "is_active": true,
+      "created_at": "2026-08-15T09:00:00Z"
+    },
+    {
+      "id": "btc_2",
+      "name": "Next.js & React Mastery - Afternoon B",
+      "course_id": "course_mern",
+      "course_name": "MERN Stack Developer Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-05",
+      "total_hours": 45,
+      "total_students": 14,
+      "is_completed": false,
+      "batch_type": "training",
+      "is_active": true,
+      "created_at": "2026-08-05T09:00:00Z"
+    },
+    {
+      "id": "btc_3",
+      "name": "Python Data Science & ML - Morning Batch",
+      "course_id": "course_datascience",
+      "course_name": "Data Science & Machine Learning Syllabus",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "start_date": "2026-08-02",
+      "total_hours": 80,
+      "total_students": 22,
+      "is_completed": false,
+      "batch_type": "training",
+      "is_active": true,
+      "created_at": "2026-08-02T08:30:00Z"
+    },
+    {
+      "id": "btc_4",
+      "name": "Student Doubt Solving & Lab Session",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "start_date": "2026-08-10",
+      "total_hours": 30,
+      "total_students": 35,
+      "is_completed": false,
+      "batch_type": "other",
+      "is_active": true,
+      "created_at": "2026-08-10T10:00:00Z"
+    },
+    {
+      "id": "btc_5",
+      "name": "Power BI & Tableau - Business Analytics",
+      "course_id": "course_powerbi",
+      "course_name": "Power BI Course Syllabus",
+      "trainer_id": "usr_trainer_3",
+      "trainer_name": "Amit Verma",
+      "start_date": "2026-08-08",
+      "total_hours": 45,
+      "total_students": 12,
+      "is_completed": false,
+      "batch_type": "training",
+      "is_active": true,
+      "created_at": "2026-08-08T11:00:00Z"
+    },
+    {
+      "name": "SQL & Database Engineering — Morning Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 40,
+      "total_students": 15,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "SQL & Database Engineering — Morning Batch — Rahul Sir",
+      "whatsapp_group_id": "120363431548007568@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/BEqZO8VAoCXCFJDXp24Vvg",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787565864093_9s9b",
+      "created_at": "2026-08-24T10:04:24.093Z"
+    },
+    {
+      "name": "Power BI Course — New Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 45,
+      "total_students": 15,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-KN-AUG-OFF-PBI-07PM",
+      "whatsapp_group_id": "120363411129930624@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/KuDd56eoAFM24W9kY1mhC2",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787567957278_79lu",
+      "created_at": "2026-08-24T10:39:17.278Z"
+    },
+    {
+      "name": "Python Developer — New Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 50,
+      "total_students": 15,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "whatsapp_group_id": "120363430872331465@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/LPiCVcbmifhCF02RwGOJG3",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787568018331_vrms",
+      "created_at": "2026-08-24T10:40:18.331Z"
+    },
+    {
+      "name": "Django Course — New Batch",
+      "course_id": "course_django",
+      "course_name": "Django Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 45,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-BTM-AUG-ON-DJANGO-10AM",
+      "whatsapp_group_id": "120363428677476123@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/H3I5I2BGL7WIhuFfJ9r5jW",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787568875893_irlc",
+      "created_at": "2026-08-24T10:54:35.893Z"
+    },
+    {
+      "name": "Angular Developer Course — New Batch",
+      "course_id": "course_angular",
+      "course_name": "Angular Developer Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 45,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-BTM-AUG-ON-ANGULAR-10AM",
+      "whatsapp_group_id": "120363412568811336@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/I1Ye0mqDQ35BhZGpFxz7CY",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787569099537_nebm",
+      "created_at": "2026-08-24T10:58:19.537Z"
+    },
+    {
+      "name": "Power BI Course — New Batch",
+      "course_id": "course_powerbi",
+      "course_name": "Power BI Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 45,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-MT-AUG-ON-PBI-10AM",
+      "whatsapp_group_id": "120363429529090114@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/GTEdA9GCeRH7LgHjtpYZvH",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787569490511_e4qw",
+      "created_at": "2026-08-24T11:04:50.511Z"
+    },
+    {
+      "name": "Power BI Course — New Batch",
+      "course_id": "course_powerbi",
+      "course_name": "Power BI Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 45,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-KN-MAR-OFF-PBI-10AM",
+      "whatsapp_group_id": "120363427088645519@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/BjDqOtfUBue1rHhbNVkV7J",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787569702189_jvvf",
+      "created_at": "2026-08-24T11:08:22.189Z"
+    },
+    {
+      "name": "SQL & Database Engineering — Morning Batch",
+      "course_id": "course_sql",
+      "course_name": "SQL Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-24",
+      "total_hours": 40,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "whatsapp_group_id": "120363411846055025@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/JKv86mE1tvw7WArdHwQofQ",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787569957498_a8ga",
+      "created_at": "2026-08-24T11:12:37.498Z"
+    },
+    {
+      "name": "Angular Developer Course — New Batch",
+      "course_id": "course_angular",
+      "course_name": "Angular Developer Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-25",
+      "total_hours": 45,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "whatsapp_group_id": "120363414196520086@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/GgX2nLzHvwM6uQ804m04ZG",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787652679305_10iz",
+      "created_at": "2026-08-25T10:11:19.305Z"
+    },
+    {
+      "name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "course_id": "course_sql",
+      "course_name": "SQL & Database Engineering",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-08-26",
+      "total_hours": 40,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "whatsapp_group_id": "120363412597705881@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/JHaDBE1A3LKIhnSG7UGrdR",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787738823975_27tn",
+      "created_at": "2026-08-26T10:07:03.975Z"
+    },
+    {
+      "name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "course_id": "course_sql",
+      "course_name": "SQL Course Syllabus",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "start_date": "2026-09-01",
+      "total_hours": 20,
+      "total_students": 1,
+      "batch_type": "training",
+      "is_active": true,
+      "is_completed": false,
+      "whatsapp_group_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "whatsapp_group_id": "120363429363364410@g.us",
+      "whatsapp_group_link": "https://chat.whatsapp.com/BlOtffU0nKlJF6jrmupRRt",
+      "auto_whatsapp_group": true,
+      "id": "btc_1787740128139_rpp7",
+      "created_at": "2026-08-26T10:28:48.139Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "ses_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "MongoDB Aggregations and Indexing hands-on practice",
+      "created_at": "2026-08-24T09:30:00Z"
+    },
+    {
+      "id": "ses_2",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "batch_id": "btc_3",
+      "batch_name": "Python Data Science & ML - Morning Batch",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "Pandas DataFrame data cleaning & exploratory data analysis",
+      "created_at": "2026-08-24T10:00:00Z"
+    },
+    {
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "MODULE 2 >> Basic SQL Queries\n• Introduction to the SELECT statement\n• Filtering data with WHERE clause & logical operators\n• Sorting data with ORDER BY (ASC / DESC)\n\n📝 Practice: Solved 15 live database query challenges in MySQL Workbench.",
+      "students_attendance": [
+        {
+          "student_id": "std_sql_1",
+          "student_name": "Rahul Patel",
+          "status": "present"
+        },
+        {
+          "student_id": "std_sql_2",
+          "student_name": "Sneha Shah",
+          "status": "absent"
+        },
+        {
+          "student_id": "std_sql_3",
+          "student_name": "Priya Mehta",
+          "status": "leave",
+          "leave_reason": "Doctor consultation"
+        },
+        {
+          "student_id": "std_sql_4",
+          "student_name": "Amit Trivedi",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 2,
+      "total_students_absent": 1,
+      "total_students_leave": 1,
+      "id": "ses_1787564638836_erwg",
+      "created_at": "2026-08-24T09:43:58.836Z"
+    },
+    {
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "MODULE 9 >> Object Oriented Programming (OOP)\n• OOP Introduction: Class and Instance\n• Properties v/s Getters and Setters (@property)\n• Abstract Classes and Polymorphism",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1787568018331_vrms_1",
+          "student_name": "Rahul Patel",
+          "phone": "+91 98981 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_2",
+          "student_name": "Sneha Shah",
+          "phone": "+91 98250 23456",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_3",
+          "student_name": "Priya Mehta",
+          "phone": "+91 97140 34567",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_4",
+          "student_name": "Amit Trivedi",
+          "phone": "+91 98790 45678",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_5",
+          "student_name": "Neha Joshi",
+          "phone": "+91 94280 56789",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_6",
+          "student_name": "Hardik Parmar",
+          "phone": "+91 99090 67890",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_7",
+          "student_name": "Pooja Varma",
+          "phone": "+91 98240 78901",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_8",
+          "student_name": "Vikas Solanki",
+          "phone": "+91 97230 89012",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_9",
+          "student_name": "Anjali Desai",
+          "phone": "+91 98980 90123",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_10",
+          "student_name": "Karan Dave",
+          "phone": "+91 98765 01234",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_11",
+          "student_name": "Bhavin Rana",
+          "phone": "+91 94270 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1787568018331_vrms_12",
+          "student_name": "Riya Rathod",
+          "phone": "+91 99040 23456",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 12,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787568165650_l1s8",
+      "created_at": "2026-08-24T10:42:45.650Z"
+    },
+    {
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_id": "usr_admin",
+      "trainer_name": "Institute Director (Admin)",
+      "session_date": "2026-08-24",
+      "hours_taken": 12,
+      "description": "MODULE 12 >> Working with Views & Materialized Views\n• Creating and using Standard Views\n• Updating data through Updatable Views\n• Security considerations & row-level access using Views\n• Materialized Views & automatic refresh strategies",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1787569957498_a8ga_1787569957500_1",
+          "student_name": "JAY",
+          "phone": "+91 9408626950",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 1,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787572380279_7142",
+      "created_at": "2026-08-24T11:53:00.279Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_admin",
+      "trainer_name": "Institute Director (Admin)",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "MODULE 6 >> Node.js\n• What is Node.js? Server-side JavaScript runtime\n• Node architecture & single-threaded Event Loop\n• NPM & package.json scripts management\n• Modules & require() vs ES Modules (import/export)\n• File system operations (fs module)\n• Streams & buffers for large data\n• Event emitter architecture\n• Asynchronous programming patterns",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1_1",
+          "student_name": "Rahul Patel",
+          "phone": "+91 98981 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_2",
+          "student_name": "Sneha Shah",
+          "phone": "+91 98250 23456",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_3",
+          "student_name": "Priya Mehta",
+          "phone": "+91 97140 34567",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_4",
+          "student_name": "Amit Trivedi",
+          "phone": "+91 98790 45678",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_5",
+          "student_name": "Neha Joshi",
+          "phone": "+91 94280 56789",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_6",
+          "student_name": "Hardik Parmar",
+          "phone": "+91 99090 67890",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_7",
+          "student_name": "Pooja Varma",
+          "phone": "+91 98240 78901",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_8",
+          "student_name": "Vikas Solanki",
+          "phone": "+91 97230 89012",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_9",
+          "student_name": "Anjali Desai",
+          "phone": "+91 98980 90123",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_10",
+          "student_name": "Karan Dave",
+          "phone": "+91 98765 01234",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_11",
+          "student_name": "Bhavin Rana",
+          "phone": "+91 94270 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_12",
+          "student_name": "Riya Rathod",
+          "phone": "+91 99040 23456",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 12,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787572417667_j13s",
+      "created_at": "2026-08-24T11:53:37.667Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_admin",
+      "trainer_name": "Institute Director (Admin)",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "MODULE 15 >> Full-Stack Integration\n• Connect React frontend with Node/Express REST backend\n• State lifting & centralized API services with Axios\n• Handling cookies, localStorage, and session persistence\n• End-to-end form validations & error UI feedback",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1_1",
+          "student_name": "Rahul Patel",
+          "phone": "+91 98981 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_2",
+          "student_name": "Sneha Shah",
+          "phone": "+91 98250 23456",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_3",
+          "student_name": "Priya Mehta",
+          "phone": "+91 97140 34567",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_4",
+          "student_name": "Amit Trivedi",
+          "phone": "+91 98790 45678",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_5",
+          "student_name": "Neha Joshi",
+          "phone": "+91 94280 56789",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_6",
+          "student_name": "Hardik Parmar",
+          "phone": "+91 99090 67890",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_7",
+          "student_name": "Pooja Varma",
+          "phone": "+91 98240 78901",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_8",
+          "student_name": "Vikas Solanki",
+          "phone": "+91 97230 89012",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_9",
+          "student_name": "Anjali Desai",
+          "phone": "+91 98980 90123",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_10",
+          "student_name": "Karan Dave",
+          "phone": "+91 98765 01234",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_11",
+          "student_name": "Bhavin Rana",
+          "phone": "+91 94270 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_12",
+          "student_name": "Riya Rathod",
+          "phone": "+91 99040 23456",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 12,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787572449017_ksas",
+      "created_at": "2026-08-24T11:54:09.017Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_admin",
+      "trainer_name": "Institute Director (Admin)",
+      "session_date": "2026-08-24",
+      "hours_taken": 2,
+      "description": "FGUJHGI FDGHFGUJ FGHRFH ",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1_1",
+          "student_name": "Rahul Patel",
+          "phone": "+91 98981 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_2",
+          "student_name": "Sneha Shah",
+          "phone": "+91 98250 23456",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_3",
+          "student_name": "Priya Mehta",
+          "phone": "+91 97140 34567",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_4",
+          "student_name": "Amit Trivedi",
+          "phone": "+91 98790 45678",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_5",
+          "student_name": "Neha Joshi",
+          "phone": "+91 94280 56789",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_6",
+          "student_name": "Hardik Parmar",
+          "phone": "+91 99090 67890",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_7",
+          "student_name": "Pooja Varma",
+          "phone": "+91 98240 78901",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_8",
+          "student_name": "Vikas Solanki",
+          "phone": "+91 97230 89012",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_9",
+          "student_name": "Anjali Desai",
+          "phone": "+91 98980 90123",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_10",
+          "student_name": "Karan Dave",
+          "phone": "+91 98765 01234",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_11",
+          "student_name": "Bhavin Rana",
+          "phone": "+91 94270 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_12",
+          "student_name": "Riya Rathod",
+          "phone": "+91 99040 23456",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 12,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787572457963_rhfb",
+      "created_at": "2026-08-24T11:54:17.963Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "session_date": "2026-08-25",
+      "hours_taken": 2,
+      "description": "Covered Variables, Data Types, and Operators with hands-on lab exercises",
+      "students_attendance": [],
+      "total_students_present": 0,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787637374955_sgts",
+      "created_at": "2026-08-25T05:56:14.955Z"
+    },
+    {
+      "batch_id": "btc_3",
+      "batch_name": "Python Data Science & ML - Morning Batch",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "course_id": "course_datascience",
+      "course_name": "Python Data Science & ML",
+      "selected_topics": [
+        "Pandas DataFrames",
+        "NumPy Arrays",
+        "Matplotlib Plotting"
+      ],
+      "session_date": "2026-08-25",
+      "hours_taken": 2,
+      "description": "Pandas DataFrames, NumPy Arrays, Matplotlib Plotting",
+      "students_attendance": [],
+      "total_students_present": 0,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787637464461_1y0a",
+      "created_at": "2026-08-25T05:57:44.461Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_mern",
+      "course_name": "MERN Stack Developer Syllabus",
+      "module_name": "MODULES 1, 2",
+      "selected_topics": [
+        "Semantic HTML5 Elements",
+        "HTML Forms & Validation",
+        "Box model, Flexbox, and CSS Grid",
+        "Responsive design and media queries"
+      ],
+      "session_date": "2026-08-25",
+      "hours_taken": 3,
+      "description": "MODULE 1 >> HTML5\n• Semantic HTML5 Elements\n• HTML Forms & Validation\n\nMODULE 2 >> CSS3\n• Box model, Flexbox, and CSS Grid\n• Responsive design and media queries",
+      "students_attendance": [],
+      "total_students_present": 0,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787638007986_yugm",
+      "created_at": "2026-08-25T06:06:47.986Z"
+    },
+    {
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_angular",
+      "course_name": "Angular Developer Course Syllabus",
+      "module_name": "MODULE 1 >> Introduction to Angular",
+      "selected_topics": [
+        "Overview of Angular framework and its evolution",
+        "Understanding the Angular ecosystem and architecture",
+        "Setting up development environment (Node.js, npm, Angular CLI)",
+        "Creating a new Angular project using Angular CLI (ng new)",
+        "Exploring project structure, main.ts, angular.json, and component tree"
+      ],
+      "session_date": "2026-08-25",
+      "hours_taken": 2,
+      "description": "MODULE 1 >> Introduction to Angular\n• Overview of Angular framework and its evolution\n• Understanding the Angular ecosystem and architecture\n• Setting up development environment (Node.js, npm, Angular CLI)\n• Creating a new Angular project using Angular CLI (ng new)\n• Exploring project structure, main.ts, angular.json, and component tree",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1787652679305_10iz_1787652679313_1",
+          "student_name": "pratik",
+          "phone": "+91 9737356415",
+          "status": "absent"
+        }
+      ],
+      "total_students_present": 0,
+      "total_students_absent": 1,
+      "total_students_leave": 0,
+      "id": "ses_1787653819496_g2ks",
+      "created_at": "2026-08-25T10:30:19.496Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_mern",
+      "course_name": "MERN Stack Developer Course Syllabus",
+      "module_name": "MODULES 1, 2",
+      "selected_topics": [
+        "Basic structure, tags, forms, tables",
+        "Semantic HTML elements",
+        "Media elements (audio, video, canvas)",
+        "Box model, Flexbox, and CSS Grid",
+        "Responsive design and media queries",
+        "Animations & transitions",
+        "Basic UI designing principles and modern CSS resets"
+      ],
+      "session_date": "2026-08-26",
+      "hours_taken": 1,
+      "description": "MODULE 1 >> HTML5\n• Basic structure, tags, forms, tables\n• Semantic HTML elements\n• Media elements (audio, video, canvas)\n\nMODULE 2 >> CSS3\n• Box model, Flexbox, and CSS Grid\n• Responsive design and media queries\n• Animations & transitions\n• Basic UI designing principles and modern CSS resets",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1_1",
+          "student_name": "Rahul Patel",
+          "phone": "+91 98981 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_2",
+          "student_name": "Sneha Shah",
+          "phone": "+91 98250 23456",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_3",
+          "student_name": "Priya Mehta",
+          "phone": "+91 97140 34567",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_4",
+          "student_name": "Amit Trivedi",
+          "phone": "+91 98790 45678",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_5",
+          "student_name": "Neha Joshi",
+          "phone": "+91 94280 56789",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_6",
+          "student_name": "Hardik Parmar",
+          "phone": "+91 99090 67890",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_7",
+          "student_name": "Pooja Varma",
+          "phone": "+91 98240 78901",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_8",
+          "student_name": "Vikas Solanki",
+          "phone": "+91 97230 89012",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_9",
+          "student_name": "Anjali Desai",
+          "phone": "+91 98980 90123",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_10",
+          "student_name": "Karan Dave",
+          "phone": "+91 98765 01234",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_11",
+          "student_name": "Bhavin Rana",
+          "phone": "+91 94270 12345",
+          "status": "present"
+        },
+        {
+          "student_id": "std_btc_1_12",
+          "student_name": "Riya Rathod",
+          "phone": "+91 99040 23456",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 12,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787737096426_2qcq",
+      "created_at": "2026-08-26T09:38:16.426Z"
+    },
+    {
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_angular",
+      "course_name": "Angular Developer Course Syllabus",
+      "module_name": "MODULES 1, 15",
+      "selected_topics": [
+        "Overview of Angular framework and its evolution",
+        "Understanding the Angular ecosystem and architecture",
+        "Setting up development environment (Node.js, npm, Angular CLI)",
+        "Creating a new Angular project using Angular CLI (ng new)",
+        "Exploring project structure, main.ts, angular.json, and component tree",
+        "Server-Side Rendering (SSR) with Angular Universal / Angular SSR",
+        "Progressive Web Apps (PWA) with @angular/pwa and service workers",
+        "Standalone Components (NgModule-less Angular) and modern Signals API",
+        "Angular Ivy compiler engine features and optimizations",
+        "Angular roadmap, community libraries, and enterprise architectural patterns"
+      ],
+      "session_date": "2026-08-26",
+      "hours_taken": 1,
+      "description": "MODULE 1 >> Introduction to Angular\n• Overview of Angular framework and its evolution\n• Understanding the Angular ecosystem and architecture\n• Setting up development environment (Node.js, npm, Angular CLI)\n• Creating a new Angular project using Angular CLI (ng new)\n• Exploring project structure, main.ts, angular.json, and component tree\n\nMODULE 15 >> Advanced Angular Topics & Ecosystem\n• Server-Side Rendering (SSR) with Angular Universal / Angular SSR\n• Progressive Web Apps (PWA) with @angular/pwa and service workers\n• Standalone Components (NgModule-less Angular) and modern Signals API\n• Angular Ivy compiler engine features and optimizations\n• Angular roadmap, community libraries, and enterprise architectural patterns",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1787652679305_10iz_1787652679313_1",
+          "student_name": "pratik",
+          "phone": "+91 9737356415",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 1,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787737120006_spg0",
+      "created_at": "2026-08-26T09:38:40.006Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_mern",
+      "course_name": "MERN Stack Developer Syllabus",
+      "selected_topics": [
+        "Variables & Identifiers",
+        "Data Types & Type Casting",
+        "Operators & Expressions",
+        "Conditional Statements (if-else, switch)",
+        "Functions, Arrow Functions & Closures",
+        "Arrays, Array Methods (map, filter, reduce)",
+        "Objects, Destructuring & Spread Operator"
+      ],
+      "session_date": "2026-08-26",
+      "hours_taken": 2,
+      "description": "Complete hands-on JavaScript core concepts",
+      "students_attendance": [
+        {
+          "student_id": "st_1",
+          "status": "present"
+        },
+        {
+          "student_id": "st_2",
+          "status": "present"
+        },
+        {
+          "student_id": "st_3",
+          "status": "present"
+        },
+        {
+          "student_id": "st_4",
+          "status": "absent"
+        }
+      ],
+      "total_students_present": 3,
+      "total_students_absent": 1,
+      "total_students_leave": 0,
+      "id": "ses_1787738478514_sgh9",
+      "created_at": "2026-08-26T10:01:18.514Z"
+    },
+    {
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_mern",
+      "course_name": "MERN Stack Developer Syllabus",
+      "selected_topics": [
+        "Variables & Identifiers",
+        "Data Types & Type Casting",
+        "Operators & Expressions",
+        "Conditional Statements (if-else, switch)",
+        "Functions, Arrow Functions & Closures",
+        "Arrays, Array Methods (map, filter, reduce)",
+        "Objects, Destructuring & Spread Operator"
+      ],
+      "session_date": "2026-08-26",
+      "hours_taken": 2,
+      "description": "Complete hands-on JavaScript core concepts",
+      "students_attendance": [
+        {
+          "student_id": "st_1",
+          "status": "present"
+        },
+        {
+          "student_id": "st_2",
+          "status": "present"
+        },
+        {
+          "student_id": "st_3",
+          "status": "present"
+        },
+        {
+          "student_id": "st_4",
+          "status": "absent"
+        }
+      ],
+      "total_students_present": 3,
+      "total_students_absent": 1,
+      "total_students_leave": 0,
+      "id": "ses_1787738508474_bsq3",
+      "created_at": "2026-08-26T10:01:48.474Z"
+    },
+    {
+      "batch_id": "btc_1787740128139_rpp7",
+      "batch_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "course_id": "course_sql",
+      "course_name": "SQL Course Syllabus",
+      "module_name": "MODULES 1, 2",
+      "selected_topics": [
+        "Overview of databases and DBMS",
+        "Types of databases (relational, NoSQL, etc.)",
+        "Introduction to SQL & query lifecycle",
+        "Setting up a database environment & client tools",
+        "Introduction to the SELECT statement",
+        "Filtering data with WHERE clause & logical operators",
+        "Sorting data with ORDER BY (ASC / DESC)",
+        "Limiting results with LIMIT & OFFSET"
+      ],
+      "session_date": "2026-09-01",
+      "hours_taken": 1,
+      "description": "MODULE 1 >> Introduction to Databases\n• Overview of databases and DBMS\n• Types of databases (relational, NoSQL, etc.)\n• Introduction to SQL & query lifecycle\n• Setting up a database environment & client tools\n\nMODULE 2 >> Basic SQL Queries\n• Introduction to the SELECT statement\n• Filtering data with WHERE clause & logical operators\n• Sorting data with ORDER BY (ASC / DESC)\n• Limiting results with LIMIT & OFFSET",
+      "students_attendance": [
+        {
+          "student_id": "std_btc_1787740128139_rpp7_1787740128149_1",
+          "student_name": "Prateek",
+          "phone": "+91 9737356415",
+          "status": "present"
+        }
+      ],
+      "total_students_present": 1,
+      "total_students_absent": 0,
+      "total_students_leave": 0,
+      "id": "ses_1787740230541_x85s",
+      "created_at": "2026-08-26T10:30:30.541Z"
+    }
+  ],
+  "attendances": [
+    {
+      "id": "att_2026-08-24_usr_trainer_2",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "date": "2026-08-24",
+      "mark_in_time": "2026-08-24T09:02:45+05:30",
+      "mark_out_time": null,
+      "working_duration": "02:40:00",
+      "latitude": "23.0230",
+      "longitude": "72.5720",
+      "location_name": "Institute Branch Lab 2 - Ahmedabad, Gujarat",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
+      "day_status": "present",
+      "created_at": "2026-08-24T09:02:45Z"
+    },
+    {
+      "id": "att_2026-08-24_usr_trainer_3",
+      "trainer_id": "usr_trainer_3",
+      "trainer_name": "Amit Verma",
+      "date": "2026-08-24",
+      "mark_in_time": null,
+      "mark_out_time": null,
+      "working_duration": null,
+      "day_status": "pending",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "att_2026-08-01_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-01",
+      "mark_in_time": "2026-08-01T09:20:00.000Z",
+      "mark_out_time": "2026-08-01T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-01T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-01_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-01",
+      "mark_in_time": "2026-08-01T09:20:00.000Z",
+      "mark_out_time": "2026-08-01T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-01T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-03_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-03",
+      "mark_in_time": "2026-08-03T09:12:00.000Z",
+      "mark_out_time": "2026-08-03T18:45:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-03T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-03_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-03",
+      "mark_in_time": "2026-08-03T09:12:00.000Z",
+      "mark_out_time": "2026-08-03T18:45:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-03T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-04_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-04",
+      "mark_in_time": "2026-08-04T09:18:00.000Z",
+      "mark_out_time": "2026-08-04T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2, Campus West",
+      "day_status": "present",
+      "created_at": "2026-08-04T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-04_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-04",
+      "mark_in_time": "2026-08-04T09:18:00.000Z",
+      "mark_out_time": "2026-08-04T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2, Campus West",
+      "day_status": "present",
+      "created_at": "2026-08-04T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-05_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-05",
+      "mark_in_time": "2026-08-05T10:35:00.000Z",
+      "mark_out_time": "2026-08-05T19:00:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "late",
+      "created_at": "2026-08-05T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-05_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-05",
+      "mark_in_time": "2026-08-05T10:35:00.000Z",
+      "mark_out_time": "2026-08-05T19:00:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "late",
+      "created_at": "2026-08-05T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-06_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-06",
+      "mark_in_time": "2026-08-06T09:15:00.000Z",
+      "mark_out_time": "2026-08-06T13:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Full-Stack Development Lab 3",
+      "day_status": "leave",
+      "created_at": "2026-08-06T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-06_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-06",
+      "mark_in_time": "2026-08-06T09:15:00.000Z",
+      "mark_out_time": "2026-08-06T13:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Full-Stack Development Lab 3",
+      "day_status": "leave",
+      "created_at": "2026-08-06T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-07_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-07",
+      "mark_in_time": "2026-08-07T09:25:00.000Z",
+      "mark_out_time": "2026-08-07T18:35:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-07T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-07_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-07",
+      "mark_in_time": "2026-08-07T09:25:00.000Z",
+      "mark_out_time": "2026-08-07T18:35:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-07T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-08_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-08",
+      "mark_in_time": "2026-08-08T09:10:00.000Z",
+      "mark_out_time": "2026-08-08T18:20:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Institute Tech Arena, 2nd Floor",
+      "day_status": "present",
+      "created_at": "2026-08-08T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-08_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-08",
+      "mark_in_time": "2026-08-08T09:10:00.000Z",
+      "mark_out_time": "2026-08-08T18:20:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Institute Tech Arena, 2nd Floor",
+      "day_status": "present",
+      "created_at": "2026-08-08T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-10_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-10",
+      "mark_in_time": "2026-08-10T09:05:00.000Z",
+      "mark_out_time": "2026-08-10T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-10T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-10_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-10",
+      "mark_in_time": "2026-08-10T09:05:00.000Z",
+      "mark_out_time": "2026-08-10T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-10T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-11_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-11",
+      "mark_in_time": "2026-08-11T10:28:00.000Z",
+      "mark_out_time": "2026-08-11T18:50:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2, Campus West",
+      "day_status": "late",
+      "created_at": "2026-08-11T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-11_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-11",
+      "mark_in_time": "2026-08-11T10:28:00.000Z",
+      "mark_out_time": "2026-08-11T18:50:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2, Campus West",
+      "day_status": "late",
+      "created_at": "2026-08-11T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-12_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-12",
+      "mark_in_time": null,
+      "mark_out_time": null,
+      "photo_in": null,
+      "photo_out": null,
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Uninformed Absence (12 PM Cutoff)",
+      "day_status": "absent",
+      "created_at": "2026-08-12T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-12_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-12",
+      "mark_in_time": null,
+      "mark_out_time": null,
+      "photo_in": null,
+      "photo_out": null,
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Uninformed Absence (12 PM Cutoff)",
+      "day_status": "absent",
+      "created_at": "2026-08-12T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-13_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-13",
+      "mark_in_time": "2026-08-13T09:20:00.000Z",
+      "mark_out_time": "2026-08-13T18:40:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Full-Stack Development Lab 3",
+      "day_status": "present",
+      "created_at": "2026-08-13T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-13_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-13",
+      "mark_in_time": "2026-08-13T09:20:00.000Z",
+      "mark_out_time": "2026-08-13T18:40:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Full-Stack Development Lab 3",
+      "day_status": "present",
+      "created_at": "2026-08-13T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-14_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-14",
+      "mark_in_time": null,
+      "mark_out_time": null,
+      "photo_in": null,
+      "photo_out": null,
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Approved Casual Leave",
+      "day_status": "leave",
+      "created_at": "2026-08-14T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-14_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-14",
+      "mark_in_time": null,
+      "mark_out_time": null,
+      "photo_in": null,
+      "photo_out": null,
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Approved Casual Leave",
+      "day_status": "leave",
+      "created_at": "2026-08-14T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-17_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-17",
+      "mark_in_time": "2026-08-17T09:10:00.000Z",
+      "mark_out_time": "2026-08-17T18:35:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-17T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-17_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-17",
+      "mark_in_time": "2026-08-17T09:10:00.000Z",
+      "mark_out_time": "2026-08-17T18:35:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-17T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-18_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-18",
+      "mark_in_time": "2026-08-18T14:00:00.000Z",
+      "mark_out_time": "2026-08-18T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2, Campus West",
+      "day_status": "leave",
+      "created_at": "2026-08-18T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-18_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-18",
+      "mark_in_time": "2026-08-18T14:00:00.000Z",
+      "mark_out_time": "2026-08-18T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2, Campus West",
+      "day_status": "leave",
+      "created_at": "2026-08-18T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-19_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-19",
+      "mark_in_time": "2026-08-19T09:12:00.000Z",
+      "mark_out_time": "2026-08-19T18:45:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-19T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-19_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-19",
+      "mark_in_time": "2026-08-19T09:12:00.000Z",
+      "mark_out_time": "2026-08-19T18:45:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-19T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-20_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-20",
+      "mark_in_time": "2026-08-20T10:40:00.000Z",
+      "mark_out_time": "2026-08-20T19:15:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Institute Tech Arena, 2nd Floor",
+      "day_status": "late",
+      "created_at": "2026-08-20T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-20_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-20",
+      "mark_in_time": "2026-08-20T10:40:00.000Z",
+      "mark_out_time": "2026-08-20T19:15:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Institute Tech Arena, 2nd Floor",
+      "day_status": "late",
+      "created_at": "2026-08-20T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-21_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-21",
+      "mark_in_time": "2026-08-21T09:14:00.000Z",
+      "mark_out_time": "2026-08-21T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-21T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-21_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-21",
+      "mark_in_time": "2026-08-21T09:14:00.000Z",
+      "mark_out_time": "2026-08-21T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-21T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-22_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-22",
+      "mark_in_time": "2026-08-22T09:22:00.000Z",
+      "mark_out_time": "2026-08-22T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Full-Stack Development Lab 3",
+      "day_status": "present",
+      "created_at": "2026-08-22T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-22_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-22",
+      "mark_in_time": "2026-08-22T09:22:00.000Z",
+      "mark_out_time": "2026-08-22T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Full-Stack Development Lab 3",
+      "day_status": "present",
+      "created_at": "2026-08-22T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-24_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-24",
+      "mark_in_time": "2026-08-24T09:15:00.000Z",
+      "mark_out_time": "2026-08-24T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-24T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-24_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-24",
+      "mark_in_time": "2026-08-24T09:15:00.000Z",
+      "mark_out_time": "2026-08-24T18:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack Lab)",
+      "day_status": "present",
+      "created_at": "2026-08-24T09:00:00.000Z"
+    },
+    {
+      "id": "att_2026-08-25_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-25",
+      "mark_in_time": "2026-08-25T03:45:00.000Z",
+      "mark_out_time": "2026-08-25T10:41:44.524Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": 23.0225,
+      "longitude": 72.5714,
+      "location_name": "Institute Lab (Standard Campus Coordinates)",
+      "day_status": "present",
+      "created_at": "2026-08-25T03:45:00.000Z",
+      "working_duration": "06:56:44"
+    },
+    {
+      "id": "att_2026-08-25_usr_rahul",
+      "trainer_id": "usr_rahul",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-25",
+      "mark_in_time": "2026-08-25T03:45:00.000Z",
+      "mark_out_time": null,
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": null,
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Main Campus Lab 1 (MERN Stack)",
+      "day_status": "present",
+      "created_at": "2026-08-25T03:45:00.000Z"
+    },
+    {
+      "id": "att_2026-08-25_usr_trainer_2",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "date": "2026-08-25",
+      "mark_in_time": "2026-08-25T09:00:00.000Z",
+      "mark_out_time": "2026-08-25T12:30:00.000Z",
+      "photo_in": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
+      "photo_out": null,
+      "latitude": "23.0225",
+      "longitude": 72.5714,
+      "location_name": "Data Science Lab 2",
+      "day_status": "leave",
+      "created_at": "2026-08-25T05:50:00.000Z"
+    },
+    {
+      "id": "att_2026-08-26_usr_admin",
+      "trainer_id": "usr_admin",
+      "trainer_name": "Institute Director (Admin)",
+      "date": "2026-08-26",
+      "mark_in_time": "2026-08-26T03:37:06.376Z",
+      "mark_out_time": null,
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": null,
+      "latitude": 23.0225,
+      "longitude": 72.5714,
+      "location_name": "Institute Lab (Standard Campus Coordinates)",
+      "day_status": "present",
+      "created_at": "2026-08-26T03:37:06.376Z"
+    },
+    {
+      "id": "att_2026-08-26_usr_trainer_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "date": "2026-08-26",
+      "mark_in_time": "2026-08-26T08:48:09.070Z",
+      "mark_out_time": "2026-08-26T10:08:32.193Z",
+      "photo_in": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "photo_out": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+      "latitude": 23.0225,
+      "longitude": 72.5714,
+      "location_name": "Campus Lab 1",
+      "day_status": "leave",
+      "created_at": "2026-08-26T08:48:09.070Z",
+      "working_duration": "01:20:23"
+    }
+  ],
+  "leaves": [
+    {
+      "id": "lv_1",
+      "trainer_id": "usr_trainer_3",
+      "trainer_name": "Amit Verma",
+      "leave_type": "sick",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Fever and cold, taking medical rest today.",
+      "status": "approved",
+      "created_at": "2026-08-24T08:00:00Z"
+    },
+    {
+      "id": "lv_2",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "optional_holiday",
+      "start_date": "2026-08-28",
+      "end_date": "2026-08-28",
+      "reason": "Raksha Bandhan festival",
+      "status": "approved",
+      "admin_notes": "Approved by Director",
+      "created_at": "2026-08-15T10:00:00Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571278122_bdi1",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:38.122Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571279621_v3el",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:39.621Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571279951_mgof",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:39.951Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571280101_l8sq",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:40.101Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571281439_lqsy",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:41.439Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571281601_3mlz",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:41.601Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571288571_ub1p",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:48.571Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571295089_5uz2",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:55.089Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571295644_sr82",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:55.644Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571295928_7jew",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:55.928Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571297883_ofpx",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:57.883Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571298132_2fst",
+      "status": "pending",
+      "created_at": "2026-08-24T11:34:58.132Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571303668_jwsy",
+      "status": "pending",
+      "created_at": "2026-08-24T11:35:03.668Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571310000_7p4d",
+      "status": "pending",
+      "created_at": "2026-08-24T11:35:10.000Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571310543_u01l",
+      "status": "pending",
+      "created_at": "2026-08-24T11:35:10.543Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-24",
+      "end_date": "2026-08-24",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571310801_yt98",
+      "status": "pending",
+      "created_at": "2026-08-24T11:35:10.801Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "weekoff",
+      "start_date": "2026-08-25",
+      "end_date": "2026-08-25",
+      "reason": "Today is my weekoff",
+      "id": "lv_1787571469224_x6sh",
+      "status": "pending",
+      "created_at": "2026-08-24T11:37:49.224Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "casual",
+      "start_date": "2026-08-25",
+      "end_date": "2026-08-25",
+      "reason": "vzfd",
+      "id": "lv_1787737231981_4bg0",
+      "status": "pending",
+      "created_at": "2026-08-26T09:40:31.981Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "emergency",
+      "start_date": "2026-08-27",
+      "end_date": "2026-08-27",
+      "reason": "fbvdzfbvrt",
+      "id": "lv_1787737311105_ux45",
+      "status": "rejected",
+      "created_at": "2026-08-26T09:41:51.105Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "emergency",
+      "start_date": "2026-08-29",
+      "end_date": "2026-08-29",
+      "reason": " fgn",
+      "id": "lv_1787737527277_ay76",
+      "status": "rejected",
+      "created_at": "2026-08-26T09:45:27.277Z"
+    },
+    {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "leave_type": "emergency",
+      "start_date": "2026-08-28",
+      "end_date": "2026-08-30",
+      "reason": "a",
+      "id": "lv_1787737638421_y8tz",
+      "status": "pending",
+      "created_at": "2026-08-26T09:47:18.421Z"
+    }
+  ],
+  "liveActivities": {
+    "usr_trainer_1": {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "status": "break",
+      "current_task_title": "Marked Out for the day",
+      "status_started_at": "2026-08-26T08:48:09.070Z",
+      "last_heartbeat_at": "2026-08-25T11:45:00.000Z",
+      "idle_minutes_current": 0,
+      "total_idle_today_minutes": 0,
+      "total_teaching_today_minutes": 150,
+      "total_task_today_minutes": 0,
+      "is_logged_in": false
+    },
+    "usr_trainer_2": {
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "status": "working_task",
+      "current_task_title": "Preparing Python NumPy & Pandas Lab Assignment",
+      "status_started_at": "2026-08-25T11:20:00.000Z",
+      "last_heartbeat_at": "2026-08-25T11:48:00.000Z",
+      "idle_minutes_current": 0,
+      "total_idle_today_minutes": 0,
+      "total_teaching_today_minutes": 0,
+      "total_task_today_minutes": 30,
+      "is_logged_in": true
+    },
+    "usr_trainer_3": {
+      "trainer_id": "usr_trainer_3",
+      "trainer_name": "Amit Verma",
+      "status": "offline",
+      "current_task_title": "Not logged in today",
+      "status_started_at": "2026-08-25T00:00:00.000Z",
+      "last_heartbeat_at": "2026-08-25T00:00:00.000Z",
+      "idle_minutes_current": 0,
+      "total_idle_today_minutes": 0,
+      "total_teaching_today_minutes": 0,
+      "total_task_today_minutes": 0,
+      "is_logged_in": false
+    },
+    "usr_admin": {
+      "trainer_id": "usr_admin",
+      "trainer_name": "Institute Director (Admin)",
+      "status": "working_task",
+      "current_task_title": "Just Checked In - Ready for class/task",
+      "status_started_at": "2026-08-26T03:37:06.376Z",
+      "last_heartbeat_at": "2026-08-26T03:37:06.376Z",
+      "idle_minutes_current": 0,
+      "total_idle_today_minutes": 0,
+      "total_teaching_today_minutes": 0,
+      "total_task_today_minutes": 0,
+      "is_logged_in": true
+    }
+  },
+  "taskLogs": [
+    {
+      "id": "tsk_1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "title": "Weekly Test Paper Checking - React Basics",
+      "category": "paper_checking",
+      "start_time": "2026-08-24T11:00:00+05:30",
+      "end_time": "2026-08-24T11:45:00+05:30",
+      "duration_minutes": 45,
+      "notes": "Checked 18 student submissions and gave code review comments.",
+      "is_completed": true,
+      "created_at": "2026-08-24T11:00:00Z"
+    },
+    {
+      "id": "tsk_2",
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "title": "1-on-1 Student Doubt Solving - Python Loops",
+      "category": "doubt_solving",
+      "start_time": "2026-08-24T11:15:00+05:30",
+      "end_time": "2026-08-24T11:45:00+05:30",
+      "duration_minutes": 30,
+      "notes": "Cleared doubts for 3 weak students from Batch B.",
+      "is_completed": true,
+      "created_at": "2026-08-24T11:15:00Z"
+    }
+  ],
+  "whatsappLogs": [
+    {
+      "id": "walg_1787740230946_raf",
+      "batch_id": "btc_1787740128139_rpp7",
+      "batch_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "message_preview": "📚 Batch: LMT-BTM-SEP-ON-SQL-04PM\n👨‍🏫 Trainer: Rahul\n📌 Topic: Overview of databases and DBMS, Types of databases (relational, NoSQL, etc.), Introduction to SQL & query lifecycle, Setting up a database environment & client tools, Introduction to the SELECT statement, Filtering data with WHERE clause & logical operators, Sorting data with ORDER BY (ASC / DESC), Limiting results with LIMIT & OFFSET\n✅ Attendance: 1/1",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:30:30.946Z"
+    },
+    {
+      "id": "walg_1787740130437_ro8",
+      "batch_id": "btc_1787740128139_rpp7",
+      "batch_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🎉 *WELCOME TO NEW BATCH!*\n━━━━━━━━━━━━━━━━━━━━\n📚 *Batch:* LMT-BTM-SEP-ON-SQL-04PM\n👨‍🏫 *Trainer:* Rahul Sharma\n📅 *Star...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:28:50.437Z"
+    },
+    {
+      "id": "walg_1787740128129_4u7",
+      "batch_id": "pending",
+      "batch_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "message_preview": "🎉 WhatsApp Group Created: \"LMT-BTM-SEP-ON-SQL-04PM\". Trainer (+91 8340729468) added automatically.",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:28:48.129Z"
+    },
+    {
+      "id": "walg_1787738913099_izz",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-Out",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Login Time: 02:18 PM\n🚪 Logout Time: 03:38 PM\n📅 Date: 26 A...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:08:33.099Z"
+    },
+    {
+      "id": "walg_1787738826469_ghm",
+      "batch_id": "btc_1787738823975_27tn",
+      "batch_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🎉 *WELCOME TO NEW BATCH!*\n━━━━━━━━━━━━━━━━━━━━\n📚 *Batch:* LMT-KN-AUG-OFF-SQL-10AM\n👨‍🏫 *Trainer:* Rahul Sharma\n📅 *Star...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:07:06.469Z"
+    },
+    {
+      "id": "walg_1787738823965_tcd",
+      "batch_id": "pending",
+      "batch_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "🎉 WhatsApp Group Created: \"LMT-KN-AUG-OFF-SQL-10AM\". Trainer (+91 8340729468) added automatically.",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:07:03.965Z"
+    },
+    {
+      "id": "walg_1787738508493_ogh",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "MERN Stack - Morning Batch A",
+      "message_preview": "📚 Batch: MERN Stack - Morning Batch A\n👨‍🏫 Trainer: Rahul\n📌 Topic: Variables & Identifiers, Data Types & Type Casting, Operators & Expressions, Conditional Statements (if-else, switch), Functions, Arrow Functions & Closures, Arrays, Array Methods (map, filter, reduce), Objects, Destructuring & Spread Operator\n✅ Attendance: 3/4",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:01:48.493Z"
+    },
+    {
+      "id": "walg_1787738478528_og4",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "MERN Stack - Morning Batch A Group",
+      "message_preview": "📚 Batch: MERN Stack - Morning Batch A\n👨‍🏫 Trainer: Rahul\n📌 Topic: Variables & Identifiers, Data Types & Type Casting, Operators & Expressions, Con...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T10:01:18.528Z"
+    },
+    {
+      "id": "walg_1787737642480_osk",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:22.480Z"
+    },
+    {
+      "id": "walg_1787737642136_ojx",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:22.136Z"
+    },
+    {
+      "id": "walg_1787737641865_4bh",
+      "batch_id": "btc_1787569702189_jvvf",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-MAR-OFF-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:21.865Z"
+    },
+    {
+      "id": "walg_1787737641607_1kc",
+      "batch_id": "btc_1787569490511_e4qw",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-ON-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:21.607Z"
+    },
+    {
+      "id": "walg_1787737641231_zz5",
+      "batch_id": "btc_1787569099537_nebm",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:21.231Z"
+    },
+    {
+      "id": "walg_1787737640965_ujd",
+      "batch_id": "btc_1787568875893_irlc",
+      "batch_name": "Django Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-DJANGO-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:20.965Z"
+    },
+    {
+      "id": "walg_1787737640548_4kf",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:20.548Z"
+    },
+    {
+      "id": "walg_1787737640183_9ky",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-PBI-07PM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:20.183Z"
+    },
+    {
+      "id": "walg_1787737639927_l7y",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "SQL & Database Engineering — Morning Batch — Rahul Sir",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-28 to 2026-08-30. (a)\n\nThere will be no session today. We will resume in the ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:47:19.927Z"
+    },
+    {
+      "id": "walg_1787737531180_yeb",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:31.180Z"
+    },
+    {
+      "id": "walg_1787737530828_4a1",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:30.828Z"
+    },
+    {
+      "id": "walg_1787737530554_zjl",
+      "batch_id": "btc_1787569702189_jvvf",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-MAR-OFF-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:30.554Z"
+    },
+    {
+      "id": "walg_1787737530201_lqf",
+      "batch_id": "btc_1787569490511_e4qw",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-ON-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:30.201Z"
+    },
+    {
+      "id": "walg_1787737529877_v7q",
+      "batch_id": "btc_1787569099537_nebm",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:29.877Z"
+    },
+    {
+      "id": "walg_1787737529554_xey",
+      "batch_id": "btc_1787568875893_irlc",
+      "batch_name": "Django Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-DJANGO-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:29.554Z"
+    },
+    {
+      "id": "walg_1787737529182_pml",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:29.182Z"
+    },
+    {
+      "id": "walg_1787737528885_2z0",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-PBI-07PM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:28.885Z"
+    },
+    {
+      "id": "walg_1787737528504_yrd",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "SQL & Database Engineering — Morning Batch — Rahul Sir",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-29. ( fgn)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:45:28.504Z"
+    },
+    {
+      "id": "walg_1787737315057_dw2",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:55.057Z"
+    },
+    {
+      "id": "walg_1787737314133_r15",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:54.133Z"
+    },
+    {
+      "id": "walg_1787737313859_8by",
+      "batch_id": "btc_1787569702189_jvvf",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-MAR-OFF-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:53.859Z"
+    },
+    {
+      "id": "walg_1787737313581_zji",
+      "batch_id": "btc_1787569490511_e4qw",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-ON-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:53.581Z"
+    },
+    {
+      "id": "walg_1787737313304_ve1",
+      "batch_id": "btc_1787569099537_nebm",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:53.305Z"
+    },
+    {
+      "id": "walg_1787737313021_rrg",
+      "batch_id": "btc_1787568875893_irlc",
+      "batch_name": "Django Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-DJANGO-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:53.021Z"
+    },
+    {
+      "id": "walg_1787737312607_tgh",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:52.607Z"
+    },
+    {
+      "id": "walg_1787737312276_ezx",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-PBI-07PM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:52.276Z"
+    },
+    {
+      "id": "walg_1787737312019_vwh",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "SQL & Database Engineering — Morning Batch — Rahul Sir",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-27. (fbvdzfbvrt)\n\nThere will be no session today. We will resume in the next ...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:41:52.019Z"
+    },
+    {
+      "id": "walg_1787737237834_3sk",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:37.834Z"
+    },
+    {
+      "id": "walg_1787737236896_qth",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:36.896Z"
+    },
+    {
+      "id": "walg_1787737236616_wuw",
+      "batch_id": "btc_1787569702189_jvvf",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-MAR-OFF-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:36.616Z"
+    },
+    {
+      "id": "walg_1787737236197_w8a",
+      "batch_id": "btc_1787569490511_e4qw",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-ON-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:36.197Z"
+    },
+    {
+      "id": "walg_1787737235613_gso",
+      "batch_id": "btc_1787569099537_nebm",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:35.613Z"
+    },
+    {
+      "id": "walg_1787737235247_43a",
+      "batch_id": "btc_1787568875893_irlc",
+      "batch_name": "Django Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-DJANGO-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:35.247Z"
+    },
+    {
+      "id": "walg_1787737234775_642",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:34.775Z"
+    },
+    {
+      "id": "walg_1787737234177_qe1",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-PBI-07PM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:34.177Z"
+    },
+    {
+      "id": "walg_1787737233831_dmz",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "SQL & Database Engineering — Morning Batch — Rahul Sir",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI will be on leave from 2026-08-25. (vzfd)\n\nThere will be no session today. We will resume in the next schedu...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:40:33.831Z"
+    },
+    {
+      "id": "walg_1787737121936_5mr",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "📚 Batch: Angular Developer Course — New Batch\n👨‍🏫 Trainer: Rahul\n📌 Topic: Overview of Angular framework and its evolution, Understanding the Angul...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:38:41.936Z"
+    },
+    {
+      "id": "walg_1787737096456_mpg",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "MERN Stack - Morning Batch A Group",
+      "message_preview": "📚 Batch: MERN Stack - Morning Batch A\n👨‍🏫 Trainer: Rahul\n📌 Topic: Basic structure, tags, forms, tables, Semantic HTML elements, Media elements (au...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T09:38:16.456Z"
+    },
+    {
+      "id": "walg_1787734131029_d0p",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-Out",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Login Time: 02:18 PM\n🚪 Logout Time: 02:18 PM\n⏳ Shift Durat...",
+      "status": "delivered",
+      "sent_at": "2026-08-26T08:48:51.029Z"
+    },
+    {
+      "id": "walg_1787734090421_wqe",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Login Time: 02:18 PM\n📅 Date: 26 Aug 2026",
+      "status": "delivered",
+      "sent_at": "2026-08-26T08:48:10.421Z"
+    },
+    {
+      "id": "walg_1787715427022_86x",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Institute Director (Admin)",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Institute Director (Admin) (Director / Management)\n📱 WhatsApp: +91 98765 43210\n⏰ Login Time: 09:07 AM\n📅 Date: 26 Aug 2026",
+      "status": "delivered",
+      "sent_at": "2026-08-26T03:37:07.022Z"
+    },
+    {
+      "id": "walg_1787654504900_ad5",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-Out",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Login Time: 09:15 AM\n🚪 Logout Time: 04:11 PM\n⏳ Shift Durat...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:41:44.900Z"
+    },
+    {
+      "id": "walg_1787654392530_n1d",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-Out",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Login Time: 02:45 PM\n🚪 Logout Time: 04:09 PM\n⏳ Shift Durat...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:39:52.530Z"
+    },
+    {
+      "id": "walg_1787653820172_8rz",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "📚 Batch: Angular Developer Course — New Batch\n👨‍🏫 Trainer: Rahul\n📌 Topic: Overview of Angular framework and its evolution, Understanding the Angul...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:30:20.172Z"
+    },
+    {
+      "id": "walg_1787653619413_fh5",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Check-In Time: 03:56 PM\n📅 Date: 25 Aug 2026",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:26:59.413Z"
+    },
+    {
+      "id": "walg_1787653595637_0ze",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Check-In Time: 03:56 PM\n📅 Date: 25 Aug 2026",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:26:35.637Z"
+    },
+    {
+      "id": "walg_1787653577955_jw2",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Check-In Time: 03:56 PM\n📅 Date: 25 Aug 2026",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:26:17.955Z"
+    },
+    {
+      "id": "walg_1787653527357_ou1",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "👨‍🏫 Trainer Name: Rahul Sharma (Senior Full-Stack Trainer)\n📱 WhatsApp: +91 8340729468\n⏰ Check-In Time: 03:55 PM\n📅 Date: 25 Aug 2026",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:25:27.357Z"
+    },
+    {
+      "id": "walg_1787653405287_af0",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-Out",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🔴 *FACULTY CHECK-OUT (LOGOUT) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma\n📱 *WhatsApp:* +91 83407294...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:23:25.287Z"
+    },
+    {
+      "id": "walg_1787653404867_4ul",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:23:24.867Z"
+    },
+    {
+      "id": "walg_1787653385834_wvy",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:23:05.834Z"
+    },
+    {
+      "id": "walg_1787653375291_aez",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:22:55.291Z"
+    },
+    {
+      "id": "walg_1787653371689_uch",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:22:51.689Z"
+    },
+    {
+      "id": "walg_1787653359201_jb2",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-MAR-ON-PY-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:22:39.201Z"
+    },
+    {
+      "id": "walg_1787652681635_73t",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🎉 *WELCOME TO NEW BATCH!*\n━━━━━━━━━━━━━━━━━━━━\n📚 *Batch:* Angular Developer Course — New Batch\n👨‍🏫 *Trainer:* Rahul Sh...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:11:21.635Z"
+    },
+    {
+      "id": "walg_1787652679299_zhv",
+      "batch_id": "pending",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-OFF-ANGULAR-10AM",
+      "message_preview": "🎉 WhatsApp Group Created: \"LMT-MT-AUG-OFF-ANGULAR-10AM\". Trainer (+91 8340729468) added automatically.",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:11:19.299Z"
+    },
+    {
+      "id": "walg_1787652206185_ytp",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:03:26.185Z"
+    },
+    {
+      "id": "walg_1787652202677_ufp",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:03:22.677Z"
+    },
+    {
+      "id": "walg_1787652097507_0b4",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:37.507Z"
+    },
+    {
+      "id": "walg_1787652077882_y5t",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:17.882Z"
+    },
+    {
+      "id": "walg_1787652077456_k3d",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:17.456Z"
+    },
+    {
+      "id": "walg_1787652076655_vrw",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:16.655Z"
+    },
+    {
+      "id": "walg_1787652076223_t2x",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:16.223Z"
+    },
+    {
+      "id": "walg_1787652074770_8p9",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:14.770Z"
+    },
+    {
+      "id": "walg_1787652074338_kr0",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:14.338Z"
+    },
+    {
+      "id": "walg_1787652060826_wg5",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:00.826Z"
+    },
+    {
+      "id": "walg_1787652060414_4sm",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:01:00.414Z"
+    },
+    {
+      "id": "walg_1787652059982_a0x",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:59.982Z"
+    },
+    {
+      "id": "walg_1787652059572_mav",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:59.572Z"
+    },
+    {
+      "id": "walg_1787652059149_a5x",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:59.149Z"
+    },
+    {
+      "id": "walg_1787652058736_r8p",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:58.736Z"
+    },
+    {
+      "id": "walg_1787652058287_x3q",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:58.287Z"
+    },
+    {
+      "id": "walg_1787652057856_h1f",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:57.856Z"
+    },
+    {
+      "id": "walg_1787652057442_vxk",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:57.442Z"
+    },
+    {
+      "id": "walg_1787652057017_bnj",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:57.017Z"
+    },
+    {
+      "id": "walg_1787652056502_11n",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:56.502Z"
+    },
+    {
+      "id": "walg_1787652046997_kad",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:46.997Z"
+    },
+    {
+      "id": "walg_1787652044210_0gs",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:44.210Z"
+    },
+    {
+      "id": "walg_1787652043033_2vl",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:43.033Z"
+    },
+    {
+      "id": "walg_1787652041604_fhl",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:41.604Z"
+    },
+    {
+      "id": "walg_1787652039252_zl7",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T10:00:39.252Z"
+    },
+    {
+      "id": "walg_1787637464420_0nt",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Priya Patel",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Priya Patel (Python & Data Science Trainer...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T05:57:44.420Z"
+    },
+    {
+      "id": "walg_1787637374911_kys",
+      "batch_id": "attendance",
+      "batch_name": "Trainer Attendance Check-In",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LEARNMORE-Login-Logout",
+      "message_preview": "🎓 *LEARNMORE TECHNOLOGIES*\n🟢 *FACULTY CHECK-IN (LOGIN) REPORT*\n━━━━━━━━━━━━━━━━━━━━\n👨‍🏫 *Trainer Name:* Rahul Sharma (Senior Full-Stack Trainer)\n\ud83d...",
+      "status": "delivered",
+      "sent_at": "2026-08-25T05:56:14.911Z"
+    },
+    {
+      "id": "walg_1787572457966_zr6",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_name": "Institute Director (Admin)",
+      "group_name": "MERN Stack - Morning Batch A Group",
+      "message_preview": "📖 *Topics Covered Today:*\nFGUJHGI FDGHFGUJ FGHRFH \n👥 *STUDENT ATTENDANCE & LEAVES:*\n📈 *Attendance:* 12/12 Present (100%)\n✅ *Absent:* None (All Pres...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:54:17.966Z"
+    },
+    {
+      "id": "walg_1787572449021_lmv",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_name": "Institute Director (Admin)",
+      "group_name": "MERN Stack - Morning Batch A Group",
+      "message_preview": "📖 *Topics Covered Today:*\nMODULE 15 >> Full-Stack Integration\n• Connect React frontend with Node/Express REST backend\n• State lifting & centralized A...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:54:09.021Z"
+    },
+    {
+      "id": "walg_1787572417675_ch6",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "trainer_name": "Institute Director (Admin)",
+      "group_name": "MERN Stack - Morning Batch A Group",
+      "message_preview": "📖 *Topics Covered Today:*\nMODULE 6 >> Node.js\n• What is Node.js? Server-side JavaScript runtime\n• Node architecture & single-threaded Event Loop\n• NP...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:53:37.675Z"
+    },
+    {
+      "id": "walg_1787572380903_993",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Institute Director (Admin)",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "📖 *Topics Covered Today:*\nMODULE 12 >> Working with Views & Materialized Views\n• Creating and using Standard Views\n• Updating data through Updatable ...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:53:00.903Z"
+    },
+    {
+      "id": "walg_1787571472339_0r4",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI am not available today. I am busy with my office work.\n\nThere will be no session today. We will resume in t...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:37:52.339Z"
+    },
+    {
+      "id": "walg_1787571471990_38k",
+      "batch_id": "btc_1787569702189_jvvf",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-KN-MAR-OFF-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI am not available today. I am busy with my office work.\n\nThere will be no session today. We will resume in t...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:37:51.990Z"
+    },
+    {
+      "id": "walg_1787571471639_0l1",
+      "batch_id": "btc_1787569490511_e4qw",
+      "batch_name": "Power BI Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-MT-AUG-ON-PBI-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI am not available today. I am busy with my office work.\n\nThere will be no session today. We will resume in t...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:37:51.639Z"
+    },
+    {
+      "id": "walg_1787571471288_3gx",
+      "batch_id": "btc_1787569099537_nebm",
+      "batch_name": "Angular Developer Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-ANGULAR-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI am not available today. I am busy with my office work.\n\nThere will be no session today. We will resume in t...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:37:51.288Z"
+    },
+    {
+      "id": "walg_1787571470952_zka",
+      "batch_id": "btc_1787568875893_irlc",
+      "batch_name": "Django Course — New Batch",
+      "trainer_name": "Rahul Sharma",
+      "group_name": "LMT-BTM-AUG-ON-DJANGO-10AM",
+      "message_preview": "📢 *Notice from Trainer*\n\nDear Students,\nI am not available today. I am busy with my office work.\n\nThere will be no session today. We will resume in t...",
+      "status": "delivered",
+      "sent_at": "2026-08-24T11:37:50.952Z"
+    }
+  ],
+  "students": [
+    {
+      "id": "std_btc_1_1",
+      "name": "Rahul Patel",
+      "phone": "+91 98981 12345",
+      "email": "rahul.patel@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_2",
+      "name": "Sneha Shah",
+      "phone": "+91 98250 23456",
+      "email": "sneha.shah@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_3",
+      "name": "Priya Mehta",
+      "phone": "+91 97140 34567",
+      "email": "priya.mehta@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_4",
+      "name": "Amit Trivedi",
+      "phone": "+91 98790 45678",
+      "email": "amit.trivedi@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_5",
+      "name": "Neha Joshi",
+      "phone": "+91 94280 56789",
+      "email": "neha.joshi@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_6",
+      "name": "Hardik Parmar",
+      "phone": "+91 99090 67890",
+      "email": "hardik.parmar@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_7",
+      "name": "Pooja Varma",
+      "phone": "+91 98240 78901",
+      "email": "pooja.varma@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_8",
+      "name": "Vikas Solanki",
+      "phone": "+91 97230 89012",
+      "email": "vikas.solanki@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_9",
+      "name": "Anjali Desai",
+      "phone": "+91 98980 90123",
+      "email": "anjali.desai@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_10",
+      "name": "Karan Dave",
+      "phone": "+91 98765 01234",
+      "email": "karan.dave@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_11",
+      "name": "Bhavin Rana",
+      "phone": "+91 94270 12345",
+      "email": "bhavin.rana@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1_12",
+      "name": "Riya Rathod",
+      "phone": "+91 99040 23456",
+      "email": "riya.rathod@gmail.com",
+      "batch_id": "btc_1",
+      "batch_name": "MERN Stack - Morning Batch A",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_1",
+      "name": "Rahul Patel",
+      "phone": "+91 98981 12345",
+      "email": "rahul.patel@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_2",
+      "name": "Sneha Shah",
+      "phone": "+91 98250 23456",
+      "email": "sneha.shah@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_3",
+      "name": "Priya Mehta",
+      "phone": "+91 97140 34567",
+      "email": "priya.mehta@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_4",
+      "name": "Amit Trivedi",
+      "phone": "+91 98790 45678",
+      "email": "amit.trivedi@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_5",
+      "name": "Neha Joshi",
+      "phone": "+91 94280 56789",
+      "email": "neha.joshi@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_6",
+      "name": "Hardik Parmar",
+      "phone": "+91 99090 67890",
+      "email": "hardik.parmar@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_7",
+      "name": "Pooja Varma",
+      "phone": "+91 98240 78901",
+      "email": "pooja.varma@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_8",
+      "name": "Vikas Solanki",
+      "phone": "+91 97230 89012",
+      "email": "vikas.solanki@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_9",
+      "name": "Anjali Desai",
+      "phone": "+91 98980 90123",
+      "email": "anjali.desai@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_10",
+      "name": "Karan Dave",
+      "phone": "+91 98765 01234",
+      "email": "karan.dave@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_11",
+      "name": "Bhavin Rana",
+      "phone": "+91 94270 12345",
+      "email": "bhavin.rana@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787565864093_9s9b_12",
+      "name": "Riya Rathod",
+      "phone": "+91 99040 23456",
+      "email": "riya.rathod@gmail.com",
+      "batch_id": "btc_1787565864093_9s9b",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_1",
+      "name": "Rahul Patel",
+      "phone": "+91 98981 12345",
+      "email": "rahul.patel@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_2",
+      "name": "Sneha Shah",
+      "phone": "+91 98250 23456",
+      "email": "sneha.shah@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_3",
+      "name": "Priya Mehta",
+      "phone": "+91 97140 34567",
+      "email": "priya.mehta@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_4",
+      "name": "Amit Trivedi",
+      "phone": "+91 98790 45678",
+      "email": "amit.trivedi@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_5",
+      "name": "Neha Joshi",
+      "phone": "+91 94280 56789",
+      "email": "neha.joshi@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_6",
+      "name": "Hardik Parmar",
+      "phone": "+91 99090 67890",
+      "email": "hardik.parmar@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_7",
+      "name": "Pooja Varma",
+      "phone": "+91 98240 78901",
+      "email": "pooja.varma@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_8",
+      "name": "Vikas Solanki",
+      "phone": "+91 97230 89012",
+      "email": "vikas.solanki@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_9",
+      "name": "Anjali Desai",
+      "phone": "+91 98980 90123",
+      "email": "anjali.desai@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_10",
+      "name": "Karan Dave",
+      "phone": "+91 98765 01234",
+      "email": "karan.dave@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_11",
+      "name": "Bhavin Rana",
+      "phone": "+91 94270 12345",
+      "email": "bhavin.rana@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787567957278_79lu_12",
+      "name": "Riya Rathod",
+      "phone": "+91 99040 23456",
+      "email": "riya.rathod@gmail.com",
+      "batch_id": "btc_1787567957278_79lu",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_1",
+      "name": "Rahul Patel",
+      "phone": "+91 98981 12345",
+      "email": "rahul.patel@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_2",
+      "name": "Sneha Shah",
+      "phone": "+91 98250 23456",
+      "email": "sneha.shah@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_3",
+      "name": "Priya Mehta",
+      "phone": "+91 97140 34567",
+      "email": "priya.mehta@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_4",
+      "name": "Amit Trivedi",
+      "phone": "+91 98790 45678",
+      "email": "amit.trivedi@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_5",
+      "name": "Neha Joshi",
+      "phone": "+91 94280 56789",
+      "email": "neha.joshi@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_6",
+      "name": "Hardik Parmar",
+      "phone": "+91 99090 67890",
+      "email": "hardik.parmar@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_7",
+      "name": "Pooja Varma",
+      "phone": "+91 98240 78901",
+      "email": "pooja.varma@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_8",
+      "name": "Vikas Solanki",
+      "phone": "+91 97230 89012",
+      "email": "vikas.solanki@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_9",
+      "name": "Anjali Desai",
+      "phone": "+91 98980 90123",
+      "email": "anjali.desai@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_10",
+      "name": "Karan Dave",
+      "phone": "+91 98765 01234",
+      "email": "karan.dave@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_11",
+      "name": "Bhavin Rana",
+      "phone": "+91 94270 12345",
+      "email": "bhavin.rana@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568018331_vrms_12",
+      "name": "Riya Rathod",
+      "phone": "+91 99040 23456",
+      "email": "riya.rathod@gmail.com",
+      "batch_id": "btc_1787568018331_vrms",
+      "batch_name": "Python Developer — New Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787568875893_irlc_1787568875895_1",
+      "name": "PATIK",
+      "phone": "9408626950",
+      "email": "patik@gmail.com",
+      "batch_id": "btc_1787568875893_irlc",
+      "batch_name": "Django Course — New Batch",
+      "enrollment_date": "2026-08-24"
+    },
+    {
+      "id": "std_btc_1787569099537_nebm_1787569099540_1",
+      "name": "Pratik Kanzariya",
+      "phone": "+91 9408626950",
+      "email": "pratik.kanzariya@gmail.com",
+      "batch_id": "btc_1787569099537_nebm",
+      "batch_name": "Angular Developer Course — New Batch",
+      "enrollment_date": "2026-08-24"
+    },
+    {
+      "id": "std_btc_1787569490511_e4qw_1787569490513_1",
+      "name": "Pratik Kanzariya",
+      "phone": "9408626950",
+      "email": "pratik.kanzariya@gmail.com",
+      "batch_id": "btc_1787569490511_e4qw",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-24"
+    },
+    {
+      "id": "std_btc_1787569702189_jvvf_1787569702192_1",
+      "name": "PRATIK",
+      "phone": "+91 9408626950",
+      "email": "pratik.@gmail.com",
+      "batch_id": "btc_1787569702189_jvvf",
+      "batch_name": "Power BI Course — New Batch",
+      "enrollment_date": "2026-08-24"
+    },
+    {
+      "id": "std_btc_1787569957498_a8ga_1787569957500_1",
+      "name": "JAY",
+      "phone": "+91 9408626950",
+      "email": "jay.@gmail.com",
+      "batch_id": "btc_1787569957498_a8ga",
+      "batch_name": "SQL & Database Engineering — Morning Batch",
+      "enrollment_date": "2026-08-24"
+    },
+    {
+      "id": "std_btc_2_1",
+      "name": "Rahul Patel",
+      "phone": "+91 98981 12345",
+      "email": "rahul.patel@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_2",
+      "name": "Sneha Shah",
+      "phone": "+91 98250 23456",
+      "email": "sneha.shah@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_3",
+      "name": "Priya Mehta",
+      "phone": "+91 97140 34567",
+      "email": "priya.mehta@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_4",
+      "name": "Amit Trivedi",
+      "phone": "+91 98790 45678",
+      "email": "amit.trivedi@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_5",
+      "name": "Neha Joshi",
+      "phone": "+91 94280 56789",
+      "email": "neha.joshi@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_6",
+      "name": "Hardik Parmar",
+      "phone": "+91 99090 67890",
+      "email": "hardik.parmar@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_7",
+      "name": "Pooja Varma",
+      "phone": "+91 98240 78901",
+      "email": "pooja.varma@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_8",
+      "name": "Vikas Solanki",
+      "phone": "+91 97230 89012",
+      "email": "vikas.solanki@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_9",
+      "name": "Anjali Desai",
+      "phone": "+91 98980 90123",
+      "email": "anjali.desai@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_10",
+      "name": "Karan Dave",
+      "phone": "+91 98765 01234",
+      "email": "karan.dave@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_11",
+      "name": "Bhavin Rana",
+      "phone": "+91 94270 12345",
+      "email": "bhavin.rana@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_2_12",
+      "name": "Riya Rathod",
+      "phone": "+91 99040 23456",
+      "email": "riya.rathod@gmail.com",
+      "batch_id": "btc_2",
+      "batch_name": "Next.js & React Mastery - Afternoon B",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_1",
+      "name": "Rahul Patel",
+      "phone": "+91 98981 12345",
+      "email": "rahul.patel@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_2",
+      "name": "Sneha Shah",
+      "phone": "+91 98250 23456",
+      "email": "sneha.shah@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_3",
+      "name": "Priya Mehta",
+      "phone": "+91 97140 34567",
+      "email": "priya.mehta@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_4",
+      "name": "Amit Trivedi",
+      "phone": "+91 98790 45678",
+      "email": "amit.trivedi@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_5",
+      "name": "Neha Joshi",
+      "phone": "+91 94280 56789",
+      "email": "neha.joshi@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_6",
+      "name": "Hardik Parmar",
+      "phone": "+91 99090 67890",
+      "email": "hardik.parmar@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_7",
+      "name": "Pooja Varma",
+      "phone": "+91 98240 78901",
+      "email": "pooja.varma@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_8",
+      "name": "Vikas Solanki",
+      "phone": "+91 97230 89012",
+      "email": "vikas.solanki@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_9",
+      "name": "Anjali Desai",
+      "phone": "+91 98980 90123",
+      "email": "anjali.desai@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_10",
+      "name": "Karan Dave",
+      "phone": "+91 98765 01234",
+      "email": "karan.dave@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_11",
+      "name": "Bhavin Rana",
+      "phone": "+91 94270 12345",
+      "email": "bhavin.rana@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_sql_12",
+      "name": "Riya Rathod",
+      "phone": "+91 99040 23456",
+      "email": "riya.rathod@gmail.com",
+      "batch_id": "btc_sql",
+      "batch_name": "SQL & Database Engineering - Morning Batch",
+      "enrollment_date": "2026-08-01"
+    },
+    {
+      "id": "std_btc_1787652679305_10iz_1787652679313_1",
+      "name": "pratik",
+      "phone": "+91 9737356415",
+      "email": "pratik@gmail.com",
+      "batch_id": "btc_1787652679305_10iz",
+      "batch_name": "Angular Developer Course — New Batch",
+      "enrollment_date": "2026-08-25"
+    },
+    {
+      "id": "std_btc_1787738823975_27tn_1787738823984_1",
+      "name": "Test Student",
+      "phone": "+91 99999 88888",
+      "email": "test.student@gmail.com",
+      "batch_id": "btc_1787738823975_27tn",
+      "batch_name": "LMT-KN-AUG-OFF-SQL-10AM",
+      "enrollment_date": "2026-08-26"
+    },
+    {
+      "id": "std_btc_1787740128139_rpp7_1787740128149_1",
+      "name": "Prateek",
+      "phone": "+91 9737356415",
+      "email": "prateek@gmail.com",
+      "batch_id": "btc_1787740128139_rpp7",
+      "batch_name": "LMT-BTM-SEP-ON-SQL-04PM",
+      "enrollment_date": "2026-08-26"
+    }
+  ],
+  "holidayConfig": {
+    "mandatory_holidays": [
+      {
+        "date": "2026-01-26",
+        "name": "Republic Day",
+        "type": "mandatory"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Labour Day",
+        "type": "mandatory"
+      },
+      {
+        "date": "2026-08-15",
+        "name": "Independence Day",
+        "type": "mandatory"
+      },
+      {
+        "date": "2026-10-02",
+        "name": "Gandhi Jayanti",
+        "type": "mandatory"
+      },
+      {
+        "date": "2026-11-01",
+        "name": "Karnataka Rajyotsava",
+        "type": "mandatory"
+      }
+    ],
+    "optional_holidays": [
+      {
+        "date": "2026-01-14",
+        "name": "Makar Sankranti",
+        "type": "optional"
+      },
+      {
+        "date": "2026-03-04",
+        "name": "Holi Festival",
+        "type": "optional"
+      },
+      {
+        "date": "2026-08-28",
+        "name": "Raksha Bandhan",
+        "type": "optional"
+      },
+      {
+        "date": "2026-10-12",
+        "name": "Diwali Deepawali",
+        "type": "optional"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Christmas Day",
+        "type": "optional"
+      }
+    ],
+    "week_off_pattern": "sunday"
+  },
+  "leaveBalances": {
+    "usr_trainer_1": {
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "casual_sick_quota": 8,
+      "casual_sick_used": 0,
+      "optional_holiday_quota": 5,
+      "optional_holiday_used": 1,
+      "mandatory_holiday_count": 5
+    },
+    "usr_trainer_2": {
+      "trainer_id": "usr_trainer_2",
+      "trainer_name": "Priya Patel",
+      "casual_sick_quota": 12,
+      "casual_sick_used": 0,
+      "optional_holiday_quota": 5,
+      "optional_holiday_used": 0,
+      "mandatory_holiday_count": 5
+    },
+    "usr_trainer_3": {
+      "trainer_id": "usr_trainer_3",
+      "trainer_name": "Amit Verma",
+      "casual_sick_quota": 12,
+      "casual_sick_used": 0,
+      "optional_holiday_quota": 5,
+      "optional_holiday_used": 0,
+      "mandatory_holiday_count": 5
+    }
+  },
+  "leaveAuditLogs": [
+    {
+      "id": "audit_1787717811947_j6l1",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "admin_name": "Director (Admin)",
+      "leave_type": "Casual/Sick Leave",
+      "old_balance": 12,
+      "new_balance": 8,
+      "adjustment": -4,
+      "reason": "fggjf",
+      "created_at": "2026-08-26T04:16:51.947Z"
+    },
+    {
+      "id": "audit_1787717784004_5r49",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "admin_name": "Director (Admin)",
+      "leave_type": "Casual/Sick Leave",
+      "old_balance": 11,
+      "new_balance": 12,
+      "adjustment": 1,
+      "reason": "wscf",
+      "created_at": "2026-08-26T04:16:24.004Z"
+    },
+    {
+      "id": "audit_1787637329224_okad",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "admin_name": "Director (Admin)",
+      "leave_type": "Casual/Sick Leave",
+      "old_balance": 11,
+      "new_balance": 11,
+      "adjustment": 0,
+      "reason": "Automated Test Verification Adjustment",
+      "created_at": "2026-08-25T05:55:29.224Z"
+    },
+    {
+      "id": "audit_1787637266493_wgwn",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "admin_name": "Director (Admin)",
+      "leave_type": "Casual/Sick Leave",
+      "old_balance": 10,
+      "new_balance": 11,
+      "adjustment": 1,
+      "reason": "Automated Test Verification Adjustment",
+      "created_at": "2026-08-25T05:54:26.493Z"
+    },
+    {
+      "id": "audit_1787636298172_j91u",
+      "trainer_id": "usr_trainer_1",
+      "trainer_name": "Rahul Sharma",
+      "admin_name": "Director (Admin)",
+      "leave_type": "Casual/Sick Leave",
+      "old_balance": 12,
+      "new_balance": 10,
+      "adjustment": -2,
+      "reason": "Overtime adjustment",
+      "created_at": "2026-08-25T05:38:18.172Z"
+    }
+  ]
+}

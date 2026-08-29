@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+  .form-header {
+    background: linear-gradient(135deg, #4361ee, #7209b7);
+    color: white;
+    padding: 1.4rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .form-body { padding: 1.8rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:540px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { margin-bottom: 1.1rem; }
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 9px 13px;
+    border: 1.5px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    color: #333;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .form-control:focus { outline: none; border-color: #4361ee; box-shadow: 0 0 0 3px rgba(67,97,238,0.1); }
+  select.form-control { cursor: pointer; }
+  .form-hint { font-size: 0.78rem; color: #888; margin-top: 3px; }
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4361ee, #7209b7);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { opacity: 0.92; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: #4361ee; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem; }
+  .alert { padding: 10px 16px; border-radius: 8px; margin-bottom: 1rem; font-weight: 500; }
+  .alert-success { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+  .alert-error   { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+  .divider { border: none; border-top: 2px solid #f0f0f0; margin: 1.2rem 0; }
+
+  /* Trainer card selection */
+  .trainer-select-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.7rem;
+    margin-top: 6px;
+  }
+  .trainer-card {
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+  }
+  .trainer-card input { display: none; }
+  .trainer-card:has(input:checked) { border-color: #4361ee; background: #f0f3ff; color: #4361ee; }
+  .trainer-card .t-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4361ee, #7209b7);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; margin: 0 auto 6px;
+  }
+</style>
+
+<a href="{% url 'training:admin_batch_list' %}" class="back-link">← Back to Batches</a>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+<div class="form-container">
+  <div class="form-header">
+    {% if edit_mode %}✏️ Edit Batch — {{ batch.name }}{% else %}📦 Create New Batch{% endif %}
+  </div>
+  <div class="form-body">
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label>Batch / Course Name *</label>
+        <input type="text" name="name" class="form-control" required
+               value="{{ batch.name|default:'' }}" placeholder="e.g. Python Full Stack — Batch 3">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Date *</label>
+          <input type="date" name="start_date" class="form-control" required
+                 value="{{ batch.start_date|date:'Y-m-d'|default:'' }}">
+        </div>
+        <div class="form-group">
+          <label>Total Hours *</label>
+          <input type="number" name="total_hours" class="form-control" required min="1"
+                 value="{{ batch.total_hours|default:'' }}" placeholder="e.g. 120">
+          <div class="form-hint">Course ki total training hours</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Total Students</label>
+        <input type="number" name="total_students" class="form-control" min="0"
+               value="{{ batch.total_students|default:0 }}" placeholder="e.g. 25">
+      </div>
+
+      <hr class="divider">
+
+      <div class="form-group">
+        <label>Assign Trainer *</label>
+        <select name="trainer" class="form-control" required>
+          <option value="">-- Select Trainer --</option>
+          {% for trainer in trainers %}
+            <option value="{{ trainer.id }}"
+              {% if batch.trainer_id == trainer.id %}selected{% endif %}>
+              {{ trainer.get_full_name|default:trainer.username }}
+              (@{{ trainer.username }})
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select name="is_active" class="form-control">
+          <option value="1" {% if batch.is_active or not edit_mode %}selected{% endif %}>✅ Active</option>
+          <option value="0" {% if not batch.is_active and edit_mode %}selected{% endif %}>🚫 Inactive</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        {% if edit_mode %}💾 Save Changes{% else %}✅ Create Batch{% endif %}
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

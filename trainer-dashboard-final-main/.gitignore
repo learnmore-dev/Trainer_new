@@ -1,0 +1,22 @@
+# Ignore Python cache/build artifacts
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Ignore IDE / editor configs
+.idea/
+*.iml
+
+# Ignore virtual environment folders (if any)
+env/
+venv/
+.venv/
+
+# Ignore logs, sqlite DB (if you don’t want DB in repo)
+*.log
+db.sqlite3
+
+# Ignore Django settings (local changes)
+trainer_monitoring/settings.py
+# Ignore media files
+media/

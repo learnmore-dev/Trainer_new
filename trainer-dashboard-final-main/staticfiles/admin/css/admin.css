@@ -1,0 +1,26 @@
+/* Change the top admin navbar background */
+body .admin-navbar {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+/* Navbar links */
+body .admin-navbar a {
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Change the sidebar background */
+body #nav-sidebar {
+    background-color: #2E7D32 !important;
+}
+
+/* Main content background */
+body #content {
+    background-color: #f5f5f5 !important;
+}
+
+/* Change font for all admin text */
+body, input, select, textarea {
+    font-family: Arial, sans-serif !important;
+}

@@ -1,0 +1,388 @@
+{% extends "base.html" %}
+
+{% block title %}My Batches — Trainer Monitor{% endblock %}
+
+{% block content %}
+<style>
+  /* ----- Modern Reset & Variables ----- */
+  .bl-page {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --indigo: #6366f1;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-xl: 1.25rem;
+    --radius-2xl: 1.5rem;
+  }
+
+  .bl-page {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    background: linear-gradient(145deg, var(--gray-50) 0%, #ffffff 100%);
+    min-height: 100vh;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim-1 { animation: fadeUp 0.4s ease both; }
+  .anim-2 { animation: fadeUp 0.4s ease both 0.07s; }
+  .anim-3 { animation: fadeUp 0.4s ease both 0.14s; }
+
+  /* Header */
+  .bl-header { margin-bottom: 2rem; }
+  .bl-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 6.25rem;
+    padding: 0.25rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+  }
+  .bl-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+  .bl-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+  }
+  .bl-header p {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    font-weight: 400;
+  }
+
+  /* Summary chips */
+  .bl-summary {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.8rem;
+  }
+  .bl-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    box-shadow: var(--shadow-sm);
+  }
+  .bl-chip strong {
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+  .bl-chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .bl-chip-dot.indigo { background: var(--indigo); }
+  .bl-chip-dot.green  { background: var(--success); }
+  .bl-chip-dot.red    { background: var(--danger); }
+
+  /* Card */
+  .bl-card {
+    background: white;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid var(--gray-100);
+  }
+  .bl-card-header {
+    padding: 1.2rem 1.8rem;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    background: #fafcff;
+  }
+  .bl-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--gray-800);
+  }
+  .bl-card-icon {
+    width: 2rem;
+    height: 2rem;
+    background: #eef2ff;
+    border-radius: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .bl-total-badge {
+    background: #f1f5f9;
+    border-radius: 1rem;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  /* Table */
+  .bl-table-wrap {
+    overflow-x: auto;
+  }
+  .bl-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .bl-table thead tr {
+    background: #f8fafc;
+  }
+  .bl-table th {
+    padding: 1rem 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .bl-table td {
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .bl-table tbody tr:hover {
+    background: #fefce8;
+  }
+  .bl-batch-name {
+    font-weight: 600;
+    color: #0f172a;
+  }
+  /* Hours pill */
+  .bl-hours {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #e0f2fe;
+    color: #0369a1;
+    border-radius: 2rem;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  /* Status badge */
+  .bl-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 2rem;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .bl-status.on-time {
+    background: #dcfce7;
+    color: #166534;
+  }
+  .bl-status.delayed {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .bl-status-pulse {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+  /* View button */
+  .bl-btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.6rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .bl-btn-view:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    color: var(--primary);
+    transform: translateY(-1px);
+  }
+  .bl-btn-view svg {
+    width: 12px;
+    height: 12px;
+  }
+  /* Row number */
+  .bl-idx {
+    display: inline-block;
+    background: #f1f5f9;
+    border-radius: 0.5rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #475569;
+  }
+  /* Empty state */
+  .bl-empty {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  .bl-empty-icon {
+    font-size: 2.5rem;
+    opacity: 0.4;
+    margin-bottom: 0.75rem;
+  }
+  .bl-empty p {
+    color: #64748b;
+    font-size: 0.85rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .bl-page {
+      padding: 1rem 1rem 3rem;
+    }
+    .bl-card-header {
+      padding: 1rem 1.2rem;
+    }
+    .bl-table th, .bl-table td {
+      padding: 0.8rem 1rem;
+    }
+  }
+</style>
+
+<div class="bl-page">
+
+  <!-- Header -->
+  <div class="bl-header anim-1">
+    <div class="bl-eyebrow">
+      <span class="bl-eyebrow-dot"></span>
+      Trainer Portal
+    </div>
+    <h1>My Batches</h1>
+    <p>All batches assigned to you — track hours and status at a glance.</p>
+  </div>
+
+  <!-- Summary chips -->
+  <div class="bl-summary anim-2">
+    <div class="bl-chip">
+      <span class="bl-chip-dot indigo"></span>
+      Total Batches: <strong>{{ batches|length }}</strong>
+    </div>
+    <div class="bl-chip">
+      <span class="bl-chip-dot green"></span>
+      On Time: <strong>{{ batches|length }}</strong>
+    </div>
+    <div class="bl-chip">
+      <span class="bl-chip-dot red"></span>
+      Delayed: <strong>0</strong>
+    </div>
+  </div>
+
+  <!-- Table card -->
+  <div class="bl-card anim-3">
+    <div class="bl-card-header">
+      <div class="bl-card-title">
+        <div class="bl-card-icon">📋</div>
+        Batch List
+        <span class="bl-total-badge">{{ batches|length }} total</span>
+      </div>
+    </div>
+
+    <div class="bl-table-wrap">
+      <table class="bl-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Batch Name</th>
+            <th>Total Hours</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for batch in batches %}
+          <tr>
+            <td><span class="bl-idx">{{ forloop.counter }}</span></td>
+            <td><span class="bl-batch-name">{{ batch.name }}</span></td>
+            <td><span class="bl-hours">⏱ {{ batch.total_hours }} h</span></td>
+            <td>
+              {% if batch.delay_hours > 0 %}
+                <span class="bl-status delayed">
+                  <span class="bl-status-pulse"></span> Delayed
+                </span>
+              {% else %}
+                <span class="bl-status on-time">
+                  <span class="bl-status-pulse"></span> On Time
+                </span>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'training:batch_detail' batch.id %}" class="bl-btn-view">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3C4 3 1 8 1 8s3 5 7 5 7-5 7-5-3-5-7-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg>
+                View
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5">
+              <div class="bl-empty">
+                <div class="bl-empty-icon">📭</div>
+                <p>No batches have been assigned to you yet.</p>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

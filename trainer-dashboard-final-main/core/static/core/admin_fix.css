@@ -1,0 +1,46 @@
+/* ---------- GLOBAL CONTENT TEXT ---------- */
+.content-wrapper,
+.content-wrapper p,
+.content-wrapper span,
+.content-wrapper label,
+.content-wrapper h1,
+.content-wrapper h2,
+.content-wrapper h3,
+.content-wrapper h4,
+.content-wrapper h5,
+.content-wrapper h6,
+.content-wrapper td,
+.content-wrapper th {
+    color: #000 !important;
+}
+
+/* ---------- SIDEBAR TEXT (WHITE) ---------- */
+.main-sidebar,
+.main-sidebar p,
+.main-sidebar span,
+.main-sidebar a,
+.main-sidebar .nav-link,
+.main-sidebar .nav-link p {
+    color: #fff !important;
+}
+
+/* ---------- BRAND LOGO TEXT (Trainer Admin) ---------- */
+.brand-link,
+.brand-link span,
+.brand-link .brand-text {
+    color: #fff !important;
+    font-weight: 600;
+}
+
+/* ---------- USER PANEL (Admin name) ---------- */
+.user-panel,
+.user-panel a,
+.user-panel .info,
+.user-panel .info a {
+    color: #fff !important;
+}
+
+/* ---------- SIDEBAR BACKGROUND ---------- */
+.main-sidebar {
+    background-color: #343a40 !important;
+}

@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  .page-title { font-size:1.15rem; font-weight:700; color:#333; margin-bottom:1.2rem; }
+  .section-title { font-size:.95rem; font-weight:700; color:#333; margin:1.4rem 0 .9rem; padding-bottom:7px; border-bottom:2px solid #e9ecef; }
+
+  /* Filter card */
+  .filter-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.3rem 1.5rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    margin-bottom: 1.5rem;
+  }
+  .filter-form { display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end; }
+  .filter-group { display:flex; flex-direction:column; gap:4px; }
+  .filter-group label { font-size:.75rem; font-weight:700; color:#555; text-transform:uppercase; letter-spacing:.3px; }
+  .filter-group input[type="date"],
+  .filter-group select {
+    padding: 8px 12px;
+    border: 1.5px solid #dee2e6;
+    border-radius: 8px;
+    font-size: .9rem;
+    color: #333;
+    background: white;
+    min-width: 160px;
+  }
+  .filter-group input:focus,
+  .filter-group select:focus { outline:none; border-color:#4361ee; box-shadow:0 0 0 3px rgba(67,97,238,.1); }
+  .filter-btn { padding:9px 20px; background:linear-gradient(135deg,#4361ee,#7209b7); color:white; border:none; border-radius:8px; font-weight:700; cursor:pointer; font-size:.9rem; transition:opacity .2s; }
+  .filter-btn:hover { opacity:.9; }
+  .hint-text { font-size:.75rem; color:#888; margin-top:3px; }
+
+  /* Summary cards */
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:.8rem; margin-bottom:1.5rem; }
+  .s-card { background:white; border-radius:10px; padding:1rem; text-align:center; box-shadow:0 3px 10px rgba(0,0,0,.06); border-top:4px solid; }
+  .s-num  { font-size:1.7rem; font-weight:800; line-height:1; }
+  .s-lbl  { font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#666; margin-top:4px; }
+  .s-card.class-c  { border-color:#4361ee; } .s-card.class-c  .s-num { color:#4361ee; }
+  .s-card.other-c  { border-color:#7209b7; } .s-card.other-c  .s-num { color:#7209b7; }
+  .s-card.total-c  { border-color:#333;    } .s-card.total-c  .s-num { color:#333; }
+  .s-card.present-c { border-color:#38a169; } .s-card.present-c .s-num { color:#38a169; }
+  .s-card.half-c   { border-color:#d69e2e; } .s-card.half-c   .s-num { color:#d69e2e; }
+  .s-card.leave-c  { border-color:#e53e3e; } .s-card.leave-c  .s-num { color:#e53e3e; }
+  .s-card.absent-c { border-color:#a0aec0; } .s-card.absent-c .s-num { color:#a0aec0; }
+
+  /* Trainer info bar */
+  .trainer-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg,#4361ee,#7209b7);
+    color: white;
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .trainer-avatar { width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:800; }
+  .trainer-info .t-name { font-size:1.1rem; font-weight:700; }
+  .trainer-info .t-range { font-size:.82rem; opacity:.85; margin-top:2px; }
+
+  /* Charts section */
+  .charts-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.4rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    font-size: .82rem;
+    font-weight: 600;
+  }
+  .legend-dot { width:12px; height:12px; border-radius:3px; display:inline-block; margin-right:4px; }
+
+  /* Daily table */
+  .daily-table-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.4rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    margin-bottom: 1.5rem;
+  }
+  .daily-table { width:100%; border-collapse:collapse; font-size:.85rem; }
+  .daily-table th { background:#343a40; color:white; padding:9px 12px; text-align:center; font-size:.8rem; font-weight:500; }
+  .daily-table td { padding:8px 12px; text-align:center; border-bottom:1px solid #f0f0f0; }
+  .daily-table tr.sunday-row { background:#f0f0f0; }
+  .daily-table tr.present-row { background:#f0fff4; }
+  .daily-table tr.half-row    { background:#fffff0; }
+  .daily-table tr.leave-row   { background:#fff5f5; }
+  .daily-table tr.absent-row  { background:#fafafa; color:#aaa; }
+  .daily-table tr:hover       { filter:brightness(.97); }
+
+  .badge { padding:3px 8px; border-radius:20px; font-size:.72rem; font-weight:700; color:white; display:inline-block; }
+  .badge-present  { background:#38a169; }
+  .badge-half_day { background:#d69e2e; color:#212529; }
+  .badge-leave    { background:#e53e3e; }
+  .badge-active   { background:#4361ee; }
+  .badge-absent   { background:#a0aec0; }
+  .badge-sunday   { background:#718096; }
+
+  .hours-pill { background:#4361ee; color:white; padding:2px 9px; border-radius:10px; font-size:.75rem; font-weight:700; }
+  .hours-pill.class { background:#4361ee; }
+  .hours-pill.other { background:#7209b7; }
+  .hours-pill.total { background:#2d3748; }
+
+  .no-data { text-align:center; padding:3rem; color:#aaa; }
+  .hint-box { background:#e9ecef; border-radius:8px; padding:.8rem 1rem; font-size:.85rem; color:#555; margin-bottom:1rem; }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<div class="page-title">📈 Trainer Date Range Report</div>
+
+<!-- Filter -->
+<div class="filter-card">
+  <form method="GET" class="filter-form">
+    <div class="filter-group">
+      <label>👤 Select Trainer *</label>
+      <select name="trainer" required>
+        <option value="">-- Select Trainer --</option>
+        {% for t in all_trainers %}
+          <option value="{{ t.id }}" {% if trainer_id == t.id|stringformat:"i" %}selected{% endif %}>
+            {{ t.get_full_name|default:t.username }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>📅 From Date</label>
+      <input type="date" name="from_date" value="{{ from_date_str }}">
+      <div class="hint-text">Start date</div>
+    </div>
+    <div class="filter-group">
+      <label>📅 To Date</label>
+      <input type="date" name="to_date" value="{{ to_date_str }}" max="{% now 'Y-m-d' %}">
+      <div class="hint-text">Max 31 days range</div>
+    </div>
+    <button type="submit" class="filter-btn">📊 Generate Report</button>
+  </form>
+</div>
+
+{% if selected_trainer and chart_data %}
+
+<!-- Trainer info bar -->
+<div class="trainer-bar">
+  <div class="trainer-avatar">{{ selected_trainer.get_full_name|first|upper }}</div>
+  <div class="trainer-info">
+    <div class="t-name">{{ selected_trainer.get_full_name|default:selected_trainer.username }}</div>
+    <div class="t-range">📅 {{ from_date|date:"d M Y" }} — {{ to_date|date:"d M Y" }} ({{ summary.total_days }} days)</div>
+  </div>
+</div>
+
+<!-- Summary cards -->
+<div class="summary-grid">
+  <div class="s-card class-c">
+    <div class="s-num">{{ summary.total_class }}h</div>
+    <div class="s-lbl">🎓 Class Hrs</div>
+  </div>
+  <div class="s-card other-c">
+    <div class="s-num">{{ summary.total_other }}h</div>
+    <div class="s-lbl">🔧 Other Hrs</div>
+  </div>
+  <div class="s-card total-c">
+    <div class="s-num">{{ summary.total_work }}h</div>
+    <div class="s-lbl">⏱ Total Hrs</div>
+  </div>
+  <div class="s-card present-c">
+    <div class="s-num">{{ summary.present_days }}</div>
+    <div class="s-lbl">🟢 Present</div>
+  </div>
+  <div class="s-card half-c">
+    <div class="s-num">{{ summary.half_day_days }}</div>
+    <div class="s-lbl">🟡 Half Day</div>
+  </div>
+  <div class="s-card leave-c">
+    <div class="s-num">{{ summary.leave_days }}</div>
+    <div class="s-lbl">🔴 Leave</div>
+  </div>
+  <div class="s-card absent-c">
+    <div class="s-num">{{ summary.absent_days }}</div>
+    <div class="s-lbl">⚫ Absent</div>
+  </div>
+</div>
+
+<!-- 3 Bar Charts -->
+<div class="charts-section">
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background:#4361ee;"></span>Class / Training Hours</span>
+    <span><span class="legend-dot" style="background:#7209b7;"></span>Other Activity Hours</span>
+    <span><span class="legend-dot" style="background:#2d3748;"></span>Total Working Hours</span>
+  </div>
+
+  <!-- Chart 1: Class hours -->
+  <div style="margin-bottom:1.8rem;">
+    <div style="font-size:.82rem;font-weight:700;color:#4361ee;text-transform:uppercase;margin-bottom:.5rem;">
+      🎓 Training / Class Hours per Day
+    </div>
+    <canvas id="classChart" height="110"></canvas>
+  </div>
+
+  <!-- Chart 2: Other hours -->
+  <div style="margin-bottom:1.8rem;">
+    <div style="font-size:.82rem;font-weight:700;color:#7209b7;text-transform:uppercase;margin-bottom:.5rem;">
+      🔧 Other Activity Hours per Day
+    </div>
+    <canvas id="otherChart" height="110"></canvas>
+  </div>
+
+  <!-- Chart 3: Total hours -->
+  <div>
+    <div style="font-size:.82rem;font-weight:700;color:#2d3748;text-transform:uppercase;margin-bottom:.5rem;">
+      ⏱ Total Working Hours per Day
+    </div>
+    <canvas id="totalChart" height="110"></canvas>
+  </div>
+</div>
+
+<!-- Daily breakdown table -->
+<div class="daily-table-section">
+  <div class="section-title">📋 Daily Breakdown</div>
+  <div style="overflow-x:auto;">
+    <table class="daily-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Day</th>
+          <th>Status</th>
+          <th>🎓 Class Hrs</th>
+          <th>🔧 Other Hrs</th>
+          <th>⏱ Total Hrs</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in chart_data %}
+        <tr class="
+          {% if d.is_sunday %}sunday-row
+          {% elif d.status == 'present' %}present-row
+          {% elif d.status == 'half_day' %}half-row
+          {% elif d.status == 'leave' %}leave-row
+          {% else %}absent-row{% endif %}
+        ">
+          <td><strong>{{ d.date }}</strong></td>
+          <td style="color:#888;font-size:.78rem;">{{ d.weekday }}</td>
+          <td>
+            {% if d.is_sunday %}
+              <span class="badge badge-sunday">☀️ Sunday</span>
+            {% elif d.status == 'present' %}
+              <span class="badge badge-present">🟢 Present</span>
+            {% elif d.status == 'half_day' %}
+              <span class="badge badge-half_day">🟡 Half Day</span>
+            {% elif d.status == 'leave' %}
+              <span class="badge badge-leave">🔴 Leave</span>
+            {% elif d.status == 'active' %}
+              <span class="badge badge-active">🔵 Working</span>
+            {% else %}
+              <span class="badge badge-absent">⚫ Absent</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if d.class_hours > 0 %}
+              <span class="hours-pill class">{{ d.class_hours }}h</span>
+            {% else %}--{% endif %}
+          </td>
+          <td>
+            {% if d.other_hours > 0 %}
+              <span class="hours-pill other">{{ d.other_hours }}h</span>
+            {% else %}--{% endif %}
+          </td>
+          <td>
+            {% if d.total_hours > 0 %}
+              <span class="hours-pill total">{{ d.total_hours }}h</span>
+            {% else %}--{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+
+        <!-- Total row -->
+        <tr style="background:#f8f9fa;font-weight:700;border-top:2px solid #dee2e6;">
+          <td colspan="3" style="text-align:right;padding-right:1rem;color:#333;">Total →</td>
+          <td><span class="hours-pill class">{{ summary.total_class }}h</span></td>
+          <td><span class="hours-pill other">{{ summary.total_other }}h</span></td>
+          <td><span class="hours-pill total">{{ summary.total_work }}h</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Chart.js Scripts -->
+<script>
+const labels     = [{% for d in chart_data %}"{{ d.date }}\n{{ d.weekday }}"{% if not forloop.last %},{% endif %}{% endfor %}];
+const classData  = [{% for d in chart_data %}{{ d.class_hours }}{% if not forloop.last %},{% endif %}{% endfor %}];
+const otherData  = [{% for d in chart_data %}{{ d.other_hours }}{% if not forloop.last %},{% endif %}{% endfor %}];
+const totalData  = [{% for d in chart_data %}{{ d.total_hours }}{% if not forloop.last %},{% endif %}{% endfor %}];
+const isSunday   = [{% for d in chart_data %}{{ d.is_sunday|yesno:"true,false" }}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+const baseOpts = () => ({
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      callbacks: {
+        title: items => {
+          const d = {{ chart_data|length }};
+          return labels[items[0].dataIndex].replace('\n', ' ');
+        },
+        label: ctx => ` ${ctx.parsed.y}h`
+      }
+    }
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      suggestedMax: 12,
+      ticks: { callback: v => v+'h', font:{size:11} },
+      grid: { color:'rgba(0,0,0,0.04)' }
+    },
+    x: {
+      ticks: { font:{size:10}, maxRotation:45 },
+      grid: { display:false }
+    }
+  }
+});
+
+// Class hours chart
+new Chart(document.getElementById('classChart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      data: classData,
+      backgroundColor: classData.map((h, i) =>
+        isSunday[i] ? '#e2e8f0' : h >= 6 ? '#2b6cb0' : h >= 3 ? '#4361ee' : h > 0 ? '#90cdf4' : '#e2e8f0'
+      ),
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: baseOpts()
+});
+
+// Other hours chart
+new Chart(document.getElementById('otherChart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      data: otherData,
+      backgroundColor: otherData.map((h, i) =>
+        isSunday[i] ? '#e2e8f0' : h >= 4 ? '#553c9a' : h >= 2 ? '#7209b7' : h > 0 ? '#d6bcfa' : '#e2e8f0'
+      ),
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: baseOpts()
+});
+
+// Total hours chart — grouped color
+new Chart(document.getElementById('totalChart'), {
+  type: 'bar',
+  data: {
+    labels,
+    datasets: [{
+      data: totalData,
+      backgroundColor: totalData.map((h, i) =>
+        isSunday[i] ? '#e2e8f0' :
+        h >= 9  ? '#276749' :   // present (green)
+        h >= 5  ? '#b7791f' :   // half day (yellow)
+        h > 0   ? '#9b2c2c' :   // leave (red)
+                  '#e2e8f0'      // absent (gray)
+      ),
+      borderRadius: 5,
+      borderSkipped: false,
+    }]
+  },
+  options: baseOpts()
+});
+</script>
+
+{% elif selected_trainer %}
+  <div style="text-align:center;padding:3rem;background:white;border-radius:12px;color:#aaa;">
+    📭 No data found for {{ selected_trainer.get_full_name }} between {{ from_date|date:"d M Y" }} — {{ to_date|date:"d M Y" }}
+  </div>
+
+{% else %}
+  <div class="hint-box">
+    👆 Trainer select karo aur date range choose karo — daily hours breakdown graph ke saath dikhega
+  </div>
+{% endif %}
+
+{% endblock %}

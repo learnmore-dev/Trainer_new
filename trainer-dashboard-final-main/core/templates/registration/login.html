@@ -1,0 +1,347 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body{
+            background:
+                linear-gradient(135deg, rgba(15,14,46,0.9), rgba(38,29,133,0.9)),
+                url("{% static 'bg-pattern.png' %}") center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            padding-top: 130px;  /* space for fixed modern header */
+        }
+
+        /* ---------- MODERN HEADER (replaces old header-bar & top-logo) ---------- */
+        .modern-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #4a1dff 0%, #b44dff 70%, #ff7eb3 100%);
+            background-size: 200% 200%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255,255,255,0.1) inset;
+            padding: 0 5%;
+            z-index: 100;
+            backdrop-filter: blur(2px);  /* subtle glass effect */
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 75px;  /* fixed height for consistency */
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Logo area with icon + text */
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img{
+    height: 48px;   /* adjust based on your logo */
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #fff, #ffe7b0);
+    -webkit-background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+}
+
+        
+
+        /* Navigation links */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.2rem;
+            position: relative;
+            transition: color 0.2s ease;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: white;
+            box-shadow: 0 0 8px #ffd966;
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffecaa;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Optional active state for first link */
+        .nav-links a:first-child {
+            font-weight: 600;
+        }
+
+        /* ---------- CARD (unchanged) ---------- */
+        .container{
+            width: 900px;
+            background: #ffffff;
+            border-radius: 22px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.45);
+            border: 2px solid #6a28ff;
+            animation: fadeIn 0.7s ease;
+            height: 450px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------- LEFT IMAGE (unchanged) ---------- */
+        .left{
+            flex: 1;
+            background: linear-gradient(135deg, #f4f1ff, #e9e4ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .left img{
+            max-width: 430px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float{
+            0%{ transform: translateY(0); }
+            50%{ transform: translateY(-10px); }
+            100%{ transform: translateY(0); }
+        }
+
+        /* ---------- RIGHT FORM (unchanged) ---------- */
+        .right{
+            flex: 1;
+            padding: 55px;
+        }
+
+        h2{
+            margin-bottom: 35px;
+            color: #2c2c2c;
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .input-box{
+            margin-bottom: 20px;
+        }
+
+        .input-box input{
+            width: 100%;
+            padding: 13px;
+            /* border: 1px solid #bbb; */
+            border-radius: 9px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .input-box input:focus{
+            border-color: #6a28ff;
+            box-shadow: 0 0 10px rgba(106,40,255,0.45);
+        }
+
+        .remember{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .remember a{
+            text-decoration: none;
+            color: #6a28ff;
+            font-weight: 600;
+        }
+
+        .remember a:hover{
+            text-decoration: underline;
+        }
+
+        button{
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6a28ff, #8e4dff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 18px rgba(106,40,255,0.45);
+        }
+
+        button:hover{
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #5820db, #7a3bdd);
+            box-shadow: 0 8px 25px rgba(106,40,255,0.65);
+        }
+
+        /* ---------- RESPONSIVE (unchanged, plus header tweaks) ---------- */
+        @media (max-width: 768px){
+            .container{
+                flex-direction: column;
+                width: 92%;
+            }
+
+            .left{
+                padding: 25px;
+            }
+
+            .right{
+                padding: 30px;
+            }
+
+            .modern-header {
+                padding: 0 4%;
+            }
+            .header-container {
+                height: 65px;
+            }
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            .logo-icon {
+                font-size: 1.7rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-links a {
+                font-size: 1rem;
+            }
+        }
+
+        /* fine tune for very small screens */
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1rem;  /* adjusted to fit longer text */
+            }
+            .nav-links {
+                gap: 0.8rem;
+            }
+        }
+        /* extra small adjustment if needed */
+        @media (max-width: 380px) {
+            .logo-text {
+                font-size: 0.85rem;
+            }
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MODERN HEADER (replaces old .header-bar and .top-logo) -->
+<header class="modern-header">
+    <div class="header-container">
+        <!-- Logo with icon and text (changed to LEARNMORE TECHNOLOGY) -->
+        <div class="logo">
+    <img src="{% static 'logo.png' %}" alt="Learnmore Logo">
+    <span class="logo-text">Learnmore Technologies</span>
+</div>
+        <!-- Navigation links (modern touch) -->
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<!-- login card (completely unchanged) -->
+<div class="container">
+
+    <div class="left">
+        <img src="{% static 'images.jpeg' %}" alt="login illustration">
+    </div>
+
+    <div class="right">
+        <h2>USER LOGIN</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Enter Username">
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Enter Password">
+            </div>
+
+            <div class="remember">
+                <label>
+                    {{ form.remember_me }} Remember me
+                </label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit">LOGIN</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

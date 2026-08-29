@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4361ee, #7209b7);
+        color: white;
+        padding: 9px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btn-primary:hover {
+        opacity: 0.9;
+        color: white;
+    }
+
+    .user-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .user-table th {
+        background: #343a40;
+        color: white;
+        padding: 12px 14px;
+        text-align: left;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .user-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 0.88rem;
+        vertical-align: middle;
+    }
+
+    .user-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .user-table tr:hover {
+        background: #f8f9fa;
+    }
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4361ee, #7209b7);
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-right: 8px;
+    }
+
+    .badge {
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    .badge-admin {
+        background: #f3e8fd;
+        color: #7209b7;
+    }
+
+    .badge-trainer {
+        background: #e8f5e9;
+        color: #155724;
+    }
+
+    .badge-active {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .badge-inactive {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .btn-sm {
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-edit {
+        background: #17a2b8;
+        color: white;
+    }
+
+    .btn-reset {
+        background: #ffc107;
+        color: #212529;
+    }
+
+    .btn-toggle {
+        background: #6c757d;
+        color: white;
+    }
+
+    .alert {
+        padding: 10px 16px;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 4px solid #28a745;
+    }
+
+    .alert-error {
+        background: #f8d7da;
+        color: #721c24;
+        border-left: 4px solid #dc3545;
+    }
+
+    .search-bar {
+        background: white;
+        border-radius: 10px;
+        padding: 0.8rem 1.2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        display: flex;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .search-bar input,
+    .search-bar select {
+        padding: 7px 12px;
+        border: 1.5px solid #dee2e6;
+        border-radius: 7px;
+        font-size: 0.88rem;
+    }
+
+    .search-bar button {
+        padding: 7px 16px;
+        background: #4361ee;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
+
+<div class="page-header">
+    <div class="page-title">👥 User Management</div>
+    <a href="{% url 'training:admin_user_create' %}" class="btn-primary">➕ Create New User</a>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+<div class="search-bar">
+    <form method="GET" style="display:flex; gap:0.8rem; flex-wrap:wrap; width:100%;">
+        <input type="text" name="q" placeholder="🔍 Search name or username..." value="{{ request.GET.q }}" style="flex:1; min-width:200px;">
+        <select name="role">
+            <option value="">All Roles</option>
+            <option value="trainer" {% if request.GET.role == 'trainer' %}selected{% endif %}>Trainer</option>
+            <option value="admin" {% if request.GET.role == 'admin'   %}selected{% endif %}>Admin</option>
+        </select>
+        <button type="submit">Filter</button>
+        <a href="{% url 'training:admin_user_list' %}" style="padding:7px 14px; color:#666; font-size:0.88rem; text-decoration:none; align-self:center;">✕ Clear</a>
+    </form>
+</div>
+
+<div style="overflow-x:auto;">
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>User</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Batches</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr>
+                <td>
+                    <span style="font-family: monospace; font-weight: 700; color: #4361ee; font-size: 0.9rem;">
+                        {{ u.employee_id|default:"—" }}
+                    </span>
+                </td>
+                <td>
+                    <div style="display:flex; align-items:center;">
+                        <span class="avatar">{{ u.username|first|upper }}</span>
+                        <strong>{{ u.get_full_name|default:u.username }}</strong>
+                    </div>
+                </td>
+                <td style="color:#666;">@{{ u.username }}</td>
+                <td style="font-size:0.83rem;">{{ u.email|default:"--" }}</td>
+                <td>
+                    {% if u.is_superuser %}
+                    <span class="badge badge-admin">👑 Admin</span>
+                    {% else %}
+                    <span class="badge badge-trainer">🎓 Trainer</span>
+                    {% endif %}
+                </td>
+                <td style="text-align:center; font-weight:600;">{{ u.batch_count }}</td>
+                <td>
+                    {% if u.is_active %}
+                    <span class="badge badge-active">Active</span>
+                    {% else %}
+                    <span class="badge badge-inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td style="font-size:0.8rem; color:#888;">{{ u.date_joined|date:"d M Y" }}</td>
+                <td>
+                    <a href="{% url 'training:admin_user_edit' u.id %}" class="btn-sm btn-edit">✏️ Edit</a>
+                    <form method="POST" action="{% url 'training:admin_user_toggle' u.id %}" style="display:inline; margin-left:4px;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-sm btn-toggle">
+                            {% if u.is_active %}🚫 Disable{% else %}✅ Enable{% endif %}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="9" style="text-align:center; padding:2rem; color:#aaa;">No users found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

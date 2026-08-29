@@ -1,0 +1,381 @@
+<!-- templates/admin_login.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background:
+                linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95)),
+                url("{% static 'bg-pattern.png' %}") center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 35px;
+            border: 2px solid rgba(255, 65, 108, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .admin-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 65, 108, 0.4);
+        }
+
+        .admin-header h1 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .admin-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .admin-form .input-group {
+            margin-bottom: 25px;
+        }
+
+        .admin-form label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .admin-form input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .admin-form input:focus {
+            border-color: #ff416c;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 65, 108, 0.3);
+        }
+
+        .admin-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .remember-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .remember-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .remember-group label {
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .admin-login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .admin-login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 65, 108, 0.4);
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-link a:hover {
+            color: #ff416c;
+        }
+
+        .admin-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        /* MESSAGES */
+        .admin-messages {
+            margin-bottom: 25px;
+        }
+
+        .admin-alert {
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            animation: fadeIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid transparent;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .admin-alert-success {
+            background: rgba(40, 167, 69, 0.2);
+            border-color: #28a745;
+        }
+
+        .admin-alert-error {
+            background: rgba(220, 53, 69, 0.2);
+            border-color: #dc3545;
+        }
+
+        .admin-alert-info {
+            background: rgba(23, 162, 184, 0.2);
+            border-color: #17a2b8;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 30px 25px;
+                margin: 20px;
+            }
+            
+            .admin-logo {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
+            }
+            
+            .admin-header h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-container {
+                padding: 25px 20px;
+            }
+            
+            .admin-header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <div class="admin-logo">
+            <i class="fas fa-user-shield"></i>
+        </div>
+        <h1>Admin Portal</h1>
+        <p>Restricted Access • Authorized Personnel Only</p>
+    </div>
+
+    {% if messages %}
+    <div class="admin-messages">
+        {% for message in messages %}
+        <div class="admin-alert admin-alert-{{ message.tags }}">
+            {% if message.tags == 'success' %}
+            <i class="fas fa-check-circle"></i>
+            {% elif message.tags == 'error' %}
+            <i class="fas fa-exclamation-circle"></i>
+            {% elif message.tags == 'info' %}
+            <i class="fas fa-info-circle"></i>
+            {% endif %}
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" class="admin-form">
+        {% csrf_token %}
+        
+        <div class="input-group">
+            <label for="admin_username">
+                <i class="fas fa-user"></i> Admin Username
+            </label>
+            <input type="text" 
+                   id="admin_username" 
+                   name="admin_username" 
+                   placeholder="Enter admin username" 
+                   required
+                   value="{{ form.admin_username.value|default:'' }}">
+        </div>
+        
+        <div class="input-group">
+            <label for="admin_password">
+                <i class="fas fa-lock"></i> Admin Password
+            </label>
+            <input type="password" 
+                   id="admin_password" 
+                   name="admin_password" 
+                   placeholder="Enter admin password" 
+                   required>
+        </div>
+        
+        <div class="remember-group">
+            <input type="checkbox" 
+                   id="remember_me" 
+                   name="remember_me"
+                   {% if form.remember_me.value %}checked{% endif %}>
+            <label for="remember_me">Keep me logged in</label>
+        </div>
+        
+        <button type="submit" class="admin-login-btn">
+            <i class="fas fa-sign-in-alt"></i> ACCESS ADMIN PANEL
+        </button>
+    </form>
+
+    <div class="back-link">
+        <a href="{% url 'login' %}">
+            <i class="fas fa-arrow-left"></i> Back to User Login
+        </a>
+    </div>
+    
+    <div class="security-note">
+        <i class="fas fa-shield-alt"></i>
+        <span>Secure Login • Activity Logged • Unauthorized Access Prohibited</span>
+    </div>
+    
+    <div class="admin-footer">
+        <p>&copy; {% now "Y" %} Admin Portal v1.0 • All Rights Reserved</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-hide messages
+        const alerts = document.querySelectorAll('.admin-alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 300);
+            }, 5000);
+        });
+        
+        // Add keyboard shortcut for demo (Ctrl+Alt+A for auto-fill demo credentials)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.altKey && e.key === 'a') {
+                e.preventDefault();
+                document.getElementById('admin_username').value = 'admin';
+                document.getElementById('admin_password').value = 'admin123';
+            }
+        });
+        
+        // Add focus effect
+        const inputs = document.querySelectorAll('.admin-form input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,840 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  :root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #7209b7;
+    --success: #28a745;
+    --warning: #fd7e14;
+    --danger: #dc3545;
+    --info: #17a2b8;
+    --light: #f8f9fc;
+    --dark: #2d3748;
+    --gray: #6c757d;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+    --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #f3f4f6;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .admin-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+
+  /* Page Title */
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .page-title:before {
+    content: "🛠️";
+    font-size: 1.8rem;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: var(--primary);
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(0,0,0,0.03);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow);
+    border-color: transparent;
+  }
+
+  .stat-card:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .stat-card:hover:after {
+    opacity: 1;
+  }
+
+  .stat-info h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-info .num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+
+  .stat-icon {
+    width: 54px;
+    height: 54px;
+    background: rgba(67, 97, 238, 0.1);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    transition: all 0.2s;
+  }
+
+  .stat-card:hover .stat-icon {
+    transform: scale(1.05);
+    background: rgba(67, 97, 238, 0.15);
+  }
+
+  /* Section Titles */
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 2rem 0 1.2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid var(--primary);
+    padding-left: 14px;
+  }
+
+  /* Quick Actions */
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .qa-btn {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 0.9rem 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .qa-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -10px rgba(67, 97, 238, 0.2);
+  }
+
+  .qa-icon {
+    font-size: 1.6rem;
+  }
+
+  /* Filter Bar */
+  .filter-bar {
+    background: white;
+    border-radius: 20px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.8rem;
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #edf2f7;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 160px;
+  }
+
+  .filter-group label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .filter-group input, 
+  .filter-group select {
+    padding: 0.6rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    background: white;
+    transition: all 0.2s;
+  }
+
+  .filter-group input:focus,
+  .filter-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+  }
+
+  .filter-btns {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+  }
+
+  .btn-filter {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-filter:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-today {
+    background: var(--success);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-today:hover {
+    background: #218838;
+    color: white;
+  }
+
+  .btn-clear {
+    background: white;
+    border: 1.5px solid #e2e8f0;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    color: var(--gray);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+
+  .btn-clear:hover {
+    border-color: var(--gray);
+    color: var(--dark);
+  }
+
+  /* Date Label */
+  .date-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.4rem;
+  }
+
+  .date-badge {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .today-tag {
+    background: var(--success);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  /* Trainer Cards Grid */
+  .trainer-status-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .trainer-card {
+    background: white;
+    border-radius: 18px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #edf2f7;
+  }
+
+  .trainer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow);
+    border-color: transparent;
+  }
+
+  .t-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .t-name {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--dark);
+  }
+
+  .t-time {
+    font-size: 0.7rem;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  .t-hours {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 4px;
+    background: rgba(67, 97, 238, 0.08);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .t-loc {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .badge-present { background: var(--success); }
+  .badge-half_day { background: var(--warning); color: #1e293b; }
+  .badge-leave { background: var(--danger); }
+  .badge-active { background: var(--primary); }
+  .badge-absent { background: #94a3b8; }
+
+  /* Charts Row */
+  .charts-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .charts-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .chart-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #edf2f7;
+  }
+
+  .chart-card h5 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Pending Leaves Table */
+  .pending-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+
+  .pending-table thead th {
+    background: #1e293b;
+    color: white;
+    padding: 1rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .pending-table tbody td {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.85rem;
+    color: #334155;
+  }
+
+  .pending-table tbody tr:hover {
+    background: #f8fafc;
+  }
+
+  .btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-approve {
+    background: var(--success);
+    color: white;
+  }
+
+  .btn-approve:hover {
+    background: #218838;
+    transform: translateY(-1px);
+  }
+
+  .btn-reject {
+    background: var(--danger);
+    color: white;
+  }
+
+  .btn-reject:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 20px;
+    color: #94a3b8;
+    font-style: italic;
+    box-shadow: var(--card-shadow);
+  }
+
+  .alert {
+    padding: 0.8rem 1.2rem;
+    border-radius: 14px;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+
+  .alert-success {
+    background: #e0f2e9;
+    color: #0a5c2e;
+    border-left: 4px solid var(--success);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<div class="admin-container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="page-title">Admin Dashboard</div>
+
+  <!-- Stat cards -->
+  <div class="stats-grid">
+    <a href="{% url 'training:admin_batch_list' %}" class="stat-card">
+      <div class="stat-info">
+        <h4>Total Batches</h4>
+        <div class="num">{{ total_batches }}</div>
+      </div>
+      <div class="stat-icon">📦</div>
+    </a>
+    <a href="{% url 'training:admin_user_list' %}" class="stat-card">
+      <div class="stat-info">
+        <h4>Total Trainers</h4>
+        <div class="num">{{ total_trainers }}</div>
+      </div>
+      <div class="stat-icon">👥</div>
+    </a>
+    <a href="{% url 'training:admin_leave_list' %}" class="stat-card">
+      <div class="stat-info">
+        <h4>Pending Leaves</h4>
+        <div class="num">{{ pending_leaves }}</div>
+      </div>
+      <div class="stat-icon">⏳</div>
+    </a>
+    <a href="{% url 'training:monthly_attendance_report' %}" class="stat-card">
+      <div class="stat-info">
+        <h4>This Month Sessions</h4>
+        <div class="num">{{ month_sessions }}</div>
+      </div>
+      <div class="stat-icon">📊</div>
+    </a>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="section-title">
+    <span>⚡</span> Quick Actions
+  </div>
+  <div class="quick-actions">
+    <a href="{% url 'training:admin_user_create' %}" class="qa-btn">
+      <span class="qa-icon">➕</span> Create User
+    </a>
+    <a href="{% url 'training:admin_batch_create' %}" class="qa-btn">
+      <span class="qa-icon">📦</span> Create Batch
+    </a>
+    <a href="{% url 'training:admin_leave_list' %}" class="qa-btn">
+      <span class="qa-icon">🗓️</span> Leave Requests
+    </a>
+    <a href="{% url 'training:monthly_attendance_report' %}" class="qa-btn">
+      <span class="qa-icon">📈</span> Attendance Report
+    </a>
+    <a href="{% url 'training:admin_batch_list' %}" class="qa-btn">
+      <span class="qa-icon">📋</span> All Batches
+    </a>
+    <a href="{% url 'training:trainer_range_report' %}" class="qa-btn">
+      <span class="qa-icon">📈</span> Range Report
+    </a>
+  </div>
+
+  <!-- Trainer Activity -->
+  <div class="section-title">
+    <span>📅</span> Trainer Activity
+  </div>
+
+  <div class="today-section">
+
+    <!-- Filter bar -->
+    <form method="GET" class="filter-bar">
+      <div class="filter-group">
+        <label>📅 Select Date</label>
+        <input type="date" name="filter_date"
+               value="{{ filter_date_str }}"
+               max="{{ today|date:'Y-m-d' }}">
+      </div>
+      <div class="filter-group">
+        <label>👤 Select Trainer</label>
+        <select name="filter_trainer">
+          <option value="">All Trainers</option>
+          {% for t in all_trainers %}
+            <option value="{{ t.id }}" {% if filter_trainer == t.id|stringformat:"i" %}selected{% endif %}>
+              {{ t.get_full_name|default:t.username }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-btns">
+        <button type="submit" class="btn-filter">🔍 Filter</button>
+        <a href="{% url 'training:admin_dashboard' %}" class="btn-today">📅 Today</a>
+        <a href="{% url 'training:admin_dashboard' %}?filter_date={{ filter_date_str }}" class="btn-clear">✕ All Trainers</a>
+      </div>
+    </form>
+
+    <!-- Date label -->
+    <div class="date-label">
+      <span class="date-badge">📅 {{ filter_date|date:"d M Y, l" }}</span>
+      {% if is_today %}
+        <span class="today-tag">Today</span>
+      {% endif %}
+      {% if filter_trainer %}
+        <span style="background:#eef2ff;padding:0.3rem 0.9rem;border-radius:30px;font-size:0.75rem;color:var(--primary);font-weight:600;">
+          👤 {% for t in all_trainers %}{% if t.id|stringformat:"i" == filter_trainer %}{{ t.get_full_name|default:t.username }}{% endif %}{% endfor %}
+        </span>
+      {% endif %}
+    </div>
+
+    {% if today_data %}
+      <!-- Trainer status cards -->
+      <div class="trainer-status-list">
+        {% for t in today_data %}
+          <div class="trainer-card">
+            <div class="t-avatar">{{ t.name|first|upper }}</div>
+            <div style="flex:1;">
+              <div class="t-name">{{ t.name }}</div>
+              <div style="margin: 5px 0 4px 0;">
+                {% if t.status == 'present' %}
+                  <span class="badge badge-present">🟢 Present</span>
+                {% elif t.status == 'half_day' %}
+                  <span class="badge badge-half_day">🟡 Half Day</span>
+                {% elif t.status == 'leave' %}
+                  <span class="badge badge-leave">🔴 Leave</span>
+                {% elif t.status == 'active' %}
+                  <span class="badge badge-active">🔵 Working</span>
+                {% else %}
+                  <span class="badge badge-absent">⚫ Absent</span>
+                {% endif %}
+              </div>
+              {% if t.mark_in %}
+                <div class="t-time">
+                  In: {{ t.mark_in }}{% if t.mark_out %} | Out: {{ t.mark_out }}{% else %} | Still in{% endif %}
+                </div>
+              {% endif %}
+              <div class="t-hours">
+                {% if t.total_hours > 0 %}
+                  ⏱ {{ t.total_hours }}h | 🎓 {{ t.class_hours }}h | 🔧 {{ t.other_hours }}h
+                {% else %}
+                  No hours recorded
+                {% endif %}
+              </div>
+              {% if t.location %}
+                <div class="t-loc">📍 {{ t.location|truncatechars:22 }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <h5>🎓 Training / Class Hours</h5>
+          <canvas id="classHoursChart" height="230"></canvas>
+        </div>
+        <div class="chart-card">
+          <h5>🔧 Other Activity Hours</h5>
+          <canvas id="otherHoursChart" height="230"></canvas>
+        </div>
+      </div>
+    {% else %}
+      <div class="no-data">
+        📭 No data found for <strong>{{ filter_date|date:"d M Y" }}</strong>
+        {% if filter_trainer %} for this trainer{% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Pending Leaves -->
+  <div class="section-title">
+    <span>🗓️</span> Pending Leave Requests
+  </div>
+
+  {% if pending_leave_list %}
+    <div style="overflow-x:auto;">
+      <table class="pending-table">
+        <thead>
+          <tr><th>Trainer</th><th>Date</th><th>Type</th><th>Reason</th><th>Applied</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          {% for leave in pending_leave_list %}
+            <tr>
+              <td><strong>{{ leave.trainer.get_full_name|default:leave.trainer.username }}</strong></td>
+              <td>{{ leave.leave_date|date:"d M Y" }}</td>
+              <td>{{ leave.get_leave_type_display }}</td>
+              <td>{{ leave.reason|truncatechars:50 }}</td>
+              <td style="font-size:0.75rem; color:#64748b;">{{ leave.applied_at|date:"d M, H:i" }}</td>
+              <td>
+                <form method="POST" action="{% url 'training:admin_leave_action' leave.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="approve">
+                  <button type="submit" class="btn btn-approve">✅ Approve</button>
+                </form>
+                <form method="POST" action="{% url 'training:admin_leave_action' leave.id %}" style="display:inline;margin-left:6px;">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="reject">
+                  <button type="submit" class="btn btn-reject">❌ Reject</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="no-data">
+      ✅ No pending leave requests
+    </div>
+  {% endif %}
+</div>
+
+<!-- Chart.js -->
+<script>
+{% if today_data %}
+const labels = [{% for t in today_data %}"{{ t.name|truncatechars:12 }}"{% if not forloop.last %},{% endif %}{% endfor %}];
+const classH = [{% for t in today_data %}{{ t.class_hours }}{% if not forloop.last %},{% endif %}{% endfor %}];
+const otherH = [{% for t in today_data %}{{ t.other_hours }}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+const commonOpts = {
+  responsive: true,
+  maintainAspectRatio: true,
+  plugins: {
+    legend: { display: false },
+    tooltip: { 
+      callbacks: { label: ctx => ` ${ctx.parsed.y} hours` },
+      backgroundColor: '#1e293b',
+      titleColor: '#f1f5f9',
+      bodyColor: '#cbd5e1',
+      padding: 8,
+      cornerRadius: 8
+    }
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      suggestedMax: 10,
+      ticks: { 
+        callback: v => v + 'h', 
+        font: { size: 11, weight: '500' },
+        color: '#64748b'
+      },
+      grid: { color: '#e2e8f0', drawBorder: false },
+      title: { display: false }
+    },
+    x: {
+      ticks: { font: { size: 10 }, color: '#475569' },
+      grid: { display: false }
+    }
+  },
+  layout: {
+    padding: { top: 10, bottom: 5 }
+  }
+};
+
+// Class hours chart
+new Chart(document.getElementById('classHoursChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      data: classH,
+      backgroundColor: classH.map(h => h >= 6 ? '#28a745' : h >= 3 ? '#68d391' : '#c6f6d5'),
+      borderRadius: 8,
+      barPercentage: 0.7,
+      categoryPercentage: 0.8,
+    }]
+  },
+  options: commonOpts
+});
+
+// Other hours chart
+new Chart(document.getElementById('otherHoursChart'), {
+  type: 'bar',
+  data: {
+    labels: labels,
+    datasets: [{
+      data: otherH,
+      backgroundColor: otherH.map(h => h >= 4 ? '#7209b7' : h >= 2 ? '#9c4dcc' : '#e9d8fd'),
+      borderRadius: 8,
+      barPercentage: 0.7,
+      categoryPercentage: 0.8,
+    }]
+  },
+  options: commonOpts
+});
+{% endif %}
+</script>
+
+{% endblock %}

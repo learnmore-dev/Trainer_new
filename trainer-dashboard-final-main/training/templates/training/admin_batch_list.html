@@ -1,0 +1,536 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  /* ----- MODERN RESET & VARIABLES ----- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --primary-light: #eef2ff;
+    --secondary: #64748b;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --border: #e2e8f0;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --transition: all 0.2s ease;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #f1f5f9;
+  }
+
+  /* ----- PAGE HEADER ----- */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(105deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 0.6rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+    background: linear-gradient(105deg, var(--primary-dark), var(--primary));
+  }
+
+  /* ----- STATS CARDS (modern) ----- */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .mini-stat {
+    background: white;
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    box-shadow: var(--card-shadow);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+  }
+
+  .mini-stat strong {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-left: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .mini-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* ----- FILTER BAR (modern glassmorphism) ----- */
+  .filter-bar {
+    background: white;
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1.75rem;
+    border: 1px solid var(--border);
+  }
+
+  .filter-bar form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .filter-group {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .filter-group label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+
+  .filter-bar input,
+  .filter-bar select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    background: white;
+    transition: var(--transition);
+  }
+
+  .filter-bar input:focus,
+  .filter-bar select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  .filter-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .btn-filter {
+    background: var(--primary);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.8rem;
+  }
+
+  .btn-filter:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .clear-link {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: var(--secondary);
+    font-size: 0.8rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .clear-link:hover {
+    background: var(--light);
+    border-color: var(--secondary);
+    color: var(--dark);
+  }
+
+  /* ----- TABLE (modern clean) ----- */
+  .batch-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+  }
+
+  .batch-table th {
+    background: var(--light);
+    color: var(--dark);
+    padding: 1rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .batch-table td {
+    padding: 1rem 1rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .batch-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .batch-table tr:hover td {
+    background: #fefce8;
+  }
+
+  /* Trainer cell */
+  .trainer-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  /* Progress bar modern */
+  .hours-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .hours-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+
+  .hours-fill.ok { background: var(--success); }
+  .hours-fill.warn { background: var(--warning); }
+  .hours-fill.danger { background: var(--danger); }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .badge-active   { background: #d1fae5; color: #065f46; }
+  .badge-inactive { background: #fee2e2; color: #991b1b; }
+  .badge-ontime   { background: #dcfce7; color: #166534; }
+  .badge-delay    { background: #ffedd5; color: #9a3412; }
+  .badge-completed{ background: #dbeafe; color: #1e40af; }
+
+  /* ----- ACTION BUTTONS (professional group) ----- */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    background: white;
+    color: var(--dark);
+    border: 1px solid var(--border);
+  }
+
+  .btn-sm i { font-style: normal; font-weight: 500; }
+
+  .btn-edit { background: #eef2ff; color: var(--primary); border-color: #c7d2fe; }
+  .btn-edit:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+  .btn-view { background: #f1f5f9; color: var(--secondary); border-color: #e2e8f0; }
+  .btn-view:hover { background: var(--secondary); color: white; border-color: var(--secondary); }
+
+  .btn-session { background: #ecfdf5; color: var(--success); border-color: #a7f3d0; }
+  .btn-session:hover { background: var(--success); color: white; border-color: var(--success); }
+
+  .btn-complete { background: #eff6ff; color: var(--info); border-color: #bfdbfe; }
+  .btn-complete:hover { background: var(--info); color: white; border-color: var(--info); }
+
+  .btn-uncomplete { background: #fff7ed; color: var(--warning); border-color: #fed7aa; }
+  .btn-uncomplete:hover { background: var(--warning); color: white; border-color: var(--warning); }
+
+  .btn-sm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* No data */
+  .no-data {
+    text-align: center;
+    padding: 3rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title { font-size: 1.2rem; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .batch-table th, .batch-table td { padding: 0.75rem; }
+    .actions { flex-direction: row; flex-wrap: wrap; }
+    .filter-group { min-width: 100%; }
+    .filter-actions { width: 100%; justify-content: stretch; }
+    .btn-filter, .clear-link { flex: 1; text-align: center; }
+  }
+
+  @media (max-width: 640px) {
+    .stats-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="page-header">
+  <div class="page-title">
+    📦 Batch Management
+  </div>
+  <a href="{% url 'training:admin_batch_create' %}" class="btn-primary">
+    ➕ Create New Batch
+  </a>
+</div>
+
+<!-- Stats Cards -->
+<div class="stats-row">
+  <div class="mini-stat">📦 Total <strong>{{ total_batches }}</strong></div>
+  <div class="mini-stat">✅ Active <strong>{{ active_batches }}</strong></div>
+  <div class="mini-stat">🏁 Completed <strong>{{ completed_batches }}</strong></div>
+  <div class="mini-stat">⏱️ Delayed <strong>{{ delayed_batches }}</strong></div>
+  <div class="mini-stat">🎓 Trainers <strong>{{ total_trainers }}</strong></div>
+</div>
+
+<!-- Filter Bar - Enhanced -->
+<div class="filter-bar">
+  <form method="GET">
+    <div class="filter-group">
+      <label>🔍 BATCH NAME</label>
+      <input type="text" name="course" placeholder="e.g., Data Science, Python..."
+             value="{{ request.GET.course }}">
+    </div>
+    <div class="filter-group">
+      <label>👤 TRAINER</label>
+      <input type="text" name="trainer" placeholder="Trainer username or name..."
+             value="{{ request.GET.trainer }}">
+    </div>
+    <div class="filter-group">
+      <label>📌 PROGRESS STATUS</label>
+      <select name="status">
+        <option value="">All</option>
+        <option value="ontime"    {% if request.GET.status == 'ontime'    %}selected{% endif %}>✅ On Time</option>
+        <option value="delay"     {% if request.GET.status == 'delay'     %}selected{% endif %}>⏱️ Delayed</option>
+        <option value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>🏁 Completed</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>🟢 ACTIVE STATE</label>
+      <select name="active">
+        <option value="">All (Active + Inactive)</option>
+        <option value="1" {% if request.GET.active == '1' %}selected{% endif %}>Active Only</option>
+        <option value="0" {% if request.GET.active == '0' %}selected{% endif %}>Inactive Only</option>
+      </select>
+    </div>
+    <div class="filter-actions">
+      <button type="submit" class="btn-filter">Apply Filters</button>
+      <a href="{% url 'training:admin_batch_list' %}" class="clear-link">Reset</a>
+    </div>
+  </form>
+</div>
+
+<!-- Batch Table -->
+<div style="overflow-x: auto;">
+  <table class="batch-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Batch Name</th>
+        <th>Trainer</th>
+        <th>Start Date</th>
+        <th>Students</th>
+        <th>Hours Progress</th>
+        <th>Status</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for batch in batches %}
+      <tr>
+        <td style="color:#64748b; font-weight:500;">{{ forloop.counter }}</td>
+        <td>
+          <strong style="color: var(--dark);">{{ batch.name }}</strong>
+        </td>
+        <td>
+          <div class="trainer-cell">
+            <span class="avatar">{{ batch.trainer.username|first|upper }}</span>
+            <div>
+              <div style="font-weight:600; font-size:0.85rem;">
+                {{ batch.trainer.get_full_name|default:batch.trainer.username }}
+              </div>
+              <div style="font-size:0.7rem; color:#64748b;">@{{ batch.trainer.username }}</div>
+            </div>
+          </div>
+        </td>
+        <td style="font-weight:500;">{{ batch.start_date|date:"d M Y" }}</td>
+        <td style="text-align:center; font-weight:700;">{{ batch.student_count }}</td>
+        <td style="min-width:150px;">
+          <div style="display: flex; justify-content: space-between; font-size:0.75rem; font-weight:500;">
+            <span>{{ batch.used_hours }}h / {{ batch.total_hours }}h</span>
+            {% if batch.delay_hours > 0 %}
+              <span style="color: var(--danger); background:#fff0f0; padding:2px 6px; border-radius:30px;">+{{ batch.delay_hours }}h delay</span>
+            {% endif %}
+          </div>
+          <div class="hours-bar">
+            {% with pct=batch.used_hours|floatformat:0 %}
+            <div class="hours-fill 
+                {% if batch.delay_hours > 0 %}danger
+                {% elif batch.remaining_hours < batch.total_hours|divisibleby:4 %}warn
+                {% else %}ok{% endif %}"
+                 style="width: {% widthratio batch.used_hours batch.total_hours 100 %}%">
+            </div>
+            {% endwith %}
+          </div>
+        </td>
+        <td>
+          {% if batch.is_completed %}
+            <span class="badge badge-completed">🏁 Completed</span>
+          {% elif batch.delay_hours > 0 %}
+            <span class="badge badge-delay">⏱️ Delayed</span>
+          {% else %}
+            <span class="badge badge-ontime">✅ On Time</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if batch.is_active %}
+            <span class="badge badge-active">Active</span>
+          {% else %}
+            <span class="badge badge-inactive">Inactive</span>
+          {% endif %}
+        </td>
+        <td class="actions">
+          <a href="{% url 'training:admin_batch_edit' batch.id %}" class="btn-sm btn-edit">
+            ✏️ Edit
+          </a>
+          <a href="{% url 'training:batch_detail' batch.id %}" class="btn-sm btn-view">
+            👁️ View
+          </a>
+          <a href="{% url 'training:session_create' batch.id %}" class="btn-sm btn-session">
+            ➕ Session
+          </a>
+          {% if batch.is_completed %}
+            <form method="POST" action="{% url 'training:admin_batch_complete' batch.id %}" style="display:inline;">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="uncomplete">
+              <button type="submit" class="btn-sm btn-uncomplete" title="Reopen batch">
+                🔁 Reopen
+              </button>
+            </form>
+          {% else %}
+            <form method="POST" action="{% url 'training:admin_batch_complete' batch.id %}" style="display:inline;">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="complete">
+              <button type="submit" class="btn-sm btn-complete" title="Mark as Completed">
+                🏁 Complete
+              </button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="9" class="no-data">
+          📭 No batches found.
+          <a href="{% url 'training:admin_batch_create' %}" style="color: var(--primary); font-weight:600; text-decoration:none;">
+            + Create first batch
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

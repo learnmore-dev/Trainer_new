@@ -1,0 +1,784 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  /* Dashboard Design System (same as trainer dashboard) */
+  :root {
+    --accent: #00d4aa;
+    --accent-dim: rgba(0,212,170,0.12);
+    --red: #ff5c5c;
+    --red-dim: rgba(255,92,92,0.12);
+    --indigo: #818cf8;
+    --indigo-dim: rgba(129,140,248,0.12);
+    --amber: #f59e0b;
+    --amber-dim: rgba(245,158,11,0.12);
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --surface-3: #f1f5f9;
+    --border: rgba(0,0,0,0.08);
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --radius: 14px;
+    --font-d: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: #f1f5f9;
+  }
+  .lp-wrap {
+    max-width: 720px;
+    margin: 2rem auto;
+    font-family: var(--font-d);
+  }
+
+  /* Cards */
+  .lp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    overflow: hidden;
+    margin-bottom: 1.8rem;
+    transition: border-color .2s;
+  }
+  .lp-card:hover {
+    border-color: rgba(0,212,170,0.2);
+  }
+  .lp-card-header {
+    background: var(--surface-2);
+    padding: 1.1rem 1.6rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .lp-card-header span:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lp-card-body {
+    padding: 1.6rem;
+  }
+
+  /* Step pills */
+  .step-pills {
+    display: flex;
+    margin-bottom: 1.8rem;
+    border-radius: 40px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .step-pill {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: transparent;
+    transition: all .25s;
+  }
+  .step-pill.active {
+    background: var(--accent);
+    color: #fff;
+  }
+  .step-pill.done {
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  /* Step panels */
+  .step-panel {
+    display: none;
+    animation: fadeUp .3s ease;
+  }
+  .step-panel.active {
+    display: block;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Leave type grid */
+  .leave-type-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .lt-btn {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 10px;
+    background: var(--surface);
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s;
+    position: relative;
+  }
+  .lt-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    background: var(--accent-dim);
+  }
+  .lt-btn.selected {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.15);
+  }
+  .lt-btn.disabled-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(0.1);
+  }
+  .lt-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .lt-label {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: block;
+  }
+  .lt-sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+    display: block;
+  }
+  .quota-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 30px;
+  }
+  .qb-ok  { background: var(--accent-dim); color: var(--accent); }
+  .qb-low { background: var(--amber-dim); color: var(--amber); }
+  .qb-out { background: var(--red-dim); color: var(--red); }
+
+  /* Form fields */
+  .fg {
+    margin-bottom: 1.3rem;
+  }
+  .fg label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .fg input, .fg textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-family: var(--font-d);
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .fg input:focus, .fg textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.1);
+  }
+
+  /* Festival list */
+  .festival-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+  .festival-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .2s;
+    background: var(--surface);
+  }
+  .festival-item:hover:not(.fi-taken) {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .festival-item.fi-selected {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.1);
+  }
+  .festival-item.fi-taken {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--surface-2);
+  }
+  .fi-emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .fi-info {
+    flex: 1;
+  }
+  .fi-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .fi-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .fi-tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 30px;
+    flex-shrink: 0;
+  }
+  .fi-tag-ok    { background: var(--accent-dim); color: var(--accent); }
+  .fi-tag-used  { background: var(--red-dim); color: var(--red); }
+  .fi-tag-fixed { background: var(--indigo-dim); color: var(--indigo); }
+
+  /* Quota bar */
+  .quota-bar {
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+  .qbar-info    { background: var(--accent-dim); color: var(--accent); border-left: 3px solid var(--accent); }
+  .qbar-warning { background: var(--amber-dim); color: var(--amber); border-left: 3px solid var(--amber); }
+  .qbar-danger  { background: var(--red-dim); color: var(--red); border-left: 3px solid var(--red); }
+
+  /* Buttons */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+  .btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--font-d);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .2s;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.96);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0f172a;
+    box-shadow: 0 2px 6px rgba(0,212,170,0.2);
+  }
+  .btn-secondary {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  /* Review box */
+  .review-box {
+    background: var(--surface-2);
+    border-radius: 14px;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    margin-bottom: 1.2rem;
+  }
+  .review-row {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .review-row:last-child {
+    border-bottom: none;
+  }
+  .review-key {
+    min-width: 110px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .review-val {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+
+  /* Messages */
+  .msg {
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid transparent;
+  }
+  .msg-success { background: var(--accent-dim); color: var(--accent); border-left-color: var(--accent); }
+  .msg-error   { background: var(--red-dim); color: var(--red); border-left-color: var(--red); }
+  .msg-warning { background: var(--amber-dim); color: var(--amber); border-left-color: var(--amber); }
+
+  /* Leave history table */
+  .leaves-table-wrap {
+    overflow-x: auto;
+  }
+  .leaves-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .leaves-table th {
+    background: var(--surface-2);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .leaves-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: middle;
+  }
+  .leaves-table tr:last-child td {
+    border-bottom: none;
+  }
+  .leaves-table tr:hover td {
+    background: var(--surface-2);
+  }
+  .status-pill {
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sp-pending  { background: var(--amber-dim); color: var(--amber); }
+  .sp-approved { background: var(--accent-dim); color: var(--accent); }
+  .sp-rejected { background: var(--red-dim); color: var(--red); }
+  .type-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--surface-2);
+    color: var(--text-secondary);
+  }
+  .no-leaves {
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  @media (max-width: 560px) {
+    .lp-card-body { padding: 1.2rem; }
+    .leave-type-grid { grid-template-columns: 1fr; }
+    .btn-row { flex-wrap: wrap; }
+    .btn { flex: 1; justify-content: center; }
+  }
+</style>
+
+<div class="lp-wrap">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="msg msg-{{ message.tags }}">
+        {% if message.tags == 'success' %}✅{% elif message.tags == 'error' %}❌{% elif message.tags == 'warning' %}⚠️{% else %}ℹ️{% endif %}
+        <span>{{ message }}</span>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="lp-card">
+    <div class="lp-card-header">
+      <span>🗓️ Apply for Leave</span>
+    </div>
+    <div class="lp-card-body">
+      <div class="step-pills">
+        <div class="step-pill active" id="pill1">1 · Leave Type</div>
+        <div class="step-pill" id="pill2">2 · Select & Details</div>
+        <div class="step-pill" id="pill3">3 · Confirm</div>
+      </div>
+
+      <form method="POST" id="leaveForm">
+        {% csrf_token %}
+        <input type="hidden" name="leave_type" id="fLeaveType">
+        <input type="hidden" name="leave_date" id="fLeaveDate">
+        <input type="hidden" name="holiday_name" id="fHolidayName">
+        <textarea name="reason" id="fReason" style="display:none;"></textarea>
+
+        <!-- STEP 1 -->
+        <div class="step-panel active" id="step1">
+          <div id="quotaLoading" style="color:var(--text-muted); font-size:0.85rem; padding:0.5rem 0;">⏳ Loading your quota...</div>
+          <div class="leave-type-grid" id="leaveTypeGrid" style="display:none;">
+            <div class="lt-btn" data-type="sick" onclick="selectType(this)">
+              <span class="lt-icon">🤒</span><span class="lt-label">Sick Leave</span><span class="lt-sub">Medical / illness</span>
+            </div>
+            <div class="lt-btn" data-type="casual" id="btnCasual" onclick="selectType(this)">
+              <span class="lt-icon">🏖️</span><span class="lt-label">Casual Leave</span>
+              <span class="lt-sub" id="casualSub">1 per month</span>
+              <span class="quota-badge" id="casualBadge"></span>
+            </div>
+            <div class="lt-btn" data-type="emergency" onclick="selectType(this)">
+              <span class="lt-icon">🚨</span><span class="lt-label">Emergency Leave</span><span class="lt-sub">Urgent / family</span>
+            </div>
+            <div class="lt-btn" data-type="weekoff" onclick="selectType(this)">
+              <span class="lt-icon">📅</span><span class="lt-label">Week Off</span><span class="lt-sub">Sunday / off day</span>
+            </div>
+            <div class="lt-btn" data-type="optional_holiday" id="btnOptional" onclick="selectType(this)">
+              <span class="lt-icon">🎉</span><span class="lt-label">Optional Holiday</span>
+              <span class="lt-sub" id="optSub">5 per year</span>
+              <span class="quota-badge" id="optBadge"></span>
+            </div>
+            <div class="lt-btn" data-type="mandatory_holiday" onclick="selectType(this)">
+              <span class="lt-icon">🏛️</span><span class="lt-label">Mandatory Holiday</span><span class="lt-sub">Fixed company holidays</span>
+            </div>
+            <div class="lt-btn" data-type="other" onclick="selectType(this)" style="grid-column:span 2;">
+              <span class="lt-icon">📝</span><span class="lt-label">Other</span><span class="lt-sub">Any other reason</span>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary" id="btnStep1Next" onclick="goStep(2)" disabled>Next → Select Date</button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-panel" id="step2">
+          <div id="quotaInfoBar" style="display:none;" class="quota-bar"></div>
+
+          <!-- Optional Holiday Festival List -->
+          <div id="optionalSection" style="display:none;">
+            <div class="fg">
+              <label>🎉 Choose Optional Holiday Festival</label>
+              <div class="festival-list" id="optFestivalList"></div>
+            </div>
+          </div>
+
+          <!-- Mandatory Holiday Festival List -->
+          <div id="mandatorySection" style="display:none;">
+            <div class="fg">
+              <label>🏛️ Choose Mandatory Holiday</label>
+              <div class="festival-list" id="manFestivalList"></div>
+            </div>
+          </div>
+
+          <!-- Week Off date -->
+          <div id="weekoffSection" style="display:none;">
+            <div class="fg">
+              <label>📅 Week Off Date <span style="color:var(--text-muted); font-weight:400;">(preferably Sunday)</span></label>
+              <input type="date" id="weekoffDate" min="{{ today }}" onchange="onDateChange('weekoff',this.value)">
+              <div id="weekoffHint" style="font-size:0.75rem; margin-top:6px;"></div>
+            </div>
+          </div>
+
+          <!-- General date (sick/casual/emergency/other) -->
+          <div id="generalSection" style="display:none;">
+            <div class="fg">
+              <label>📅 Leave Date</label>
+              <input type="date" id="generalDate" min="{{ today }}" onchange="onDateChange('general',this.value)">
+            </div>
+          </div>
+
+          <!-- Reason -->
+          <div class="fg" id="reasonSection" style="display:none;">
+            <label>✏️ Reason <span style="color:var(--text-muted); font-weight:400;">(min 10 chars)</span></label>
+            <textarea id="reasonInput" placeholder="Describe your reason..." oninput="checkStep2()"></textarea>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn btn-secondary" onclick="goStep(1)">← Back</button>
+            <button type="button" class="btn btn-primary" id="btnStep2Next" onclick="goStep(3)" disabled>Next → Review</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-panel" id="step3">
+          <div class="review-box" id="reviewBox"></div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-secondary" onclick="goStep(2)">← Back</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">📨 Submit Application</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- My Leave History -->
+  <div class="lp-card">
+    <div class="lp-card-header">
+      <span>📋 My Leave Applications</span>
+      <a href="{% url 'training:leave_balance' %}" style="font-size:0.75rem; background:var(--accent-dim); padding:4px 14px; border-radius:30px; color:var(--accent); text-decoration:none; font-weight:700;">📊 Leave Balance</a>
+    </div>
+    <div class="lp-card-body" style="padding:0;">
+      {% if my_leaves %}
+        <div class="leaves-table-wrap">
+          <table class="leaves-table">
+            <thead><tr><th>Date</th><th>Type</th><th>Reason</th><th>Status</th></tr></thead>
+            <tbody>
+              {% for leave in my_leaves %}
+              <tr>
+                <td><strong>{{ leave.leave_date|date:"d M Y" }}</strong></td>
+                <td>
+                  <span class="type-chip">
+                    {% if leave.leave_type == 'sick' %}🤒{% elif leave.leave_type == 'casual' %}🏖️{% elif leave.leave_type == 'emergency' %}🚨{% elif leave.leave_type == 'weekoff' %}📅{% elif leave.leave_type == 'optional_holiday' %}🎉{% elif leave.leave_type == 'mandatory_holiday' %}🏛️{% else %}📝{% endif %}
+                    {{ leave.get_leave_type_display }}{% if leave.holiday_name %} · {{ leave.holiday_name }}{% endif %}
+                  </span>
+                </td>
+                <td>{{ leave.reason|truncatechars:35 }}</td>
+                <td>
+                  <span class="status-pill sp-{{ leave.status }}">
+                    {% if leave.status == 'pending' %}⏳{% elif leave.status == 'approved' %}✅{% else %}❌{% endif %}
+                    {{ leave.get_status_display }}
+                  </span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="no-leaves">No leave applications yet.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+let quota = null, selectedType = null, selectedDate = null, selectedHolidayName = '';
+const TYPE_LABELS = {sick:'🤒 Sick Leave',casual:'🏖️ Casual Leave',emergency:'🚨 Emergency Leave',weekoff:'📅 Week Off',optional_holiday:'🎉 Optional Holiday',mandatory_holiday:'🏛️ Mandatory Holiday',other:'📝 Other'};
+const EMOJIS = {'Makar Sankranti':'🪁','Maha Shivratri':'🔱','Holi':'🎨','Ugadi':'🌸','Eid-ul-Fitr':'🌙','Ram Navami':'🪷','Raksha Bandhan':'🪢','Janmashtami':'🎵','Diwali':'🪔','Vijayadashami / Dusshera':'⚔️','Christmas':'🎄','Republic Day':'🇮🇳','Labour Day':'👷','Independence Day':'🎌','Gandhi Jayanti':'🕊️','Karnataka Rajyotsava':'🌟'};
+
+async function loadQuota() {
+  try { const r = await fetch('/training/leave/quota/'); quota = await r.json(); } catch(e) { quota = null; }
+  renderBadges();
+  document.getElementById('quotaLoading').style.display  = 'none';
+  document.getElementById('leaveTypeGrid').style.display = 'grid';
+}
+
+function renderBadges() {
+  if (!quota) return;
+  const optRem = quota.optional_remaining;
+  const optBadge = document.getElementById('optBadge');
+  document.getElementById('optSub').textContent = `${optRem}/${quota.optional_limit} left`;
+  if (optRem === 0) { optBadge.className='quota-badge qb-out'; optBadge.textContent='Full'; document.getElementById('btnOptional').classList.add('disabled-btn'); }
+  else if (optRem<=2) { optBadge.className='quota-badge qb-low'; optBadge.textContent=`${optRem} left`; }
+  else { optBadge.className='quota-badge qb-ok'; optBadge.textContent=`${optRem} left`; }
+  const casRem = quota.casual_remaining;
+  const casBadge = document.getElementById('casualBadge');
+  document.getElementById('casualSub').textContent = `${casRem}/${quota.casual_limit} this month`;
+  if (casRem === 0) { casBadge.className='quota-badge qb-out'; casBadge.textContent='Used'; document.getElementById('btnCasual').classList.add('disabled-btn'); }
+  else { casBadge.className='quota-badge qb-ok'; casBadge.textContent=`${casRem} left`; }
+}
+
+function selectType(el) {
+  if (el.classList.contains('disabled-btn')) return;
+  document.querySelectorAll('.lt-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedType = el.dataset.type; selectedDate = null; selectedHolidayName = '';
+  document.getElementById('btnStep1Next').disabled = false;
+}
+
+function goStep(n) {
+  if (n === 3) {
+    const reason = document.getElementById('reasonInput').value.trim();
+    if (!selectedDate)      { alert('Please select a date / festival.'); return; }
+    if (reason.length < 10) { alert('Please enter a reason (min 10 chars).'); return; }
+    document.getElementById('fLeaveType').value   = selectedType;
+    document.getElementById('fLeaveDate').value   = selectedDate;
+    document.getElementById('fHolidayName').value = selectedHolidayName;
+    document.getElementById('fReason').value      = reason;
+    buildReview();
+  }
+  [1,2,3].forEach(i => {
+    document.getElementById(`step${i}`).classList.toggle('active', i===n);
+    const p = document.getElementById(`pill${i}`);
+    p.classList.toggle('active', i===n); p.classList.toggle('done', i<n);
+  });
+  if (n === 2) buildStep2();
+}
+
+function buildStep2() {
+  ['optionalSection','mandatorySection','weekoffSection','generalSection','reasonSection','quotaInfoBar'].forEach(id => { document.getElementById(id).style.display='none'; });
+  selectedDate = null; selectedHolidayName = '';
+  document.getElementById('reasonInput').value = '';
+  document.getElementById('btnStep2Next').disabled = true;
+  const bar = document.getElementById('quotaInfoBar');
+
+  if (selectedType === 'optional_holiday') {
+    if (quota) {
+      const rem = quota.optional_remaining;
+      bar.style.display='flex';
+      if (rem === 0) { bar.className='quota-bar qbar-danger'; bar.innerHTML=`❌ All ${quota.optional_limit} optional holidays used for this year.`; showReason(); return; }
+      bar.className = rem<=2 ? 'quota-bar qbar-warning' : 'quota-bar qbar-info';
+      bar.innerHTML = `🎉 <strong>${rem} of ${quota.optional_limit}</strong> Optional Holidays remaining. Select any ${rem} festival(s) from below.`;
+    }
+    buildOptionalList(); showReason();
+
+  } else if (selectedType === 'mandatory_holiday') {
+    bar.style.display='flex'; bar.className='quota-bar qbar-info';
+    bar.innerHTML='🏛️ These are fixed company holidays. Select one below to apply leave.';
+    buildMandatoryList(); showReason();
+
+  } else if (selectedType === 'weekoff') {
+    document.getElementById('weekoffSection').style.display='block';
+    document.getElementById('weekoffDate').value=''; document.getElementById('weekoffHint').innerHTML='';
+    showReason();
+
+  } else if (selectedType === 'casual') {
+    if (quota) {
+      const rem = quota.casual_remaining;
+      bar.style.display='flex';
+      bar.className = rem===0 ? 'quota-bar qbar-danger' : 'quota-bar qbar-info';
+      bar.innerHTML = rem===0 ? `❌ Casual Leave already used this month (limit: ${quota.casual_limit}/month).` : `🏖️ Casual Leave: <strong>${rem}</strong> remaining this month.`;
+    }
+    document.getElementById('generalSection').style.display='block'; showReason();
+
+  } else {
+    document.getElementById('generalSection').style.display='block'; showReason();
+  }
+}
+
+function showReason() { document.getElementById('reasonSection').style.display='block'; }
+
+function buildOptionalList() {
+  document.getElementById('optionalSection').style.display = 'block';
+  const list = document.getElementById('optFestivalList');
+  const taken = quota ? quota.optional_taken_dates : [];
+  const hols  = quota ? quota.optional_holidays : [];
+  list.innerHTML = hols.map(([d,name]) => {
+    const isTaken = taken.includes(d);
+    return `<div class="festival-item ${isTaken?'fi-taken':''}" data-date="${d}" data-name="${name}" onclick="${isTaken?'':'pickFestival(this,true)'}">
+      <span class="fi-emoji">${EMOJIS[name]||'🎉'}</span>
+      <div class="fi-info"><div class="fi-name">${name}</div><div class="fi-date">${niceDate(d)}</div></div>
+      <span class="fi-tag ${isTaken?'fi-tag-used':'fi-tag-ok'}">${isTaken?'Already used':'Available'}</span>
+    </div>`;
+  }).join('');
+}
+
+function buildMandatoryList() {
+  document.getElementById('mandatorySection').style.display = 'block';
+  const list  = document.getElementById('manFestivalList');
+  const taken = quota ? quota.mandatory_taken_dates : [];
+  const hols  = quota ? quota.mandatory_holidays : [];
+  list.innerHTML = hols.map(([d,name]) => {
+    const isTaken = taken.includes(d);
+    return `<div class="festival-item ${isTaken?'fi-taken':''}" data-date="${d}" data-name="${name}" onclick="${isTaken?'':'pickFestival(this,false)'}">
+      <span class="fi-emoji">${EMOJIS[name]||'🏛️'}</span>
+      <div class="fi-info"><div class="fi-name">${name}</div><div class="fi-date">${niceDate(d)}</div></div>
+      <span class="fi-tag ${isTaken?'fi-tag-used':'fi-tag-fixed'}">${isTaken?'Applied':'Company Holiday'}</span>
+    </div>`;
+  }).join('');
+}
+
+function pickFestival(el, isOpt) {
+  const listId = isOpt ? '#optFestivalList' : '#manFestivalList';
+  document.querySelectorAll(`${listId} .festival-item`).forEach(i => i.classList.remove('fi-selected'));
+  el.classList.add('fi-selected');
+  selectedDate = el.dataset.date; selectedHolidayName = el.dataset.name;
+  checkStep2();
+}
+
+function onDateChange(type, val) {
+  selectedDate = val;
+  if (type === 'weekoff') {
+    const d = new Date(val + 'T00:00:00');
+    const hint = document.getElementById('weekoffHint');
+    if (d.getDay()===0) hint.innerHTML='<span style="color:var(--accent);">✅ Sunday — valid week off</span>';
+    else { const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; hint.innerHTML=`<span style="color:var(--amber);">⚠️ ${days[d.getDay()]} — not Sunday, admin will review</span>`; }
+  }
+  checkStep2();
+}
+
+function checkStep2() {
+  const reason = document.getElementById('reasonInput').value.trim();
+  document.getElementById('btnStep2Next').disabled = !(!!selectedDate && reason.length >= 10);
+}
+
+function buildReview() {
+  const reason = document.getElementById('reasonInput').value.trim();
+  const rows = [
+    {k:'Leave Type', v:TYPE_LABELS[selectedType]||selectedType},
+    {k:'Date', v:niceDate(selectedDate)},
+    ...(selectedHolidayName ? [{k:'Festival', v:selectedHolidayName}] : []),
+    {k:'Reason', v:reason},
+  ];
+  document.getElementById('reviewBox').innerHTML = `
+    <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.8rem; color:var(--text-primary);">📋 Review your application</div>
+    ${rows.map(r=>`<div class="review-row"><span class="review-key">${r.k}</span><span class="review-val">${r.v}</span></div>`).join('')}
+    <div style="margin-top:0.8rem; font-size:0.75rem; color:var(--text-muted);">ℹ️ Application will be sent to admin for approval.</div>`;
+}
+
+function niceDate(str) {
+  if (!str) return '--';
+  const d=new Date(str+'T00:00:00');
+  const mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dy=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  return `${String(d.getDate()).padStart(2,'0')} ${mn[d.getMonth()]} ${d.getFullYear()} (${dy[d.getDay()]})`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('reasonInput').addEventListener('input', checkStep2);
+  loadQuota();
+});
+
+document.getElementById('leaveForm').addEventListener('submit', function() {
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.innerHTML = '⏳ Submitting...';
+});
+</script>
+{% endblock %}

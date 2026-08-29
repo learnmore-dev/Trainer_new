@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* Modern Container */
+.signup-form {
+    width: 380px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #f9fafb;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.signup-title {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #1f2937;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Form Field Styling */
+.signup-form p {
+    margin-bottom: 18px;
+    font-size: 15px;
+    color: #374151;
+    font-weight: 500;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #ffffff;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+.signup-form input:hover {
+    border-color: #9ca3af;
+}
+
+.signup-form input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 8px rgba(99,102,241,0.3);
+    outline: none;
+}
+
+/* Modern Button */
+.signup-btn {
+    width: 100%;
+    padding: 12px 0;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: 0.25s ease;
+}
+
+.signup-btn:hover {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    transform: translateY(-2px);
+}
+
+.signup-btn:active {
+    transform: scale(0.98);
+}
+</style>
+
+<h2 class="signup-title">Sign Up</h2>
+
+<form method="post" class="signup-form">
+    {% csrf_token %}
+
+    <!-- 🔥 Show form validation errors -->
+    {% if form.errors %}
+    <div style="background:#fee2e2; color:#b91c1c; padding:10px; border-radius:6px; margin-bottom:15px;">
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+    {{ form.as_p }}
+    <button type="submit" class="signup-btn">Register</button>
+</form>
+
+{% endblock content %}

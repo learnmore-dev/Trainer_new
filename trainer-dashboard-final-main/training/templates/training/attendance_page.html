@@ -1,0 +1,860 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  :root {
+    --primary: #4361ee;
+    --secondary: #7209b7;
+    --green: #28a745;
+    --red: #dc3545;
+    --gray-light: #e9ecef;
+    --gray-medium: #adb5bd;
+    --radius: 12px;
+    --shadow: 0 8px 24px rgba(0,0,0,0.08);
+    --transition: all 0.3s ease;
+  }
+
+  .attendance-container {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-top: 1rem;
+    border-left: 5px solid var(--primary);
+  }
+
+  h2 {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  .stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--primary);
+    text-align: center;
+  }
+
+  .stat-card h4 {
+    font-size: 0.85rem;
+    color: var(--gray-medium);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .stat-card .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .attendance-btn {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 150px;
+    justify-content: center;
+  }
+
+  .in-btn   { background: linear-gradient(135deg, #28a745, #20c997); color: white; }
+  .out-btn  { background: linear-gradient(135deg, #dc3545, #ff6b6b); color: white; }
+  .gray-btn { background: #6c757d; color: white; }
+  .warn-btn { background: linear-gradient(135deg, #ffc107, #fd7e14); color: white; }
+
+  .attendance-btn:hover    { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+  .attendance-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: white;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 460px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .modal-header {
+    padding: 1rem 1.2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--gray-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+  }
+
+  .modal-body { padding: 1rem 1.2rem; }
+
+  #cameraVideo, #photoPreview {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    background: #000;
+    max-height: 280px;
+    object-fit: cover;
+  }
+  #photoPreview { display: none; border: 3px solid var(--green); }
+
+  /* ✅ Location card inside modal */
+  .loc-card {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: background 0.3s;
+  }
+  .loc-card.fetching { background: #fff3cd; color: #856404; }
+  .loc-card.success  { background: #d4edda; color: #155724; }
+  .loc-card.error    { background: #f8d7da; color: #721c24; }
+
+  .loc-card-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .loc-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* ✅ Exact address line */
+  .loc-address {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+    line-height: 1.4;
+  }
+
+  .loc-coords {
+    font-size: 0.75rem;
+    opacity: 0.75;
+    font-family: monospace;
+  }
+
+  .accuracy-bar {
+    height: 4px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+  .accuracy-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease, background 0.3s;
+    width: 0%;
+  }
+
+  .modal-footer {
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid var(--gray-light);
+    display: flex;
+    gap: 0.7rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    background: #f8f9fa;
+  }
+
+  /* ── TABLE ── */
+  .attendance-table-container {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-top: 1.5rem;
+  }
+
+  table { width: 100%; border-collapse: collapse; min-width: 740px; }
+
+  th {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    font-weight: 600;
+    padding: 0.9rem 1rem;
+    text-align: center;
+  }
+
+  td {
+    padding: 0.9rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-light);
+    color: #555;
+    font-size: 0.88rem;
+  }
+
+  tr:hover { background: rgba(67,97,238,0.03); }
+
+  .badge {
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+  }
+  .badge-in  { background: linear-gradient(135deg,#28a745,#20c997); }
+  .badge-out { background: linear-gradient(135deg,#dc3545,#ff6b6b); }
+  .badge-leave { background: linear-gradient(135deg,#fd7e14,#ffc107); color: #212529; }
+
+  .working-hours { font-weight: 600; color: var(--primary); }
+
+  .status-indicator { display:flex; align-items:center; justify-content:center; gap:6px; }
+  .status-dot { width:9px; height:9px; border-radius:50%; }
+  .dot-in  { background:#28a745; box-shadow:0 0 6px rgba(40,167,69,.5); }
+  .dot-out  { background:#dc3545; box-shadow:0 0 6px rgba(220,53,69,.5); }
+  .dot-leave { background:#fd7e14; box-shadow:0 0 6px rgba(253,126,20,.5); }
+  .badge-present  { background: linear-gradient(135deg,#28a745,#20c997); color:white; }
+  .badge-half_day { background: linear-gradient(135deg,#ffc107,#fd7e14); color:#212529; }
+  .badge-leave    { background: linear-gradient(135deg,#dc3545,#ff6b6b); color:white; }
+  .badge-pending  { background: #6c757d; color:white; }
+
+  .attendance-photo {
+    width:52px; height:52px;
+    border-radius:6px; object-fit:cover;
+    border:2px solid var(--gray-light);
+    cursor:pointer; transition:transform .2s;
+  }
+  .attendance-photo:hover { transform:scale(1.7); position:relative; z-index:10; }
+
+  .loc-name-cell { font-size:0.8rem; color:#555; max-width:160px; line-height:1.3; }
+
+  .no-data { text-align:center; padding:2rem; color:var(--gray-medium); font-style:italic; }
+
+  @media(max-width:600px){
+    .attendance-container { padding:1rem; }
+    h2 { font-size:1.4rem; }
+    .actions { flex-direction:column; align-items:center; }
+    .attendance-btn { width:100%; max-width:280px; }
+  }
+</style>
+
+<div class="attendance-container">
+  <h2>📊 Trainer Attendance</h2>
+
+  <!-- Month/Year Selector -->
+  <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center;">
+    <div>
+      <label style="font-weight: 600; margin-right: 0.5rem;">Month:</label>
+      <select id="monthSelect" onchange="changeMonth()">
+        {% for m in "01,02,03,04,05,06,07,08,09,10,11,12" %}
+        <option value="{{ forloop.counter }}" {% if forloop.counter == current_month %}selected{% endif %}>
+          {{ forloop.counter|date:"F" }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label style="font-weight: 600; margin-right: 0.5rem;">Year:</label>
+      <select id="yearSelect" onchange="changeMonth()">
+        {% for y in "2023,2024,2025,2026,2027" %}
+        <option value="{{ y }}" {% if y == current_year %}selected{% endif %}>{{ y }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="stats-summary">
+    <div class="stat-card">
+      <h4>Today</h4>
+      <div class="value" id="todayStatus">--</div>
+    </div>
+    <div class="stat-card">
+      <h4>This Month</h4>
+      <div class="value" id="monthCount">--</div>
+    </div>
+    <div class="stat-card">
+      <h4>Total Hours</h4>
+      <div class="value" id="totalHours">--</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="attendance-btn in-btn"  onclick="startAttendance('mark_in')">
+      <i class="fas fa-sign-in-alt"></i> Mark In
+    </button>
+    <button class="attendance-btn out-btn" onclick="startAttendance('mark_out')">
+      <i class="fas fa-sign-out-alt"></i> Mark Out
+    </button>
+  </div>
+
+  <!-- ✅ MODAL: Camera + Live GPS + Exact Address -->
+  <div class="modal-overlay" id="cameraModal">
+    <div class="modal-box">
+
+      <div class="modal-header">
+        <span id="modalIcon">📷</span>
+        <span id="modalTitle">Take Attendance Photo</span>
+      </div>
+
+      <div class="modal-body">
+        <video id="cameraVideo" autoplay playsinline muted></video>
+        <img   id="photoPreview" alt="Captured" />
+
+        <!-- ✅ Location card — shows exact address -->
+        <div class="loc-card fetching" id="locCard">
+          <div class="loc-card-top">
+            <span class="loc-icon" id="locIcon">📡</span>
+            <span id="locStatus">Starting GPS...</span>
+          </div>
+          <div class="loc-address" id="locAddress"></div>
+          <div class="loc-coords"  id="locCoords"></div>
+          <div class="accuracy-bar">
+            <div class="accuracy-fill" id="accuracyFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="modalFooter">
+        <button class="attendance-btn gray-btn" onclick="closeModal()">
+          <i class="fas fa-times"></i> Cancel
+        </button>
+        <button class="attendance-btn in-btn" id="captureBtn" onclick="capturePhoto()" disabled>
+          <i class="fas fa-camera"></i>
+          <span id="captureBtnText">Waiting for GPS...</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+
+  <div class="attendance-table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th><th>Status</th><th>Day Status</th><th>Mark In</th>
+          <th>Mark Out</th><th>Working Hours</th>
+          <th>Location</th><th>Photo</th>
+        </tr>
+      </thead>
+      <tbody id="attendanceTable">
+        <tr><td colspan="7" class="no-data">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// ────────── STATE ──────────
+let selectedAction = null;
+let mediaStream    = null;
+let capturedBlob   = null;
+let watchId        = null;
+let liveLocation   = null;
+// liveLocation = { lat, lng, accuracy, fullAddress, shortAddress }
+
+// ────────── START ──────────
+function startAttendance(action) {
+  selectedAction = action;
+  const label = action === 'mark_in' ? 'Mark IN' : 'Mark OUT';
+  if (!confirm(`Confirm: ${label}?`)) return;
+  openModal();
+}
+
+function openModal() {
+  resetModal();
+  document.getElementById('cameraModal').classList.add('active');
+  startCamera();
+  startLiveGPS();
+}
+
+function resetModal() {
+  capturedBlob = null;
+  liveLocation = null;
+  document.getElementById('cameraVideo').style.display  = 'block';
+  document.getElementById('photoPreview').style.display = 'none';
+  document.getElementById('photoPreview').src = '';
+  document.getElementById('modalIcon').textContent  = '📷';
+  document.getElementById('modalTitle').textContent = 'Take Attendance Photo';
+  setLocCard('fetching', '📡', 'Starting GPS...', '', '', 0);
+  document.getElementById('modalFooter').innerHTML = `
+    <button class="attendance-btn gray-btn" onclick="closeModal()">
+      <i class="fas fa-times"></i> Cancel
+    </button>
+    <button class="attendance-btn in-btn" id="captureBtn" onclick="capturePhoto()" disabled>
+      <i class="fas fa-camera"></i>
+      <span id="captureBtnText">Waiting for GPS...</span>
+    </button>`;
+}
+
+// ────────── CAMERA ──────────
+function startCamera() {
+  const video = document.getElementById('cameraVideo');
+  navigator.mediaDevices.getUserMedia({
+    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+  })
+  .then(stream => {
+    mediaStream = stream;
+    video.srcObject = stream;
+    video.play();
+  })
+  .catch(err => {
+    console.error('Camera:', err);
+    alert('Camera permission denied. Please allow camera access and retry.');
+    closeModal();
+  });
+}
+
+function stopCamera() {
+  if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); mediaStream = null; }
+}
+
+// ────────── ✅ LIVE GPS + REVERSE GEOCODING ──────────
+function startLiveGPS() {
+  if (!navigator.geolocation) {
+    setLocCard('error', '❌', 'Geolocation not supported.', '', '', 0);
+    enableCaptureBtn(true);
+    return;
+  }
+
+  watchId = navigator.geolocation.watchPosition(
+    function onSuccess(pos) {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const acc = Math.round(pos.coords.accuracy);
+
+      // Save coordinates immediately
+      if (!liveLocation) liveLocation = {};
+      liveLocation.lat      = lat;
+      liveLocation.lng      = lng;
+      liveLocation.accuracy = acc;
+
+      const bar = Math.max(0, Math.min(100, Math.round((1 - (acc - 5) / 95) * 100)));
+      const coordStr = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+
+      if (acc <= 100) {
+        setLocCard('fetching', '🔄', `GPS ready (±${acc}m) — fetching address...`,
+          'Getting exact location...', coordStr, bar);
+        enableCaptureBtn(acc > 50);  // warn if >50m
+
+        // ✅ Fetch exact address via OpenStreetMap Nominatim
+        fetchExactAddress(lat, lng, acc, bar, coordStr);
+      } else {
+        setLocCard('fetching', '📡', `Improving GPS accuracy... ±${acc}m`,
+          '', coordStr, bar);
+      }
+    },
+    function onError(err) {
+      let msg = 'Location error.';
+      if (err.code === 1) msg = 'Permission denied — allow location in browser settings.';
+      if (err.code === 2) msg = 'GPS unavailable. Check device settings.';
+      if (err.code === 3) msg = 'GPS timed out.';
+      setLocCard('error', '❌', msg, '', '', 0);
+      if (liveLocation) {
+        enableCaptureBtn(true);
+      } else {
+        enableCaptureBtn(true, 'Capture (no GPS)');
+      }
+    },
+    { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
+  );
+}
+
+// ✅ OpenStreetMap Nominatim — free, no API key, exact address
+function fetchExactAddress(lat, lng, acc, bar, coordStr) {
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`;
+
+  fetch(url, {
+    headers: { 'Accept-Language': 'en' }   // English mein address
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (!data || !data.address) throw new Error('No address');
+
+    const a = data.address;
+
+    // ✅ Full address — building/road level
+    const fullAddress = data.display_name;
+
+    // ✅ Short readable address — building + road + area + city
+    const parts = [
+      a.building || a.amenity || a.shop || a.office,   // exact building name
+      a.road || a.pedestrian || a.footway,              // street
+      a.suburb || a.neighbourhood || a.quarter,         // area
+      a.city || a.town || a.village || a.county,        // city
+      a.state                                            // state
+    ].filter(Boolean);
+
+    const shortAddress = parts.join(', ');
+
+    // Save to liveLocation
+    liveLocation.fullAddress  = fullAddress;
+    liveLocation.shortAddress = shortAddress;
+
+    setLocCard('success', '📍',
+      `Location found  ±${acc}m`,
+      shortAddress,
+      coordStr,
+      bar
+    );
+
+    enableCaptureBtn(acc > 50);
+  })
+  .catch(() => {
+    // Geocoding failed — use coordinates only
+    if (liveLocation) {
+      liveLocation.shortAddress = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+      liveLocation.fullAddress  = liveLocation.shortAddress;
+    }
+    setLocCard('success', '📍',
+      `Location ready  ±${acc}m`,
+      `${lat.toFixed(5)}, ${lng.toFixed(5)}`,
+      coordStr,
+      bar
+    );
+    enableCaptureBtn(acc > 50);
+  });
+}
+
+function stopGPS() {
+  if (watchId !== null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+}
+
+// ────────── CAPTURE PHOTO ──────────
+function capturePhoto() {
+  const video  = document.getElementById('cameraVideo');
+  const canvas = document.createElement('canvas');
+  canvas.width  = video.videoWidth  || 640;
+  canvas.height = video.videoHeight || 480;
+
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0);
+
+  // ✅ Stamp exact address + coordinates + time on photo
+  if (liveLocation) {
+    const now       = new Date().toLocaleString('en-IN', { hour12: true });
+    const place     = liveLocation.shortAddress || `${liveLocation.lat.toFixed(5)}, ${liveLocation.lng.toFixed(5)}`;
+    const coordLine = `${liveLocation.lat.toFixed(6)}, ${liveLocation.lng.toFixed(6)}  ±${liveLocation.accuracy}m`;
+
+    const fs   = Math.max(12, Math.round(canvas.width * 0.020));
+    const pad  = 8;
+    const lh   = fs + 6;
+    const boxH = lh * 3 + pad * 2;
+
+    // Semi-transparent black box at bottom
+    ctx.fillStyle = 'rgba(0,0,0,0.65)';
+    ctx.fillRect(0, canvas.height - boxH, canvas.width, boxH);
+
+    ctx.font      = `bold ${fs}px Arial`;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(`📍 ${place}`, pad, canvas.height - boxH + pad + fs);
+
+    ctx.font      = `${fs - 1}px Arial`;
+    ctx.fillStyle = '#cccccc';
+    ctx.fillText(coordLine, pad, canvas.height - boxH + pad + fs + lh);
+
+    ctx.font      = `${fs - 1}px Arial`;
+    ctx.fillStyle = '#aaaaaa';
+    ctx.fillText(`🕐 ${now}`, pad, canvas.height - boxH + pad + fs + lh * 2);
+  }
+
+  canvas.toBlob(blob => {
+    capturedBlob = blob;
+    stopCamera();
+
+    const preview = document.getElementById('photoPreview');
+    preview.src = URL.createObjectURL(blob);
+    preview.style.display = 'block';
+    document.getElementById('cameraVideo').style.display = 'none';
+
+    document.getElementById('modalIcon').textContent  = '✅';
+    document.getElementById('modalTitle').textContent = 'Photo captured — confirm?';
+
+    document.getElementById('modalFooter').innerHTML = `
+      <button class="attendance-btn gray-btn" onclick="retakePhoto()">
+        <i class="fas fa-redo"></i> Retake
+      </button>
+      <button class="attendance-btn in-btn" onclick="submitAttendance()">
+        <i class="fas fa-check"></i> Submit
+      </button>`;
+  }, 'image/jpeg', 0.88);
+}
+
+// ────────── RETAKE ──────────
+function retakePhoto() {
+  capturedBlob = null;
+  stopGPS();
+  resetModal();
+  startCamera();
+  startLiveGPS();
+}
+
+// ────────── SUBMIT ──────────
+function submitAttendance() {
+  if (!capturedBlob) { alert('No photo captured.'); return; }
+  if (!liveLocation && !confirm('No GPS location. Submit anyway?')) return;
+
+  closeModal();
+
+  document.querySelectorAll('.in-btn, .out-btn').forEach(b => {
+    b.disabled = true;
+    b.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Submitting...`;
+  });
+
+  const fd = new FormData();
+  fd.append('attendance', selectedAction);
+  fd.append('photo', new File([capturedBlob], `att_${Date.now()}.jpg`, { type: 'image/jpeg' }));
+  if (liveLocation) {
+    fd.append('latitude',      liveLocation.lat);
+    fd.append('longitude',     liveLocation.lng);
+    fd.append('accuracy',      liveLocation.accuracy);
+    // ✅ Exact address bhi bhejo — DB mein save hoga
+    fd.append('location_name', liveLocation.shortAddress || '');
+  }
+
+  fetch('/training/trainer-attendance/api/', {
+    method: 'POST',
+    headers: { 'X-CSRFToken': document.getElementById('csrf_token').value },
+    body: fd
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.error) {
+      showNotification('❌ ' + data.error, 'error');
+    } else {
+      const label = selectedAction === 'mark_in' ? 'IN' : 'OUT';
+      showNotification(`✅ Marked ${label} at ${data.time}`, 'success');
+      loadAttendance();
+    }
+  })
+  .catch(() => showNotification('Network error. Please retry.', 'error'))
+  .finally(() => {
+    document.querySelectorAll('.in-btn, .out-btn').forEach(b => {
+      b.disabled = false;
+      b.innerHTML = b.classList.contains('in-btn')
+        ? `<i class="fas fa-sign-in-alt"></i> Mark In`
+        : `<i class="fas fa-sign-out-alt"></i> Mark Out`;
+    });
+  });
+}
+
+// ────────── CLOSE MODAL ──────────
+function closeModal() {
+  document.getElementById('cameraModal').classList.remove('active');
+  stopCamera();
+  stopGPS();
+}
+
+// ────────── HELPERS ──────────
+function setLocCard(type, icon, status, address, coords, barPct) {
+  const card = document.getElementById('locCard');
+  if (!card) return;
+  card.className = `loc-card ${type}`;
+  document.getElementById('locIcon').textContent    = icon;
+  document.getElementById('locStatus').textContent  = status;
+  document.getElementById('locAddress').textContent = address;
+  document.getElementById('locCoords').textContent  = coords;
+  const fill = document.getElementById('accuracyFill');
+  fill.style.width      = barPct + '%';
+  fill.style.background = type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#ffc107';
+}
+
+function enableCaptureBtn(warn = false, label = '') {
+  const btn = document.getElementById('captureBtn');
+  const txt = document.getElementById('captureBtnText');
+  if (!btn) return;
+  btn.disabled = false;
+  if (warn) {
+    btn.className         = 'attendance-btn warn-btn';
+    txt.textContent       = label || 'Capture (low accuracy)';
+  } else {
+    btn.className         = 'attendance-btn in-btn';
+    txt.textContent       = 'Capture';
+  }
+}
+
+// ────────── MONTH CHANGE ──────────
+function changeMonth() {
+  const month = document.getElementById('monthSelect').value;
+  const year = document.getElementById('yearSelect').value;
+  loadAttendance(month, year);
+}
+
+// ────────── LOAD TABLE ──────────
+function loadAttendance(month = null, year = null) {
+  let url = '/training/trainer-attendance/history/';
+  if (month && year) {
+    url += `?month=${month}&year=${year}`;
+  }
+
+  fetch(url)
+    .then(r => r.json())
+    .then(res => {
+      const tbody = document.getElementById('attendanceTable');
+      if (!res.data || res.data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="no-data">No attendance records yet</td></tr>`;
+        return;
+      }
+      updateStats(res.data);
+      tbody.innerHTML = res.data.map(row => {
+        let sc, dc, ds;
+
+        if (row.status === 'LEAVE') {
+          sc = 'badge-leave';
+          dc = 'dot-leave';
+          ds = { cls: 'badge-leave', icon: '🗓️', label: row.day_status.replace('_', ' ').toUpperCase() };
+        } else if (row.status === 'ABSENT') {
+          sc = 'badge-leave';
+          dc = 'dot-out';
+          ds = { cls: 'badge-leave', icon: '❌', label: 'Absent' };
+        } else if (row.status === 'IN') {
+          sc = 'badge-in';
+          dc = 'dot-in';
+          ds = { cls: 'badge-present', icon: '🟢', label: 'Present' };
+        } else {
+          sc = 'badge-out';
+          dc = 'dot-out';
+          ds = { cls: 'badge-present', icon: '🟢', label: 'Present' };
+        }
+
+        // Day status badge
+        const dsMap = {
+          'present':  { cls: 'badge-present',  icon: '🟢', label: 'Present'  },
+          'half_day': { cls: 'badge-half_day', icon: '🟡', label: 'Half Day' },
+          'leave':    { cls: 'badge-leave',    icon: '🔴', label: 'Leave'    },
+          'pending':  { cls: 'badge-pending',  icon: '⏳', label: 'Pending'  },
+          'absent':   { cls: 'badge-leave',    icon: '❌', label: 'Absent'   },
+          'sick':     { cls: 'badge-leave',    icon: '🤒', label: 'Sick Leave' },
+          'casual':   { cls: 'badge-leave',    icon: '🏖️', label: 'Casual Leave' },
+          'emergency': { cls: 'badge-leave',   icon: '🚨', label: 'Emergency' },
+          'weekoff':  { cls: 'badge-leave',    icon: '📅', label: 'Week Off' },
+          'optional_holiday': { cls: 'badge-leave', icon: '🎉', label: 'Optional Holiday' },
+          'mandatory_holiday': { cls: 'badge-leave', icon: '🏛️', label: 'Mandatory Holiday' },
+          'other':    { cls: 'badge-leave',    icon: '📝', label: 'Other Leave' },
+        };
+        const dsInfo = dsMap[row.day_status] || { cls: 'badge-pending', icon: '⏳', label: '--' };
+
+        return `<tr>
+          <td><strong>${row.date||'--'}</strong></td>
+          <td><div class="status-indicator">
+            <span class="status-dot ${dc}"></span>
+            <span class="badge ${sc}">${row.status||'--'}</span>
+          </div></td>
+          <td><span class="badge ${dsInfo.cls}">${dsInfo.icon} ${dsInfo.label}</span></td>
+          <td>${row.mark_in||'--'}</td>
+          <td>${row.mark_out||'--'}</td>
+          <td class="working-hours">${row.working_hours||'--'}</td>
+          <td class="loc-name-cell">${row.location_name && row.location_name !== '--' ? '📍 '+row.location_name : '--'}</td>
+          <td>${row.photo_in
+            ? `<img src="${row.photo_in}" class="attendance-photo" onclick="previewImg('${row.photo_in}')" title="Click to enlarge">`
+            : '--'}</td>
+        </tr>`;
+      }).join('');
+    })
+    .catch(() => {
+      document.getElementById('attendanceTable').innerHTML =
+        `<tr><td colspan="7" class="no-data">Error loading data. Please refresh.</td></tr>`;
+    });
+}
+
+function updateStats(data) {
+  const todayFmt = new Date().toLocaleDateString('en-GB').split('/').join('-');
+  const todayRec = data.find(r => r.date === todayFmt);
+  const todayEl  = document.getElementById('todayStatus');
+  if (todayRec) {
+    todayEl.textContent = todayRec.status === 'IN' ? '✅ In' : todayRec.status === 'LEAVE' ? '🗓️ Leave' : todayRec.status === 'ABSENT' ? '❌ Absent' : '✅ Out';
+    todayEl.style.color = todayRec.status === 'IN' ? '#28a745' : todayRec.status === 'LEAVE' ? '#fd7e14' : todayRec.status === 'ABSENT' ? '#dc3545' : '#dc3545';
+  } else {
+    todayEl.textContent = 'Absent';
+    todayEl.style.color = '#dc3545';
+  }
+
+  // Use selected month/year for stats
+  const selectedMonth = document.getElementById('monthSelect').value;
+  const selectedYear = document.getElementById('yearSelect').value;
+
+  const monthRecs = data.filter(r => {
+    const p = r.date.split('-');
+    return +p[1] === +selectedMonth && +p[2] === +selectedYear && r.status === 'OUT';
+  });
+  document.getElementById('monthCount').textContent = `${monthRecs.length} days`;
+  let mins = 0;
+  monthRecs.forEach(r => {
+    const match = (r.working_hours||'').match(/(\d+)h\s*(\d+)m/);
+    if (match) mins += +match[1]*60 + +match[2];
+  });
+  document.getElementById('totalHours').textContent = `${Math.floor(mins/60)}h ${mins%60}m`;
+}
+
+// ────────── IMAGE PREVIEW ──────────
+function previewImg(src) {
+  const d = document.createElement('div');
+  d.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.93);
+    display:flex;align-items:center;justify-content:center;z-index:9000;cursor:pointer;`;
+  const img = document.createElement('img');
+  img.src = src;
+  img.style.cssText = `max-width:93%;max-height:93%;border-radius:10px;`;
+  d.appendChild(img);
+  d.onclick = () => d.remove();
+  document.body.appendChild(d);
+}
+
+// ────────── NOTIFICATION ──────────
+function showNotification(msg, type) {
+  const n = document.createElement('div');
+  n.style.cssText = `position:fixed;top:76px;right:16px;padding:.9rem 1.3rem;
+    background:${type==='success'?'#28a745':'#dc3545'};color:white;
+    border-radius:10px;font-weight:600;font-size:.9rem;z-index:9999;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);animation:sIn .3s ease;`;
+  n.textContent = msg;
+  document.body.appendChild(n);
+  setTimeout(() => { n.style.animation='sOut .3s ease'; setTimeout(()=>n.remove(),300); }, 3500);
+}
+
+const sty = document.createElement('style');
+sty.textContent = `
+  @keyframes sIn  { from{transform:translateX(110%);opacity:0} to{transform:translateX(0);opacity:1} }
+  @keyframes sOut { from{transform:translateX(0);opacity:1}    to{transform:translateX(110%);opacity:0} }
+`;
+document.head.appendChild(sty);
+
+document.addEventListener('DOMContentLoaded', function() {
+  const now = new Date();
+  document.getElementById('monthSelect').value = now.getMonth() + 1;
+  document.getElementById('yearSelect').value = now.getFullYear();
+  loadAttendance(now.getMonth() + 1, now.getFullYear());
+});
+</script>
+
+{% endblock %}
