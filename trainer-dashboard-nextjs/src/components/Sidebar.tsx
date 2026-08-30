@@ -19,7 +19,8 @@ import {
 } from 'lucide-react';
 
 export default function Sidebar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname || '';
 
   const links = [
     { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
@@ -36,7 +37,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-60 shrink-0 hidden lg:flex flex-col bg-white border-r border-slate-200/80 min-h-screen p-4 justify-between">
+    <aside className="w-60 shrink-0 hidden lg:flex flex-col bg-white border-r border-slate-200/80 min-h-screen p-4 justify-between" suppressHydrationWarning>
       <div>
         {/* Brand Header */}
         <div className="flex items-center gap-2.5 px-2 py-3 mb-4">
@@ -87,7 +88,7 @@ export default function Sidebar() {
           <ChevronDown className="h-4 w-4 text-slate-400" />
         </div>
 
-        <div className="py-1 px-3 rounded-lg bg-blue-50 text-blue-700 font-bold text-[11px] text-center border border-blue-100">
+        <div className="py-1 px-3 rounded-lg bg-blue-50 text-blue-700 font-bold text-[11px] text-center border border-blue-100" suppressHydrationWarning>
           11:45 AM • 22 May 2025
         </div>
       </div>

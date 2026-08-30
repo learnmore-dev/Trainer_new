@@ -29,7 +29,8 @@ import {
   Check,
   UserX,
   Coffee,
-  ChevronRight
+  ChevronRight,
+  Save
 } from 'lucide-react';
 
 const defaultTrainers = [

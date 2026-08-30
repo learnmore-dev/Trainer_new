@@ -20,7 +20,8 @@ import {
 import WhatsAppBotModal from './WhatsAppBotModal';
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname || '';
   const [isWaModalOpen, setIsWaModalOpen] = useState(false);
 
   return (

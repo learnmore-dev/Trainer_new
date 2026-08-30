@@ -44,9 +44,14 @@ interface ChatMessage {
 type Language = 'en' | 'hi' | 'gu';
 
 export default function AICopilotModal() {
+  const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState<Language>('en');
@@ -603,6 +608,8 @@ export default function AICopilotModal() {
     stopSpeaking();
     setMessages([]);
   };
+
+  if (!mounted) return null;
 
   return (
     <>
