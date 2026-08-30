@@ -10,11 +10,11 @@ export default function HomePage() {
   useEffect(() => {
     const user = getStoredUser();
     if (!user) {
-      router.replace('/login');
+      window.location.href = '/login';
     } else if (user.role === 'admin') {
-      router.replace('/admin/dashboard');
+      window.location.href = '/admin/dashboard';
     } else {
-      router.replace('/trainer/dashboard');
+      window.location.href = '/trainer/dashboard';
     }
   }, [router]);
 
