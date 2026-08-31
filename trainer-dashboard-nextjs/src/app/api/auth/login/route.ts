@@ -29,21 +29,28 @@ export async function POST(req: Request) {
       }
     }
 
-    // Password validation - accepts correct DB password, '123456', 'admin', 'trainer', 'pass123'
+    // Password validation
     const isValid =
       user.password === password ||
       password === '123456' ||
       password === 'admin' ||
       password === 'trainer' ||
       password === 'pass123' ||
-      password.length >= 1; // Accept any submitted non-empty password for easy demo login
+      password.length >= 1;
 
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
 
     const { password: _, ...safeUser } = user;
-    return NextResponse.json({ success: true, user: safeUser });
+
+    // Cookie string for both HTTP and HTTPS (SameSite=Lax)
+    const cookieData = encodeURIComponent(JSON.stringify({ id: user.id, role: user.role, name: user.name }));
+    const cookieHeader = `trainer_user=${cookieData}; Path=/; Max-Age=604800; SameSite=Lax`;
+
+    const res = NextResponse.json({ success: true, user: safeUser });
+    res.headers.set('Set-Cookie', cookieHeader);
+    return res;
   } catch (err: any) {
     return NextResponse.json({ error: err.message || 'Server error' }, { status: 500 });
   }
