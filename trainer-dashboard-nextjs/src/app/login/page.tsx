@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { setStoredUser } from '@/lib/auth';
-import { User as UserIcon, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
+import { setStoredUser, getStoredUser } from '@/lib/auth';
+import { User as UserIcon, Lock, ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,16 +12,35 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Auto-redirect if already logged in
+  useEffect(() => {
+    const user = getStoredUser();
+    if (user) {
+      const target = user.role === 'admin' ? '/admin/dashboard' : '/trainer/dashboard';
+      window.location.replace(target);
+    }
+  }, []);
+
+  const handleLogin = async (e?: React.FormEvent | React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setLoading(true);
     setError(null);
+
+    const cleanUser = username.trim();
+    if (!cleanUser || !password) {
+      setError('Please enter both username and password');
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username: cleanUser, password }),
       });
 
       const data = await res.json();
@@ -32,11 +51,8 @@ export default function LoginPage() {
       }
 
       setStoredUser(data.user);
-      if (data.user.role === 'admin') {
-        window.location.href = '/admin/dashboard';
-      } else {
-        window.location.href = '/trainer/dashboard';
-      }
+      const target = data.user.role === 'admin' ? '/admin/dashboard' : '/trainer/dashboard';
+      window.location.replace(target);
     } catch (err: any) {
       setError(err.message || 'Server connection error');
       setLoading(false);
@@ -51,7 +67,7 @@ export default function LoginPage() {
 
       <div className="w-full max-w-[440px] z-10">
         {/* Single Unified Login Card */}
-        <div className="rounded-3xl p-8 sm:p-10 bg-white shadow-2xl shadow-slate-200/80 border border-slate-200/80 space-y-6">
+        <div className="rounded-3xl p-6 sm:p-10 bg-white shadow-2xl shadow-slate-200/80 border border-slate-200/80 space-y-6">
           {/* Logo & Headline Inside Card */}
           <div className="text-center space-y-3 pb-2 border-b border-slate-100">
             <div className="inline-flex p-2 items-center justify-center">
@@ -78,7 +94,7 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={(e) => { e.preventDefault(); handleLogin(e); }} className="space-y-4">
+          <form action="javascript:void(0);" onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
                 Username
@@ -114,8 +130,7 @@ export default function LoginPage() {
             </div>
 
             <button
-              type="button"
-              onClick={handleLogin}
+              type="submit"
               disabled={loading}
               className="w-full mt-2 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold py-3.5 text-sm shadow-md shadow-blue-600/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
             >
