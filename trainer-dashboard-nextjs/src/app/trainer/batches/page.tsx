@@ -38,10 +38,7 @@ export default function TrainerBatchesPage() {
   const delayedBatches = batches.filter((b) => (b.used_hours || 0) > b.total_hours).length;
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] text-slate-800 flex flex-col">
-      <Navbar />
-
-      <main className="flex-1 w-full max-w-[1480px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <main className="flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
@@ -179,7 +176,6 @@ export default function TrainerBatchesPage() {
             </table>
           </div>
         </div>
-      </main>
-    </div>
+    </main>
   );
 }

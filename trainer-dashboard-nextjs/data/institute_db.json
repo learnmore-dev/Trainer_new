@@ -50,6 +50,19 @@
       "hourly_rate": 500,
       "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150",
       "created_at": "2025-03-09T18:30:00.000Z"
+    },
+    {
+      "username": "KANZARIYA",
+      "name": "KANZARIYA PRATIK",
+      "email": "kanzariyapratik124@gmail.com",
+      "role": "trainer",
+      "password": "123456",
+      "phone": "+91 97373564515",
+      "designation": "Faculty Trainer",
+      "hourly_rate": 500,
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=KANZARIYA",
+      "id": "usr_1788166404148_itu4",
+      "created_at": "2026-08-31T08:53:24.148Z"
     }
   ],
   "batches": [
@@ -3947,6 +3960,15 @@
     "usr_trainer_3": {
       "trainer_id": "usr_trainer_3",
       "trainer_name": "Amit Verma",
+      "casual_sick_quota": 12,
+      "casual_sick_used": 0,
+      "optional_holiday_quota": 5,
+      "optional_holiday_used": 0,
+      "mandatory_holiday_count": 5
+    },
+    "usr_1788166404148_itu4": {
+      "trainer_id": "usr_1788166404148_itu4",
+      "trainer_name": "KANZARIYA PRATIK",
       "casual_sick_quota": 12,
       "casual_sick_used": 0,
       "optional_holiday_quota": 5,

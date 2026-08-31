@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import Sidebar from '@/components/Sidebar';
 import { getStoredUser } from '@/lib/auth';
 import { User, TaskLog, TaskCategory } from '@/lib/types';
 import {
@@ -111,13 +109,7 @@ export default function TrainerTasksPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <Navbar />
-
-      <div className="flex">
-        <Sidebar role="trainer" />
-
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl space-y-6">
+    <main className="flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
           {/* Header */}
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
@@ -260,8 +252,6 @@ export default function TrainerTasksPage() {
               )}
             </div>
           </div>
-        </main>
-      </div>
-    </div>
+    </main>
   );
 }

@@ -124,10 +124,7 @@ export default function TrainerLeavesPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-800 flex flex-col">
-      <Navbar />
-
-      <main className="flex-1 w-full max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <main className="flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-200">
           <div>
@@ -313,7 +310,6 @@ export default function TrainerLeavesPage() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+    </main>
   );
 }

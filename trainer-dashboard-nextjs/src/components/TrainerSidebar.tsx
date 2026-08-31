@@ -7,20 +7,15 @@ import { clearStoredUser, getStoredUser } from '@/lib/auth';
 import { User } from '@/lib/types';
 import {
   LayoutDashboard,
-  Users,
   BookOpen,
   Camera,
-  Clock,
-  FileBarChart2,
+  PlusCircle,
+  CheckSquare,
   CalendarDays,
-  Calendar,
-  MessageSquare,
-  Radio,
-  Settings,
   LogOut
 } from 'lucide-react';
 
-export default function Sidebar() {
+export default function TrainerSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -35,21 +30,16 @@ export default function Sidebar() {
   };
 
   const links = [
-    { href: '/admin/dashboard', label: 'Overview', icon: LayoutDashboard },
-    { href: '/admin/batches', label: 'Batches', icon: BookOpen },
-    { href: '/admin/trainers', label: 'Trainers', icon: Users },
-    { href: '/admin/attendance', label: 'Attendance', icon: Camera },
-    { href: '/admin/monitoring', label: 'Login Monitor', icon: Clock },
-    { href: '/admin/reports', label: 'Reports', icon: FileBarChart2 },
-    { href: '/admin/leaves', label: 'Leaves', icon: CalendarDays },
-    { href: '/admin/holidays', label: 'Holidays', icon: Calendar },
-    { href: '/admin/whatsapp', label: 'WhatsApp Hub', icon: MessageSquare },
-    { href: '/admin/live-monitor', label: 'Radar', icon: Radio },
-    { href: '/admin/settings', label: 'Institute Settings', icon: Settings },
+    { href: '/trainer/dashboard', label: 'Overview', icon: LayoutDashboard },
+    { href: '/trainer/batches', label: 'My Batches', icon: BookOpen },
+    { href: '/trainer/attendance', label: 'Mark Attendance', icon: Camera },
+    { href: '/trainer/sessions/add', label: 'Log Work Session', icon: PlusCircle },
+    { href: '/trainer/tasks', label: 'Tasks & Syllabus', icon: CheckSquare },
+    { href: '/trainer/leaves', label: 'My Leaves', icon: CalendarDays },
   ];
 
-  const userName = currentUser?.name || 'Nimisha';
-  const userRole = currentUser?.role === 'admin' ? 'Super Admin' : 'Trainer';
+  const userName = currentUser?.name || 'Kanzariya Pratik';
+  const userRole = 'Faculty Trainer';
   const initial = userName.charAt(0).toUpperCase();
 
   return (
@@ -62,7 +52,7 @@ export default function Sidebar() {
           </div>
           <div className="font-extrabold text-sm text-slate-900 tracking-tight leading-tight">
             Learnmore <br />
-            <span className="text-blue-600 font-bold text-xs">Technologies</span>
+            <span className="text-blue-600 font-bold text-xs">Trainer Portal</span>
           </div>
         </div>
 
@@ -89,16 +79,16 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* User Profile at Bottom */}
+      {/* User Profile & Logout at Bottom */}
       <div className="pt-3 border-t border-slate-100 space-y-2 shrink-0">
         <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-200/60">
           <div className="flex items-center gap-2.5">
-            <div className="h-8 w-8 rounded-full bg-slate-900 text-white font-black text-xs flex items-center justify-center shadow-sm">
+            <div className="h-8 w-8 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow-sm">
               {initial}
             </div>
-            <div>
-              <div className="font-extrabold text-xs text-slate-900">{userName}</div>
-              <div className="text-[10px] text-slate-500 font-semibold">{userRole}</div>
+            <div className="min-w-0 flex-1">
+              <div className="font-extrabold text-xs text-slate-900 truncate">{userName}</div>
+              <div className="text-[10px] text-slate-500 font-semibold truncate">{userRole}</div>
             </div>
           </div>
         </div>
@@ -114,4 +104,3 @@ export default function Sidebar() {
     </aside>
   );
 }
-

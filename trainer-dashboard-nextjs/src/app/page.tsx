@@ -1,29 +1,22 @@
-'use client';
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { getStoredUser } from '@/lib/auth';
+export default async function HomePage() {
+  const cookieStore = await cookies();
+  const userCookie = cookieStore.get('trainer_user')?.value;
 
-export default function HomePage() {
-  const router = useRouter();
+  if (!userCookie) {
+    redirect('/login');
+  }
 
-  useEffect(() => {
-    const user = getStoredUser();
-    if (!user) {
-      router.replace('/login');
-    } else if (user.role === 'admin') {
-      router.replace('/admin/dashboard');
+  try {
+    const user = JSON.parse(decodeURIComponent(userCookie));
+    if (user?.role === 'admin') {
+      redirect('/admin/dashboard');
     } else {
-      router.replace('/trainer/dashboard');
+      redirect('/trainer/dashboard');
     }
-  }, [router]);
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
-      <div className="flex items-center gap-3">
-        <div className="h-6 w-6 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
-        <span className="text-sm font-medium text-slate-400">Loading TrainerPulse...</span>
-      </div>
-    </div>
-  );
+  } catch {
+    redirect('/login');
+  }
 }

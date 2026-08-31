@@ -33,9 +33,9 @@ export default function LoginPage() {
 
       setStoredUser(data.user);
       if (data.user.role === 'admin') {
-        router.push('/admin/dashboard');
+        window.location.href = '/admin/dashboard';
       } else {
-        router.push('/trainer/dashboard');
+        window.location.href = '/trainer/dashboard';
       }
     } catch (err: any) {
       setError(err.message || 'Server connection error');
@@ -78,7 +78,7 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={(e) => { e.preventDefault(); handleLogin(e); }} className="space-y-4">
             <div>
               <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">
                 Username
@@ -114,7 +114,8 @@ export default function LoginPage() {
             </div>
 
             <button
-              type="submit"
+              type="button"
+              onClick={handleLogin}
               disabled={loading}
               className="w-full mt-2 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold py-3.5 text-sm shadow-md shadow-blue-600/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
             >

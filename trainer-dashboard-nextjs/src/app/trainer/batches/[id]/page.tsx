@@ -63,10 +63,7 @@ export default function BatchDetailPage() {
   const delayHours = usedHours > totalHours ? usedHours - totalHours : 0;
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] text-slate-800 flex flex-col">
-      <Navbar />
-
-      <main className="flex-1 w-full max-w-[1480px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <main className="flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Breadcrumb & Navigation */}
         <div className="flex items-center justify-between">
           <button
@@ -232,7 +229,6 @@ export default function BatchDetailPage() {
             </table>
           </div>
         </div>
-      </main>
-    </div>
+    </main>
   );
 }

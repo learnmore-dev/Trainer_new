@@ -54,10 +54,7 @@ export default function TrainerDashboardPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] text-slate-800 flex flex-col">
-      <Navbar />
-
-      <main className="flex-1 w-full max-w-[1480px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+    <main className="flex-1 w-full max-w-[1600px] mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Welcome Banner */}
         <div className="rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-6 sm:p-8 text-white shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="space-y-2">
@@ -184,7 +181,6 @@ export default function TrainerDashboardPage() {
             })}
           </div>
         </div>
-      </main>
-    </div>
+    </main>
   );
 }
