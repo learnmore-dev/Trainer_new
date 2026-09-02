@@ -29,9 +29,14 @@ export default function Sidebar() {
     setCurrentUser(getStoredUser());
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     clearStoredUser();
-    router.push('/login');
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {
+      // silent
+    }
+    window.location.href = '/login';
   };
 
   const links = [

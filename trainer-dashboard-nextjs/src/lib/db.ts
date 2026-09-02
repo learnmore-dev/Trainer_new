@@ -378,30 +378,54 @@ function getInitialData(): DatabaseSchema {
 }
 
 export class DB {
+  private static memoryDB: DatabaseSchema | null = null;
+
   private static ensureDB(): DatabaseSchema {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-    if (!fs.existsSync(DB_FILE)) {
-      const initData = getInitialData();
-      fs.writeFileSync(DB_FILE, JSON.stringify(initData, null, 2), 'utf-8');
-      return initData;
-    }
+    if (this.memoryDB) return this.memoryDB;
+
     try {
+      if (!fs.existsSync(DATA_DIR)) {
+        try {
+          fs.mkdirSync(DATA_DIR, { recursive: true });
+        } catch {
+          // Read-only filesystem
+        }
+      }
+      if (!fs.existsSync(DB_FILE)) {
+        const initData = getInitialData();
+        try {
+          fs.writeFileSync(DB_FILE, JSON.stringify(initData, null, 2), 'utf-8');
+        } catch {
+          // Read-only filesystem
+        }
+        this.memoryDB = initData;
+        return initData;
+      }
       const raw = fs.readFileSync(DB_FILE, 'utf-8');
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      this.memoryDB = parsed;
+      return parsed;
     } catch {
       const initData = getInitialData();
-      fs.writeFileSync(DB_FILE, JSON.stringify(initData, null, 2), 'utf-8');
+      this.memoryDB = initData;
       return initData;
     }
   }
 
   private static saveDB(data: DatabaseSchema): void {
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
+    this.memoryDB = data;
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        try {
+          fs.mkdirSync(DATA_DIR, { recursive: true });
+        } catch {
+          // Read-only filesystem
+        }
+      }
+      fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    } catch {
+      // Read-only filesystem (e.g. Vercel / Netlify)
     }
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
   }
 
   // --- Users ---
@@ -821,6 +845,10 @@ export class DB {
     if (admin_notes) data.leaves[idx].admin_notes = admin_notes;
     this.saveDB(data);
     return data.leaves[idx];
+  }
+
+  static updateLeave(id: string, updates: Partial<Leave>): Leave | null {
+    return this.updateLeaveStatus(id, (updates.status as 'approved' | 'rejected') || 'approved', updates.admin_notes);
   }
 
   // --- Real-time 1-Minute Live Activity & Idle Tracking ---
@@ -1540,7 +1568,7 @@ export class DB {
     const leaveBalance = this.getTrainerLeaveBalance(trainerId);
 
     // Audit logs for leave changes
-    const auditLogs = data.leaveAuditLogs
+    const auditLogs = (data.leaveAuditLogs || [])
       .filter((l) => l.trainer_id === trainerId)
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 

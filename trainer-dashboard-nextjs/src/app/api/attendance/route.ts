@@ -55,7 +55,7 @@ export async function POST(req: Request) {
         await whatsappService.sendAttendanceCheckIn({
           trainer,
           checkInTime: record.mark_in_time,
-          locationName: record.location_name,
+          locationName: record.location_name || undefined,
         });
       }
 

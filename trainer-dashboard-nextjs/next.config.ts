@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     '192.168.1.2:3001',
     '192.168.1.2',
     'app.skyranksolution.com',
+    'app.skyranksolution.com.',
+    'app.skyranksolution.com:8080',
+    '*.skyranksolution.com',
   ],
 };
 

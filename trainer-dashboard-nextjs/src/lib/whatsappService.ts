@@ -460,7 +460,7 @@ class WhatsAppService {
     DB.addWhatsAppLog({
       id: `walg_${Date.now()}_${Math.random().toString(36).substring(2, 5)}`,
       batch_id: 'leave',
-      batch_name: isWeekoff ? 'Faculty Weekoff Notice' : 'Faculty Leave Application',
+      batch_name: params.leaveType === 'weekoff' ? 'Faculty Weekoff Notice' : 'Faculty Leave Application',
       trainer_name: params.trainerName,
       group_name: this.attendanceGroup.name,
       message_preview: formattedMessage.slice(0, 150) + '...',

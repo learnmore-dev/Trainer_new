@@ -38,31 +38,73 @@ export default function WebcamCapture({ onCapture, onCancel, title }: WebcamCapt
       }
     };
 
-    // Geolocation
+    // High-Accuracy Real Geolocation with Reverse Geocoding
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (pos) => {
+        async (pos) => {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          let realAddress = `GPS: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+
+          try {
+            // Fetch human readable address from OpenStreetMap Reverse Geocoding
+            const geoRes = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`,
+              { headers: { 'Accept-Language': 'en' } }
+            );
+            if (geoRes.ok) {
+              const geoData = await geoRes.json();
+              if (geoData && geoData.address) {
+                const a = geoData.address;
+                const road = a.road || a.suburb || a.neighbourhood || '';
+                const city = a.city || a.town || a.village || a.county || '';
+                const state = a.state || '';
+                const parts = [road, city, state].filter(Boolean);
+                if (parts.length > 0) {
+                  realAddress = parts.join(', ');
+                } else if (geoData.display_name) {
+                  realAddress = geoData.display_name.split(',').slice(0, 3).join(',');
+                }
+              }
+            }
+          } catch {
+            // Fallback to coordinates
+            realAddress = `Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}`;
+          }
+
           setLocation({
-            lat: pos.coords.latitude.toFixed(4),
-            lon: pos.coords.longitude.toFixed(4),
-            address: 'Institute Campus, Main Building, Ahmedabad',
+            lat: lat.toFixed(5),
+            lon: lon.toFixed(5),
+            address: realAddress,
           });
           setLocLoading(false);
         },
-        () => {
-          setLocation({
-            lat: '23.0225',
-            lon: '72.5714',
-            address: 'Institute Lab (Standard Campus Coordinates)',
-          });
+        async () => {
+          // IP fallback if GPS denied
+          try {
+            const ipRes = await fetch('https://ipapi.co/json/');
+            const ipData = await ipRes.json();
+            setLocation({
+              lat: String(ipData.latitude || '23.0225'),
+              lon: String(ipData.longitude || '72.5714'),
+              address: `${ipData.city || 'Ahmedabad'}, ${ipData.region || 'Gujarat'} (Approx IP Location)`,
+            });
+          } catch {
+            setLocation({
+              lat: '23.0225',
+              lon: '72.5714',
+              address: 'Ahmedabad, Gujarat, India',
+            });
+          }
           setLocLoading(false);
-        }
+        },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
     } else {
       setLocation({
         lat: '23.0225',
         lon: '72.5714',
-        address: 'Institute Lab (Standard Campus Coordinates)',
+        address: 'Ahmedabad, Gujarat, India',
       });
       setLocLoading(false);
     }

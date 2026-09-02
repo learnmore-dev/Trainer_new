@@ -16,11 +16,24 @@ export default function AdminTrainersPage() {
 
   const fetchData = () => {
     Promise.all([
-      fetch('/api/users?role=trainer').then((r) => r.json()),
-      fetch('/api/batches').then((r) => r.json()),
+      fetch('/api/users?role=trainer').then((r) => r.json()).catch(() => ({ success: false })),
+      fetch('/api/batches').then((r) => r.json()).catch(() => ({ success: false })),
     ]).then(([uData, bData]) => {
-      if (uData.success) setTrainers(uData.users || []);
-      if (bData.success) setBatches(bData.batches || []);
+      let list: User[] = [];
+      if (uData && uData.success && uData.users) {
+        list = uData.users;
+      }
+      try {
+        const customUsers = JSON.parse(localStorage.getItem('custom_users') || '[]');
+        const customTrainers = customUsers.filter((u: any) => u.role === 'trainer');
+        customTrainers.forEach((cu: any) => {
+          if (!list.some((existing) => existing.id === cu.id || existing.username === cu.username)) {
+            list.push(cu);
+          }
+        });
+      } catch {}
+      setTrainers(list);
+      if (bData && bData.success && bData.batches) setBatches(bData.batches);
     });
   };
 
